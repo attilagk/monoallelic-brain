@@ -1,5 +1,6 @@
 ---
 layout: post
+categories: article
 ---
 
 A document (accessible [here][pdf])
