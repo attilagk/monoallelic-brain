@@ -11,7 +11,7 @@ title: Tags
 {% for post in posts %}
 {% if post.tags contains t %}
 [ {{ post.title }} ]( {{ post.url }} )
-{{ post.date | date: "%B %-d, %Y"  }}
+{{ post.date | date: "%b %-d, %Y" }}
 {% endif %}
 {% endfor %}
 {% endfor %}

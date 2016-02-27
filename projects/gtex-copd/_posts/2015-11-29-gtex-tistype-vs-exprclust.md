@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Some Title
+title: Expression-based Clusters of Tissue Samples
 ---
 
-{% include /posts/gtex-tistype-vs-exprclust.html %}
+{% include /projects/gtex-copd/gtex-tistype-vs-exprclust.html %}

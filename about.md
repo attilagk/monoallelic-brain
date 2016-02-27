@@ -1,10 +1,7 @@
 ---
 layout: page
-title: One
-permalink: /about/
+title: Test
 ---
-
-before {% for item in site.posts %} {{ item.title }} {% endfor %}
 
 {% for tag in site.tags %} {{ tag[0] }}, {% endfor %}
 

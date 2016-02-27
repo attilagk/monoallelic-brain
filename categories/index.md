@@ -1,6 +1,5 @@
 ---
 layout: page
-title: Categories
 ---
 
 {% for category in site.categories %}
@@ -11,7 +10,7 @@ title: Categories
 {% for post in posts %}
 {% if post.categories contains t %}
 [ {{ post.title }} ]( {{ post.url }} )
-{{ post.date | date: "%B %-d, %Y"  }}
+{{ post.date | date: "%b %-d, %Y"  }}
 {% endif %}
 {% endfor %}
 {% endfor %}
