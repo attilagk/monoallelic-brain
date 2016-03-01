@@ -2,18 +2,27 @@
 layout: default
 ---
 
-<div class="home">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">Posts by Date</h1>
+    <h1 class="post-title" itemprop="name headline">Posts by Categories</h1>
   </header>
 
+<div class="post-content">
+
   {% include category-tag-list.html %}
-  
+
+
+{% for category in site.categories %}
+{% assign t = category | first %}
+{% assign posts = category | last %}
+
+<h2 id="{{ t }}"> {{ t }} </h2>
+
+{% for post in posts %}
+{% if post.categories contains t %}
 <ul class="post-list">
-{% for post in site.posts %}
     <li>
-        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}"> {{ post.title }} </a>
         <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
         <ul>
         {% for category in post.categories %}
@@ -28,9 +37,8 @@ layout: default
         {% endfor %}
         </ul>
     </li>
-{% endfor %}
 </ul>
-
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
-
+{% endif %}
+{% endfor %}
+{% endfor %}
 </div>

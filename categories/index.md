@@ -1,15 +1,11 @@
----
-layout: page
----
-
 {% for category in site.categories %}
-  {% assign t = category | first %}
-  {% assign posts = category | last %}
+{% assign t = category | first %}
+{% assign posts = category | last %}
 
-### {{ t | downcase }}
+## {{ t | downcase }}
 {% for post in posts %}
 {% if post.categories contains t %}
-[ {{ post.title }} ]( {{ post.url }} )
+<a class="post-link" href="{{ post.url | prepend: site.baseurl }}"> {{ post.title }} </a>
 {{ post.date | date: "%b %-d, %Y"  }}
 {% endif %}
 {% endfor %}

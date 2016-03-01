@@ -1,3 +1,0 @@
-# Linking GTEx Data to Lung Disease (COPD)
-
-Ein, zwei, drei, usw,...

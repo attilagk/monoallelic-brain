@@ -1,0 +1,24 @@
+---
+layout: page
+title: Projects
+---
+
+<div class="post-content">
+
+{% assign projects = "monoallelic-brain;gtex-copd" | split: ';' %}
+
+{% for project in projects %}
+
+<article class="sub-article">
+{% include projects/{{ project }}/description.html %}
+<a href="/categories/index.html" title="posts sorted by categories">
+    Category:
+</a>
+<a class="category" href="/categories/index.html#{{ project }}" title="posts in this category">
+    {{ project }}
+</a>
+</article>
+
+{% endfor %}
+
+</div>

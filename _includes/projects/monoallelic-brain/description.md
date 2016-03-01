@@ -1,3 +1,0 @@
-# Monoallelic Expression in the Brain
-
-Lorem ipsum, etc,...

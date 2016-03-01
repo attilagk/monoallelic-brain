@@ -9,7 +9,7 @@
 title: Lab Notebook
 email: attila.gulyas.kovacs@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
-    The documentation of my research: literature, ideas, hypotheses, methods, analyses, results, conclusions and presentations
+    This blog keeps track of my research activity.  Its posts document literature, ideas, discussions, hypotheses, methods, analyses, results, conclusions, articles, presentations, lab meetings, etc.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://attilagk.github.io" # the base hostname & protocol for your site
 twitter_username: 
@@ -23,3 +23,5 @@ markdown: kramdown
 #paginate: 5
 
 gems: ['jekyll/scholar']
+
+future: TRUE

@@ -1,5 +1,6 @@
 ---
 layout: post
+tags: [ article, modeling ]
 ---
 
 A document (accessible [here][pdf])
