@@ -1,0 +1,23 @@
+<header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Posts by {{ page.sortkey |
+        capitalize }}</h1>
+</header>
+
+<div class="post-content">
+
+    {% include category-tag-list.html %}
+
+    {% for item in site.[{{page.sortkey}}] %}
+    {% assign t = item | first %}
+    {% assign posts = item | last %}
+    <h3 id="{{ t }}"> {{ t }} </h3>
+    {% for post in posts %}
+    {% if post.[{{page.sortkey}}] contains t %}
+
+    {% include post-list-item.html %}
+
+    {% endif %}
+    {% endfor %}
+    {% endfor %}
+
+</div>
