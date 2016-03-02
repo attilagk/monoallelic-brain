@@ -14,7 +14,7 @@ layout: default
 {% for tag in site.tags %}
     {% assign t = tag | first %}
     {% assign posts = tag | last %}
-    <h2 id="{{ t }}"> {{ t }} </h2>
+    <h3 id="{{ t }}"> {{ t }} </h3>
     {% for post in posts %}
     {% if post.tags contains t %}
     <ul class="post-list">
@@ -24,12 +24,12 @@ layout: default
         <ul>
         {% for category in post.categories %}
             <li class="category">
-            <a class="category" href="/categories/index.html#{{ category }}" title="posts in this category"> {{ category }}</a>
+            <a href="/categories/index.html#{{ category }}" title="posts in this category"> {{ category }}</a>
             </li>
         {% endfor %}
         {% for tag in post.tags %}
             <li class="tag">
-            <a class="tag" href="/tags/index.html#{{ tag }}" title="posts with this tag"> {{ tag }}</a>
+            <a href="/tags/index.html#{{ tag }}" title="posts with this tag"> {{ tag }}</a>
             </li>
         {% endfor %}
         </ul>

@@ -1,23 +1,56 @@
 ---
 layout: post
+comments: true
+tags: [ semantic-publication, lab-notebook, programming, reproducible-research ]
 ---
 
-# Title 1
+## Introduction
 
-## Title 2
+### Motivation
 
-### Title 3
+* efficient research, collaboration & communication (publication)
+* transparency, manageability, reproducibility
+* leverage emerging trends & technologies
 
-#### Title 4
+### Concepts
 
-## Math rendering
+* mixing natural and programming languages
+    * *semantic publishing*: natural l. $$ \rightarrow $$ programming l.
+    * *literate programming*: natural l. $$ \leftarrow $$ programming l.
+* program evaluation, dynamic documents
+* semantic publishing
+* open science
 
-The inline equation $$\Gamma(x) = \int_0^\infty t^{x-1} e^{-t} \mathrm{d} t$$ and $$\Gamma \left( \frac{1}{2} \right) = \pi$$, and below their counterparts in a $$\LaTeX$$ `eqnarray` environment
+### Technicalities
+
+* `W3C`, semantic web
+* website and pages; blog and posts
+* host: local/remote
+* static/dynamic generation
+* `Markdown` to `HTML` conversion
+    * *typesetting*, $$\LaTeX$$
+    * weaving, dynamic document, `knitr`
+* version control & repositories: `git` & `GitHub`
+
+## Demonstration
+
+### Typesetting
+
+* writing nested lists and inline equations with $$\LaTeX$$
+  1. the likelihood equation $$\ell'(\hat{\theta}; y)=0$$
+  2. observed informatioin $$J(\theta) = - \ell''(\theta; y)$$
+  2. Fisher information $$I(\theta) = - \mathrm{E}[ \ell''(\theta; Y) ]$$
+* hyperlinks
+    * to my personal [home page][my website]
+    * to [a post] on this locally hosted site
+    * citing an insightful theoretical paper {% cite Dawid1981 --file 2016-03-01-lab-notebook-sample.bib %}, a widespread method of FDR control {% cite Storey:2003kx --file 2016-03-01-lab-notebook-sample.bib %} and a refreshing work on semantic publishing {% cite Shotton2009 --file 2016-03-01-lab-notebook-sample.bib %}, see pdf [here][shotton.pdf] and semantically enhanced [article][shotton.html] on the web
+
+The *gamma function* is closely related to the following distributions: gamma, beta and normal.  Two equations to remember:
 
 $$
 \begin{eqnarray}
-\Gamma(x) &=& \int_0^\infty t^{x-1} e^{-t} \mathrm{d} t \\
-\Gamma \left( \frac{1}{2} \right) &=& \pi
+\Gamma(x) &=& \int_0^\infty t^{x-1} e^{-t} \mathrm{d} t \qquad \text{gamma function} \\
+\Gamma \left( \frac{1}{2} \right) &=& \pi \qquad \text{cf. normal distribution}
 \end{eqnarray}
 $$
 
@@ -29,7 +62,17 @@ $$
 \end{equation}
 $$
 
-## Code evaluation
+A table explaining true/false positives/negatives:
+
+|                 | called positive | called negative |
+| ---------------:|:---------------:|:---------------:|
+| actual positive |       TP        |       FN        |
+| actual negative |       FP        |       TN        |
+
+
+### Code evaluation
+
+#### `R` language
 
 Below is an R code with the backtick '\'' (knitr default) fence
 
@@ -66,11 +109,11 @@ curve(foo, from=-1, to=1, n=1001, type='l')
 ## Warning in sin(1/y): NaNs produced
 ~~~
 
-![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2-1.png) 
+![sinefig]
 
-### Various language engines
+#### Other languages
 
-Fooling with `tr` utility using bash:
+Fooling with `tr` utility using `bash`:
 
 
 ~~~bash
@@ -88,7 +131,7 @@ echo $D | tr '[:lower:][:upper:]' '[:upper:][:lower:]'
 ## mON fEB 8 19:54:41 est 2016
 ~~~
 
-Fibonacci series up to 7 terms in python:
+Fibonacci series up to 7 terms in `python`:
 
 
 ~~~python
@@ -105,7 +148,7 @@ print fib(7)
 ## 21
 ~~~
 
-The analogous implementation in R:
+The analogous implementation in `R`:
 
 
 ~~~r
@@ -120,31 +163,24 @@ fib(7)
 ## [1] 21
 ~~~
 
-### Setting a knitr hook function
+## Real World examples
 
+See [a post], all posts sorted by date, categories or tags.
 
-~~~r
-knit_hooks$set(date_hook = function(before, options, envir) if(before) date())
-~~~
+## To do: hosting and more
 
-Below is an empty code block with chunk option `date_hook=TRUE`, where the hook function is defined as `date_hook = function(before, options, envir) if(before) date()` and passed as an argument to the `knit_hooks$set` function.
+* availability: intra vs internet
+* authentication (contra open science)
+* notification: `RSS`
+* comments?
+* multiple authors?
 
-Mon Feb  8 19:54:41 2016
+## Bibliography
 
-## Miscellaneous features
-
-The following features are illustrated here
-
-* nested lists
-  1. the likelihood equation $$\ell'(\hat{\theta}; y)=0$$
-  2. observed informatioin $$J(\theta) = - \ell''(\theta; y)$$
-  2. Fisher information $$I(\theta) = - \mathrm{E} \ell''(\theta; Y)$$
-* a link to [my website]
-* and a table explaining true/false positives/negatives
-
-|                 | called positive | called negative |
-| ---------------:|:---------------:|:---------------:|
-| actual positive |       TP        |       FN        |
-| actual negative |       FP        |       TN        |
+{% bibliography --file 2016-03-01-lab-notebook-sample.bib %}
 
 [my website]: http://attilagk.com
+[a post]: {% post_url 2016-02-15-mixture-distribution %}
+[sinefig]: /assets/lab-meetings/2016-03-01-lab-notebook-sample-post/unnamed-chunk-2-1.png
+[shotton.pdf]: /assets/lab-meetings/2016-03-01-lab-notebook-sample-post/Shotton2009.pdf
+[shotton.html]: http://svn.code.sf.net/p/enhancedplospaper/code/trunk/paper/index.html
