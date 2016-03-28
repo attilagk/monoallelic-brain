@@ -1,26 +1,26 @@
 <div class="tag-list">
-<a href="/categories/index.html" title="posts sorted by categories" class="post-link">
+<a href="{{ site.baseurl }}/categories/index.html" title="posts sorted by categories" class="post-link">
     Categories
 </a>
 <ul>
 {% for category in site.categories %}
     {% assign t = category | first %}
     <li class="category">
-    <a href="/categories/index.html#{{ t }}" title="posts in this category">
+    <a href="{{ site.baseurl }}/categories/index.html#{{ t }}" title="posts in this category">
         {{ t }}
     </a>
     </li>
 {% endfor %}
 </ul>
 
-<a href="/tags/index.html" title="posts sorted by tags" class="post-link">
+<a href="{{ site.baseurl }}/tags/index.html" title="posts sorted by tags" class="post-link">
     Tags
 </a>
 <ul>
 {% for tag in site.tags %}
     {% assign t = tag | first %}
     <li class="tag">
-    <a href="/tags/index.html#{{ t }}" title="posts with this tag">
+    <a href="{{ site.baseurl }}/tags/index.html#{{ t }}" title="posts with this tag">
         {{ t }}
     </a>
     </li>

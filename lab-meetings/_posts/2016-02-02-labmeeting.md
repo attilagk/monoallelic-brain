@@ -6,4 +6,4 @@ tags: [ disease, schizophrenia, monoallelic-expression, genetic-association ]
 
 Download the pdf [here].
 
-[here]: /assets/lab-meetings/2016-02-02-labmeeting.pdf
+[here]: {{ site.baseurl }}/assets/lab-meetings/2016-02-02-labmeeting.pdf

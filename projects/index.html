@@ -11,10 +11,10 @@ title: Projects
 
 <article class="sub-article">
 {% include projects/{{ project }}/description.html %}
-<a href="/categories/index.html" title="posts sorted by categories">
+<a href="{{ site.baseurl }}/categories/index.html" title="posts sorted by categories">
     Category:
 </a>
-<a class="category" href="/categories/index.html#{{ project }}" title="posts in this category">
+<a class="category" href="{{ site.baseurl }}/categories/index.html#{{ project }}" title="posts in this category">
     {{ project }}
 </a>
 </article>

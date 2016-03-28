@@ -8,10 +8,10 @@ layout: default
     <p class="post-meta">
         <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%b %-d, %Y" }}</time>{% if page.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>{% endif %}
         {% for category in page.categories %}
-            <a class="category" href="/categories/index.html#{{ category }}" title="posts in this category"> {{ category }}</a>
+            <a class="category" href="{{ site.baseurl }}/categories/index.html#{{ category }}" title="posts in this category"> {{ category }}</a>
         {% endfor %}
         {% for tag in page.tags %}
-            <a class="tag" href="/tags/index.html#{{ tag }}" title="posts with this tag"> {{ tag }}</a>
+            <a class="tag" href="{{ site.baseurl }}/tags/index.html#{{ tag }}" title="posts with this tag"> {{ tag }}</a>
         {% endfor %}
     </p>
 

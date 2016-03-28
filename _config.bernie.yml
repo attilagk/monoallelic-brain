@@ -1,0 +1,3 @@
+# Supplementary config file for deployment to Bernie
+baseurl: "/~attila" # the subpath of your site, e.g. /blog
+url: "http://bernie.anbg.mssm.edu" # the base hostname & protocol for your site

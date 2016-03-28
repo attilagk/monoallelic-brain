@@ -89,6 +89,6 @@ See [a post], all posts sorted by date, categories or tags.
 
 [my website]: http://attilagk.com
 [a post]: {% post_url 2016-02-15-mixture-distribution %}
-[sinefig]: /assets/lab-meetings/2016-03-01-lab-notebook-sample-post/unnamed-chunk-2-1.png
-[shotton.pdf]: /assets/lab-meetings/2016-03-01-lab-notebook-sample-post/Shotton2009.pdf
+[sinefig]: {{ site.baseurl }}/assets/lab-meetings/2016-03-01-lab-notebook-sample-post/unnamed-chunk-2-1.png
+[shotton.pdf]: {{ site.baseurl }}/assets/lab-meetings/2016-03-01-lab-notebook-sample-post/Shotton2009.pdf
 [shotton.html]: http://svn.code.sf.net/p/enhancedplospaper/code/trunk/paper/index.html
