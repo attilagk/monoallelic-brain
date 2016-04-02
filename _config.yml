@@ -20,6 +20,6 @@ markdown: kramdown
 
 gems: [jekyll-paginate, jekyll/scholar]
 
-paginate: 5
+paginate: 10
 
 future: TRUE

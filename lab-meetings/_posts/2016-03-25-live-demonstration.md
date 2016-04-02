@@ -9,7 +9,7 @@ tags: [ chaggai, reproducible-research, programming ]
 
 #### Subsubtitle
 
-1. insert a new document
+1. insert a brand new document
 2. mathematical typesetting with $$\LaTeX$$
 1. dynamic documents
 3. real analysis

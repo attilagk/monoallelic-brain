@@ -10,12 +10,14 @@ layout: default
 
     {% include category-tag-list.html %}
 
-    {% for post in site.posts %}
+    {% include pagination-navigator.html %}
+
+    {% for post in paginator.posts %}
 
     {% include post-list-item.html %}
 
     {% endfor %}
 
-    <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+    {% include pagination-navigator.html %}
 
 </div>
