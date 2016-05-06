@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Logistic Models Using the S statistic as Response (Work in Progress)
+title: Logistic Models Using the S statistic as Response
 tags: [ regression, reproducible-research ]
 ---
 
