@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Schizophrenia and MHC.  Monoallelic Expression in the Brain.
-tags: [ disease, schizophrenia, monoallelic-expression, genetic-association ]
+tags: [ progress-report, disease, schizophrenia, monoallelic-expression, genetic-association ]
 ---
 
 Download the pdf [here].

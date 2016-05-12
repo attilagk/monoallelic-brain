@@ -1,6 +1,6 @@
 ---
 layout: post
-tags: [ abstracts ]
+tags: [ abstract ]
 ---
 
 See NCBI collection [2016-04-18-abstracts][ncbi]
