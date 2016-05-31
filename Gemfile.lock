@@ -143,5 +143,10 @@ PLATFORMS
 DEPENDENCIES
   font-awesome-sass
   github-pages
+  jekyll (>= 3.0.0)
   jekyll-paginate
   jekyll-scholar
+  octokit
+
+BUNDLED WITH
+   1.11.2
