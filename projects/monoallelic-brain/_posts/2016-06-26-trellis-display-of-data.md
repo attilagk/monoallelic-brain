@@ -1,5 +1,7 @@
 ---
 layout: post
+title: "Trellis Display of Data"
+tag: [ multivariate ]
 ---
 
 ## Goal
