@@ -3,12 +3,12 @@
             <a class="post-link" href="{{ site.baseurl }}{{ post.url }}"> {{ post.title }} </a>
             <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
             <ul>
-                {% for category in post.categories %}
+                {% for category in post.categories | sort %}
                 <li class="category">
                     <a href="{{ site.baseurl }}/categories/index.html#{{ category }}" title="posts in this category"> {{ category }}</a>
                 </li>
                 {% endfor %}
-                {% for tag in post.tags %}
+                {% for tag in post.tags | sort %}
                 <li class="tag">
                     <a href="{{ site.baseurl }}/tags/index.html#{{ tag }}" title="posts with this tag"> {{ tag }}</a>
                 </li>

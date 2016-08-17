@@ -1,0 +1,14 @@
+<div>
+    <div class="paging-button-prev">
+        <a href="{{ site.baseurl }}/{{ page.previous.url }}">
+            &lt;&lt;prev<br>{{ page.previous.title }}<br>
+            {{ page.previous.date | date: "%b %-d, %Y" }}
+        </a>
+    </div>
+    <div class="paging-button-next">
+        <a href="{{ site.baseurl }}/{{ page.next.url }}">
+            next&gt;&gt;<br>
+            {{ page.next.title }}<br>{{ page.next.date | date: "%b %-d, %Y" }}
+        </a>
+    </div>
+</div>

@@ -5,7 +5,60 @@ title: Monoall-ms
 
 <link rel="stylesheet" href="{{ "/css/manuscript-summary.css" | prepend: site.baseurl }}">
 
-<h2>Genome-wide analysis of parentally biased allelic expression in the human brain</h2>
+<h2>Aging and genomic imprinting in the human brain</h2>
+
+<section>
+    <h3>Preliminaries</h3>
+    <h4>Notation</h4>
+    <p><strong>Color key</strong>
+        <ul>
+            <li> <dfn>normal color:</dfn> text related to main figure</li>
+            <li> <dfn class=supplementary>first color:</dfn> ...supplementary figure</li>
+            <li> <dfn class=missing>second color:</dfn> ...figure still missing</li>
+        </ul>
+    </p>
+    <p> <strong>refname:</strong> this should be used as unique identifier for
+    a figure until the final figure numbers may be established</p>
+    <h4>Definitions</h4>
+    <ul>
+        <li>
+            <dfn>monoallelic expression:</dfn> only one allele is expressed to a
+            certain degree
+        </li><li>
+            <dfn>(genomic) imprinting:</dfn> a subtype of monoallelic expression
+            where the same allele is expressed in some tissue across all
+            individuals
+        </li><li>
+            <dfn>known imprinted</dfn> and <dfn>candidate</dfn> genes: with
+            and without prior evidence for imprinting, respectively
+        </li><li>
+            <dfn>candidate, \lt 1 MB gene:</dfn> a candidate gene in the 1 MB
+            neighborhood of some known imprinted gene
+        </li><li>
+            <dfn>imprinted gene cluster:</dfn> a sequence of neighboring genes
+            that fall in either the "known" or the "candidate, \lt 1 MB gene"
+            category
+        </li><li>
+            <dfn>biallelic expression:</dfn> both alleles are expressed to a
+            certain degree
+        </li><li>
+            <dfn>unbiased, or balanced, expression:</dfn> the two alleles are
+            expressed at equally high level
+        </li><li>
+            <dfn>parental expression bias</dfn> or simply <dfn>parental bias:</dfn> one allele is expressed at a
+            higher level
+        </li><li>
+            <dfn>mean transcript ratio, \mu_{ig}</dfn> of a given individual i
+            and gene g:
+            <ol>
+                <li>the mean ratio of the number of maternal transcripts in
+                    all transcripts over a suitable period of time and set of
+                    cells
+                </li><li>hence a natural but not directly unobservable measure of expression bias</li>
+            </ol>
+        </li>
+    </ul>
+</section>
 
 <section>
     <h3>Parental expression bias: variation across genes and individuals</h3>
@@ -21,19 +74,54 @@ title: Monoall-ms
         </figcaption>
     </figure>
     <p>
-    <strong>Motivation:</strong>
-       Et eligendi quasi quia. Corporis aliquid maxime nulla placeat excepturi earum ipsum iusto. Unde ex qui repellendus accusantium nulla placeat. Dolorum excepturi non ipsum. Et culpa sit omnis magnam ut atque unde. 
+        <strong>Motivation:</strong>
+        Genome-wide and population-wide quantification parental bias
+        <ol>
+            <li>variability across genes and the fraction of monoallelically
+                expressed genes</li>
+            <li>variability across individuals</li>
+        </ol>
+        We define<dfn>read count ratio statistic, S_{ig}</dfn> of a given
+        individual i and gene g as
+        the greater of the observed read count of the two alleles at each
+        heterozygous SNP summed over all such SNPs and normalized to the
+        corresponding total read count.  We use S_{ig} to quantify parental
+        bias.  This is justified by the reasonable assumptions that
+        <ol>
+            <li>the number of paternal and maternal transcripts are Poisson
+                distributed with rate \lambda and \lambda \mu, respectively
+            </li>
+            <li>the observed paternal and maternal read count are both
+                Poisson distributed with rate proportional to the number of
+                paternal and maternal transcripts, respectively.
+            </li>
+        </ol>
+        We also define the <dfn>gene g's score</dfn> as the fraction of
+        individuals i for which S_{ig}\gt 0.9.  This is the same as 1 -
+        ECDF(0.9), where ECDF is the empirical cumulative distribution
+        function based on observations S_{1g},...,S_{Ig} on I individuals or,
+        equivalently, the same as the corresponding survival function.
     </p>
     <p>
-    <strong>Result:</strong>
-        Et eligendi quasi quia. Corporis aliquid maxime nulla placeat excepturi earum ipsum iusto. Unde ex qui repellendus accusantium nulla placeat. Dolorum excepturi non ipsum. Et culpa sit omnis magnam ut atque unde.
+        <strong>Result:</strong>
+        Three typical genes are shown in the <strong>upper 3 panels</strong>:
+        PEG10 and ZNF331 are known imprinted genes, whereas AFAP1 is a
+        candidate gene.  The each gene has a characteristic survival function
+        1 - ECDF(s) based on which receive different scores <strong>green
+            circles a, b, c</strong>.  The survival functions are color-coded
+        for terse representation.  All ca. 5K genes that passed our quality
+        filters are shown in this representation<strong>2 main lower
+            panels</strong>; they are ranked according to their score, shown
+        in the auxiliary <strong>right lower panels</strong>.
     </p>
     <p>
-    <strong>Interpretation:</strong>
-        Et eligendi quasi quia. Corporis aliquid maxime nulla placeat excepturi earum ipsum iusto. Unde ex qui repellendus accusantium nulla placeat. Dolorum excepturi non ipsum. Et culpa sit omnis magnam ut atque unde.
+        <strong>Interpretation:</strong>
+        Given some reasonable assumptions (see definition of read count ratio
+        statistic S) only about ca. 1 % of the genes are expressed
+        monoallelically
     </p>
     <p>
-    <strong>See also:</strong>
+        <strong>See also:</strong>
         <a href="{{ site.baseurl }}{% post_url 2016-07-19-genome-wide-S %}">
             2016-07-19-genome-wide-S
         </a>
@@ -41,7 +129,7 @@ title: Monoall-ms
 </section>
 
 <section>
-    <h3>Parental bias and previously found imprinted gene clusters</h3>
+    <h3>Parental bias and imprinted gene clusters</h3>
     <figure>
         <a href="{{ site.baseurl }}/monoall-ms/2016-08-08-imprinted-gene-clusters/score-genomic-location-1.png">
             <img src="{{ site.baseurl }}/monoall-ms/2016-08-08-imprinted-gene-clusters/score-genomic-location-1.png">
@@ -55,15 +143,18 @@ title: Monoall-ms
     </figure>
     <p>
     <strong>Motivation:</strong>
-        TODO
+        Given our definition of clusters (above) identify them along with the
+        "known" and "candidate, \lt 1MB" genes.  These gene sets will be
+        combined with the observed ranking for more detailed analysis.
     </p>
     <p>
     <strong>Result:</strong>
-        TODO
-    </p>
+        Altogether 60 "known" and 701 "candidate, \lt 1MB" genes
+        before quality filtering.  These form 36 clusters, each with at least a few genes and a median of
+        15 genes.  After filtering 36 "known" and 266 "candidate, \lt 1MB" genes.</p>
     <p>
     <strong>Interpretation:</strong>
-        TODO
+        None.
     </p>
     <p>
     <strong>See also:</strong>
@@ -89,19 +180,29 @@ title: Monoall-ms
         </figcaption>
     </figure>
     <p>
-    <strong>Motivation:</strong>
-       Et eligendi quasi quia. Corporis aliquid maxime nulla placeat excepturi earum ipsum iusto. Unde ex qui repellendus accusantium nulla placeat. Dolorum excepturi non ipsum. Et culpa sit omnis magnam ut atque unde. 
+        <strong>Motivation:</strong>
+        Based on gene score and clusters
+        <ol>
+            <li>
+                detect novel imprinted genes
+            </li>
+            <li>define gene set for detailed subsequent analysis</li>
+        </ol>
     </p>
     <p>
-    <strong>Result:</strong>
-        Et eligendi quasi quia. Corporis aliquid maxime nulla placeat excepturi earum ipsum iusto. Unde ex qui repellendus accusantium nulla placeat. Dolorum excepturi non ipsum. Et culpa sit omnis magnam ut atque unde.
+        <strong>Result:</strong>
+        The figure presents the top ranking genes colored according to their
+        imprinting category ("known",...).
     </p>
     <p>
-    <strong>Interpretation:</strong>
-        Et eligendi quasi quia. Corporis aliquid maxime nulla placeat excepturi earum ipsum iusto. Unde ex qui repellendus accusantium nulla placeat. Dolorum excepturi non ipsum. Et culpa sit omnis magnam ut atque unde.
+        <strong>Interpretation:</strong>
+        Evidence for some novel imprinted genes, e.g. TMEM261P1.  Several
+        "known" imprinted genes are not among these top ranking genes
+        suggesting these may not be imprinted in most human brains.
+        Limitation: we did not estimate error rates.
     </p>
     <p>
-    <strong>See also:</strong>
+        <strong>See also:</strong>
         <a href="{{ site.baseurl }}{% post_url 2016-08-01-ifats-filters %}">
             2016-08-01-ifats-filters
         </a>, <a href="https://docs.google.com/presentation/d/1YvpA1AJ-zzir1Iw0F25tO9x8gkSAzqaO4fjB7K3zBhE/edit#slide=id.p4">
@@ -125,15 +226,23 @@ title: Monoall-ms
     </figure>
     <p>
     <strong>Motivation:</strong>
-        TODO
+    The observed variability across individuals calls for explanation.
+    Several variables were recorded including age, gender and disease status.
+        Imprinting: clearly important for perinatal developement but how about
+        later stages and aging?
     </p>
     <p>
     <strong>Result:</strong>
-        TODO
+        Age seems to affect both the mean and variance of S for some genes
+        either by decreasing (ZNF331) or increasing (DIRAS3), but not others
+        (MEST). Smoothing with local regression (LOESS) supports this.
     </p>
     <p>
     <strong>Interpretation:</strong>
-        TODO
+    The observed effect is difficult to interpret since
+        the age of death seems to be associated with the
+        brain-collecting(?) institution.  Possible association with other
+        variables may further complicate interpretation.
     </p>
     <p>
     <strong>See also:</strong>
