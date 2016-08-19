@@ -5,6 +5,9 @@ title: Monoall-ms
 
 <link rel="stylesheet" href="{{ "/css/manuscript-summary.css" | prepend: site.baseurl }}">
 
+<a href="{{ site.baseurl }}/monoall-ms/monoall-ms.docx">Download</a> this page
+in docx format (without figures).
+
 <h2>Aging and genomic imprinting in the human brain</h2>
 
 <section>
@@ -18,7 +21,7 @@ title: Monoall-ms
         </ul>
     </p>
     <p> <strong>refname:</strong> this should be used as unique identifier for
-    a figure until the final figure numbers may be established</p>
+        a figure until the final figure numbers may be established</p>
     <h4>Definitions</h4>
     <ul>
         <li>
@@ -142,22 +145,22 @@ title: Monoall-ms
         </figcaption>
     </figure>
     <p>
-    <strong>Motivation:</strong>
+        <strong>Motivation:</strong>
         Given our definition of clusters (above) identify them along with the
         "known" and "candidate, \lt 1MB" genes.  These gene sets will be
         combined with the observed ranking for more detailed analysis.
     </p>
     <p>
-    <strong>Result:</strong>
+        <strong>Result:</strong>
         Altogether 60 "known" and 701 "candidate, \lt 1MB" genes
         before quality filtering.  These form 36 clusters, each with at least a few genes and a median of
         15 genes.  After filtering 36 "known" and 266 "candidate, \lt 1MB" genes.</p>
     <p>
-    <strong>Interpretation:</strong>
+        <strong>Interpretation:</strong>
         None.
     </p>
     <p>
-    <strong>See also:</strong>
+        <strong>See also:</strong>
         <a href="{{ site.baseurl }}{% post_url 2016-08-08-imprinted-gene-clusters %}">
             2016-08-08-imprinted-gene-clusters
         </a>, <a href="{{ site.baseurl }}{% post_url 2016-07-14-imprinting-resources %}">
@@ -225,26 +228,26 @@ title: Monoall-ms
         </figcaption>
     </figure>
     <p>
-    <strong>Motivation:</strong>
-    The observed variability across individuals calls for explanation.
-    Several variables were recorded including age, gender and disease status.
+        <strong>Motivation:</strong>
+        The observed variability across individuals calls for explanation.
+        Several variables were recorded including age, gender and disease status.
         Imprinting: clearly important for perinatal developement but how about
         later stages and aging?
     </p>
     <p>
-    <strong>Result:</strong>
+        <strong>Result:</strong>
         Age seems to affect both the mean and variance of S for some genes
         either by decreasing (ZNF331) or increasing (DIRAS3), but not others
         (MEST). Smoothing with local regression (LOESS) supports this.
     </p>
     <p>
-    <strong>Interpretation:</strong>
-    The result appears to suggest dependence of parental bias on age.
-    However, age seems to be associated with the brain-collecting(?) institution.  Possible association with other
+        <strong>Interpretation:</strong>
+        The result appears to suggest dependence of parental bias on age.
+        However, age seems to be associated with the brain-collecting(?) institution.  Possible association with other
         variables may further complicate interpretation.
     </p>
     <p>
-    <strong>See also:</strong>
+        <strong>See also:</strong>
         <a href="{{ site.baseurl }}{% post_url 2016-06-26-trellis-display-of-data %}">
             2016-06-26-trellis-display-of-data
         </a>
@@ -265,24 +268,24 @@ title: Monoall-ms
         </figcaption>
     </figure>
     <p>
-    <strong>Motivation:</strong>
+        <strong>Motivation:</strong>
         Uncover association among putative predictors of parental bias.  In theory higher order
         associations are of interest but here only pairwise ones are studied,
         in particular those involving age of death.
     </p>
     <p>
-    <strong>Result:</strong>
+        <strong>Result:</strong>
         Association of age is strong to institution, disease, RNA quality (RIN) and
         ancestry and is also substantial to gender.  Institution is also
         strongly associated
         to most variables. </p>
     <p>
-    <strong>Interpretation:</strong>
+        <strong>Interpretation:</strong>
         The latter finding suggests institution-specific technical procedures
         and sampling bias.
     </p>
     <p>
-    <strong>See also:</strong>
+        <strong>See also:</strong>
         <a href="{{ site.baseurl }}{% post_url 2016-06-26-trellis-display-of-data %}">
             2016-06-26-trellis-display-of-data
         </a>
@@ -290,32 +293,42 @@ title: Monoall-ms
 </section>
 
 <section class=supplementary>
-    <h3>The amount of data</h3>
+    <h3>Weight of evidence</h3>
     <figure>
         <a href="{{ site.baseurl }}/monoall-ms/2016-06-26-trellis-display-of-data/S-age-tot-read-count-1.png">
             <img src="{{ site.baseurl }}/monoall-ms/2016-06-26-trellis-display-of-data/S-age-tot-read-count-1.png" width=200>
         </a>
         <figcaption>
-        amount-of-data
+        weight-of-evidence
         <p>
             <a href="{{ site.baseurl }}/monoall-ms/2016-06-26-trellis-display-of-data/S-age-tot-read-count-1.pdf">pdf</a> 
         </p>
         </figcaption>
     </figure>
     <p>
-    <strong>Motivation:</strong>
-        TODO
+        <strong>Motivation:</strong>
+        The total read count is informative for statistical inference on the
+        effect of age and other predictors since the latter may be considered as a
+        weigh of evidence on the read count ratio for each data point that corresponds
+        to some individual--gene pair.
     </p>
     <p>
-    <strong>Result:</strong>
-        TODO
+        <strong>Result:</strong>
+        The total read count varies both across genes and, for a given gene,
+        across individuals.  Summing the higher and total read count over
+        genes yields a weighted average (WA) of the read count ratio.
     </p>
     <p>
-    <strong>Interpretation:</strong>
-        TODO
+        <strong>Interpretation:</strong>
+        The across-genes variation of read count may chiefly reflect across-genes
+        variation in expression, whereas the across-individuals variation of
+        read count likely arises from variation both in expression and in
+        technological effects.  Modeling these levels of
+        variation is challenging but desirable since that affords higher
+        sensitivity and specificity.
     </p>
     <p>
-    <strong>See also:</strong>
+        <strong>See also:</strong>
         <a href="{{ site.baseurl }}{% post_url 2016-06-26-trellis-display-of-data %}">
             2016-06-26-trellis-display-of-data
         </a>
@@ -323,7 +336,7 @@ title: Monoall-ms
 </section>
 
 <section class=supplementary>
-    <h3>Regression models: predicted curves</h3>
+    <h3>Regression models</h3>
     <figure>
         <a href="{{ site.baseurl }}/monoall-ms/2016-04-22-glm-for-s-statistic/s-stat-cmp-simple-multiple-regr-peg3-1.png">
             <img src="{{ site.baseurl }}/monoall-ms/2016-04-22-glm-for-s-statistic/s-stat-cmp-simple-multiple-regr-peg3-1.png">
@@ -336,19 +349,50 @@ title: Monoall-ms
         </figcaption>
     </figure>
     <p>
-    <strong>Motivation:</strong>
-        Blah-blah-blah
+        <strong>Motivation:</strong>
+        Fitting a suitable regression model is the standard technique to
+        quantitatively infer putative predictors' effect on a response
+        variable, in this case the read count ratio.  We need a regression
+        model that best accounts for our observation of associations among
+        predictors and of varying weight of evidence.  We tested several
+        models that differ in the following characteristics:
+        <ol>
+            <li>data transformation (none or rank tr.)</li>
+            <li>weighting according to total read count (weighted or
+                unweighted)</li>
+            <li>link function and error distribution (logistic and normal
+                linear)</li>
+            <li>relationship among predictors (simple or multiple regression)</li>
+            <li>relationship among genes (independent or identically
+                distributed).</li>
+        </ol>
     </p>
     <p>
-    <strong>Result:</strong>
-        Blah-blah-blah
+        <strong>Result:</strong>
+        In summary fitting various models revealed the similar qualitative
+        trends.  The figure shows that normal linear models are limited to a
+        narrow age interval otherwise they predict read count ratios greater
+        than one while logistic models suffer in another weakness: the need of
+        massive extrapolation.  Multiple regression yields typically shallower
+        dependence on age.
     </p>
     <p>
-    <strong>Interpretation:</strong>
-        Blah-blah-blah
+        <strong>Interpretation:</strong>
+        The steeper dependence for simple regression alludes to a bias from the
+        association of age with other predictors.  Multiple regression accounts
+        for that.  The logistic models have other theoretical advantages
+        over the normal linear models besides keeping predicted ratios below 1
+        <ul>
+            <li>
+                they model the higher read count as binomial variables, which is not
+                only more reasonable than normality but provides a natural way of
+                using total read counts as weights of evidence </li>
+            <li>they model the strongly unequal error variance observed in the
+            data.</li>
+        </ul>
     </p>
     <p>
-    <strong>See also:</strong>
+        <strong>See also:</strong>
         <a href="{{ site.baseurl }}{% post_url 2016-04-22-glm-for-s-statistic %}">
             2016-04-22-glm-for-s-statistic
         </a>
@@ -369,19 +413,30 @@ title: Monoall-ms
         </figcaption>
     </figure>
     <p>
-    <strong>Motivation:</strong>
-        Blah-blah-blah
+        <strong>Motivation:</strong>
+        Normal linear models become strongly biased when fitted to data with
+        non-constant error variance.
     </p>
     <p>
-    <strong>Result:</strong>
-        Blah-blah-blah
+        <strong>Result:</strong>
+        The error variance is strongly varying: both systematically (with age,
+        for instance) as seen in the <strong>top left</strong> panel and
+        non-systematically (several outlier data points) as shown by the
+        <strong>top right</strong> panel.  The <strong>bottom</strong> panels
+        were obtained with rank transformation and show much improvement due
+        to reduced systematic and non-systematic variation.
     </p>
     <p>
-    <strong>Interpretation:</strong>
-        Blah-blah-blah
+        <strong>Interpretation:</strong>
+        The result is in line with the theoretical disadvantages of the normal
+        linear model and suggests that inference from this model should not be
+        taken into account because the inferred parameters are strongly
+        biased.  Rank transformation is likely to remove most of the bias at
+        the expense of reduced sensitivity and interpretability since it
+        places read count ratio on relative scale.
     </p>
     <p>
-    <strong>See also:</strong>
+        <strong>See also:</strong>
         <a href="{{ site.baseurl }}{% post_url 2016-05-07-comparing-regression-models %}">
             2016-05-07-comparing-regression-models
         </a>
@@ -402,21 +457,36 @@ title: Monoall-ms
         </figcaption>
     </figure>
     <p>
-    <strong>Motivation:</strong>
-        Blah-blah-blah
+        <strong>Motivation:</strong>
+        Given the results and theoretical considerations the logistic multiple
+        regression model is used to infer \beta_\mathrm{age}, the regression
+        coefficient that mediates the effect of age on read count ratio.
     </p>
     <p>
-    <strong>Result:</strong>
-        Blah-blah-blah
+        <strong>Result:</strong>
+        When genes are taken independent, a separate \beta_\mathrm{age} is
+        inferred for each of them.  This shows great variability across genes:
+        at 99 % confidence
+        some have significantly negative, others significantly positive
+        coefficient and yet others a coefficient not significantly different
+        from zero.  The variability is also seen within imprinted gene
+        clusters.  Compared to the logistic model (shown) the normal linear
+        model with rank transformation appears much less powerful
+        (significance only for 1 gene: ZDBF2).  Decreasing confidence to 95 % improves
+        power (significance for 5 genes).
     </p>
     <p>
-    <strong>Interpretation:</strong>
-        Age operates on genes within the same cluster independently rather
-        than in concert.  The wide confidence intervals and the relatively
-        poor model fit weaken this conclusion.
+        <strong>Interpretation:</strong>
+        Some genes loose and others gain parental expression bias with age,
+        while a third set of genes are not affected by age.  An alternative,
+        not necessary exclusive, interpretation is that the extrapolation
+        under the logistic model leads to biased coefficients.  The
+        qualitative agreement between the two models supports the biological
+        interpretation.  If the age effect is indeed true then age operates on
+        genes within the same cluster independently rather than in concert.
     </p>
     <p>
-    <strong>See also:</strong>
+        <strong>See also:</strong>
         <a href="{{ site.baseurl }}{% post_url 2016-08-08-imprinted-gene-clusters %}">
             2016-08-08-imprinted-gene-clusters
         </a>
@@ -437,19 +507,23 @@ title: Monoall-ms
         </figcaption>
     </figure>
     <p>
-    <strong>Motivation:</strong>
+        <strong>Motivation:</strong>
+        Apart from age, we have data on other biological explanatory
+        variables, specifically disease status, gender and ancestry.  Do these also modulate
+        parental bias like age seems to do?
+    </p>
+    <p>
+        <strong>Result:</strong>
+        Gender and some principal components of the ancestry have significant
+        effects for several genes.  In contrast, disease status (Dx) does not,
+        except for a single gene, NDN.
+    </p>
+    <p>
+        <strong>Interpretation:</strong>
         TODO
     </p>
     <p>
-    <strong>Result:</strong>
-        TODO
-    </p>
-    <p>
-    <strong>Interpretation:</strong>
-        TODO
-    </p>
-    <p>
-    <strong>See also:</strong>
+        <strong>See also:</strong>
         <a href="{{ site.baseurl }}{% post_url 2016-06-22-extending-anova %}">
             2016-06-22-extending-anova
         </a>
@@ -459,30 +533,36 @@ title: Monoall-ms
 <section class=supplementary>
     <h3>All regression coefficients (wnlm.R model)</h3>
     <figure>
-        <a href="{{ site.baseurl }}/monoall-ms/2016-06-22-extending-anova/reg-coef-logi.S-1.png">
-            <img src="{{ site.baseurl }}/monoall-ms/2016-06-22-extending-anova/reg-coef-logi.S-1.png" width=200>
+        <a href="{{ site.baseurl }}/monoall-ms/2016-06-22-extending-anova/reg-coef-wnlm.R-1.png">
+            <img src="{{ site.baseurl }}/monoall-ms/2016-06-22-extending-anova/reg-coef-wnlm.R-1.png" width=200>
         </a>
         <figcaption>
         all-effects-wnlm.R
         <p>
-            <a href="{{ site.baseurl }}/monoall-ms/2016-06-22-extending-anova/reg-coef-logi.S-1.pdf">pdf</a> 
+            <a href="{{ site.baseurl }}/monoall-ms/2016-06-22-extending-anova/reg-coef-wnlm.R-1.pdf">pdf</a> 
         </p>
         </figcaption>
     </figure>
     <p>
-    <strong>Motivation:</strong>
-        TODO
+        <strong>Motivation:</strong>
+        Does the qualitative agreement between the logistic model logi.S (fitted on read
+        count ratios without transformation) and normal linear model wnlm.R (fitted
+        after rank-transformation) observed for age's effect also hold for
+        other predictors.
     </p>
     <p>
-    <strong>Result:</strong>
-        TODO
+        <strong>Result:</strong>
+        Similar qualitative patterns are found under wnlm.R as under logi.S.
+        In general, the confidence intervals are relatively broader.
     </p>
     <p>
-    <strong>Interpretation:</strong>
-        TODO
+        <strong>Interpretation:</strong>
+        These results provide further support for the significant effects of
+        some of the biological variables explaining parental bias.  wnlm.R is
+        less powerful (sensitive) than logi.S.
     </p>
     <p>
-    <strong>See also:</strong>
+        <strong>See also:</strong>
         <a href="{{ site.baseurl }}{% post_url 2016-06-22-extending-anova %}">
             2016-06-22-extending-anova
         </a>
@@ -503,19 +583,24 @@ title: Monoall-ms
         </figcaption>
     </figure>
     <p>
-    <strong>Motivation:</strong>
-        TODO
+        <strong>Motivation:</strong>
+        A more direct comparison of the logistic (logi.S) and normal linear
+        models (wnlm.R) may help more firmly establish the preceding results.
     </p>
     <p>
-    <strong>Result:</strong>
-        TODO
+        <strong>Result:</strong>
+        Clearly, the two models agree qualitatively on age's effect.
     </p>
     <p>
-    <strong>Interpretation:</strong>
-        TODO
+        <strong>Interpretation:</strong>
+        The two models quite different in several statistical properties.
+        Thus, relatively few shared sources of bias are possible making the
+        biological interpretation of the significant effects more plausible.
+        In what follows we turn to an obvious shared property of the two
+        models: (generalized) linearity.
     </p>
     <p>
-    <strong>See also:</strong>
+        <strong>See also:</strong>
         <a href="{{ site.baseurl }}{% post_url 2016-06-17-extending-regression-analysis %}">
             2016-06-17-extending-regression-analysis
         </a>
@@ -523,7 +608,7 @@ title: Monoall-ms
 </section>
 
 <section>
-    <h3>Non-orthogonality obscures relative impact of predictors</h3>
+    <h3>Associations obscure the size of the age effect</h3>
     <figure>
         <a href="{{ site.baseurl }}/monoall-ms/2016-06-22-extending-anova/anova-effects-fw-rv-logi.S-1.png">
             <img src="{{ site.baseurl }}/monoall-ms/2016-06-22-extending-anova/anova-effects-fw-rv-logi.S-1.png" width=200>
@@ -536,19 +621,33 @@ title: Monoall-ms
         </figcaption>
     </figure>
     <p>
-    <strong>Motivation:</strong>
-        TODO
+        <strong>Motivation:</strong>
+        Before more directly inspecting linearity we study the possibility of
+        near collinearity of sets of predictors.  Orthogonality (lack of
+        collinearity) is desirable to make statements on the relative impact
+        of predictors and therefore the biological-"signal"-to-technical-"noise"
+        ratio.  In particular we ask: how much change in parental bias can
+        aging induce? This can be studied with ANOVA as well as with the
+        decomposition of the response response vector along regression
+        coefficients (observed mediators of effects) and unobserved mediators
+        of effects.
     </p>
     <p>
-    <strong>Result:</strong>
-        TODO
+        <strong>Result:</strong>
+        When the age component is taken first into account the corresponding
+        deviance and effect is roughly as high as the highest technical
+        variables (Institution and RNA_batch).  But in the reverse direction
+        the age component greatly shrinks.
     </p>
     <p>
-    <strong>Interpretation:</strong>
-        TODO
+        <strong>Interpretation:</strong>
+        The shrinkage is due to age's association to institution and other
+        predictors, as we found above.
+        This does not weaken the previously observed significance of
+        age's effect but it does preclude determination of age's effect size.
     </p>
     <p>
-    <strong>See also:</strong>
+        <strong>See also:</strong>
         <a href="{{ site.baseurl }}{% post_url 2016-06-22-extending-anova %}">
             2016-06-22-extending-anova
         </a>
@@ -569,19 +668,32 @@ title: Monoall-ms
         </figcaption>
     </figure>
     <p>
-    <strong>Motivation:</strong>
-        TODO
+        <strong>Motivation:</strong>
+        Linearity is a shared assumption by all models used here, whose
+        violation might bias inference on the effect of age and other
+        predictors.  Linearity is equivalent to the conditional independence
+        of predictors given the response (i.e. read count ratio).
     </p>
     <p>
-    <strong>Result:</strong>
-        TODO
+        <strong>Result:</strong>
+        Conditioning the inference of \beta_\mathrm{age} on institution and
+        gender seems to more strongly affect inferences under the logistic model logi.S
+        (shown) than those under the normal linear model wnlm.R.  The pattern
+        of change in the inferred \beta_\mathrm{age} is more often similar
+        than different.
     </p>
     <p>
-    <strong>Interpretation:</strong>
-        TODO
+        <strong>Interpretation:</strong>
+        The result suggests substantial nonlinearity; in other words age
+        interacts with institution and gender.  This interaction is not
+        accounted for by our models, which may potentially lead to quit strong
+        bias. The normal linear model (fitted to rank-transformed read counts)
+        is more robust to departures from linearity.  This points to the
+        importance of comparing our observational study with factorially
+        designed experiments.
     </p>
     <p>
-    <strong>See also:</strong>
+        <strong>See also:</strong>
         <a href="{{ site.baseurl }}{% post_url 2016-07-08-conditional-inference %}">
             2016-07-08-conditional-inference
         </a>
@@ -602,19 +714,19 @@ title: Monoall-ms
         </figcaption>
     </figure>
     <p>
-    <strong>Motivation:</strong>
+        <strong>Motivation:</strong>
         TODO
     </p>
     <p>
-    <strong>Result:</strong>
+        <strong>Result:</strong>
         TODO
     </p>
     <p>
-    <strong>Interpretation:</strong>
+        <strong>Interpretation:</strong>
         TODO
     </p>
     <p>
-    <strong>See also:</strong>
+        <strong>See also:</strong>
         <a href="{{ site.baseurl }}{% post_url 2016-08-08-imprinted-gene-clusters %}">
             2016-08-08-imprinted-gene-clusters
         </a>
@@ -635,19 +747,19 @@ title: Monoall-ms
         </figcaption>
     </figure>
     <p>
-    <strong>Motivation:</strong>
+        <strong>Motivation:</strong>
         TODO
     </p>
     <p>
-    <strong>Result:</strong>
+        <strong>Result:</strong>
         TODO
     </p>
     <p>
-    <strong>Interpretation:</strong>
+        <strong>Interpretation:</strong>
         TODO
     </p>
     <p>
-    <strong>See also:</strong>
+        <strong>See also:</strong>
         <a href="{{ site.baseurl }}{% post_url 2016-08-08-imprinted-gene-clusters %}">
             2016-08-08-imprinted-gene-clusters
         </a>
