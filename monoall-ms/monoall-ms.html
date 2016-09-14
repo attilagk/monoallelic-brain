@@ -5,10 +5,20 @@ title: Monoall-ms
 
 <link rel="stylesheet" href="{{ "/css/manuscript-summary.css" | prepend: site.baseurl }}">
 
-<a href="{{ site.baseurl }}/monoall-ms/monoall-ms.docx">Download</a> this page
-in docx format (without figures).
+<h2>Downloads</h2>
 
-<h2>Aging and genomic imprinting in the human brain</h2>
+Get the manuscript in
+<a href="{{ site.baseurl }}/monoall-ms/monoall-ms.rtf">rtf</a>
+or
+<a href="{{ site.baseurl }}/monoall-ms/monoall-ms.pdf">pdf</a>
+format, or download the
+<a href="{{ site.baseurl }}/monoall-ms/monoall-ms.tex">latex</a>
+and
+<a href="{{ site.baseurl }}/monoall-ms/monoall-ms.bib">bibtex</a>
+source files.
+
+<h2>Variation of Genomic Imprinting in the Human Population,
+and Analysis of its Sources and Psychiatric Consequences</h2>
 
 <section>
     <h3>Preliminaries</h3>
@@ -35,7 +45,7 @@ in docx format (without figures).
             <dfn>known imprinted</dfn> and <dfn>candidate</dfn> genes: with
             and without prior evidence for imprinting, respectively
         </li><li>
-            <dfn>candidate, \lt 1 MB gene:</dfn> a candidate gene in the 1 MB
+            <dfn>nearby candidate</dfn> a candidate gene in the 1 MB
             neighborhood of some known imprinted gene
         </li><li>
             <dfn>imprinted gene cluster:</dfn> a sequence of neighboring genes
@@ -131,7 +141,7 @@ in docx format (without figures).
     </p>
 </section>
 
-<section>
+<section class=supplementary>
     <h3>Parental bias and imprinted gene clusters</h3>
     <figure>
         <a href="{{ site.baseurl }}/monoall-ms/2016-08-08-imprinted-gene-clusters/score-genomic-location-1.png">
@@ -217,13 +227,13 @@ in docx format (without figures).
 <section>
     <h3>Variation of parental bias with age</h3>
     <figure>
-        <a href="{{ site.baseurl }}/monoall-ms/2016-06-26-trellis-display-of-data/S-age-smooth-1.png">
-            <img src="{{ site.baseurl }}/monoall-ms/2016-06-26-trellis-display-of-data/S-age-smooth-1.png" width=200>
+        <a href="{{ site.baseurl }}/monoall-ms/2016-06-26-trellis-display-of-data/S-age-gender-1.png">
+            <img src="{{ site.baseurl }}/monoall-ms/2016-06-26-trellis-display-of-data/S-age-gender-1.png" width=200>
         </a>
         <figcaption>
-        S-age-institution
+        S-age-gender
         <p>
-            <a href="{{ site.baseurl }}/monoall-ms/2016-06-26-trellis-display-of-data/S-age-smooth-1.pdf">pdf</a> 
+            <a href="{{ site.baseurl }}/monoall-ms/2016-06-26-trellis-display-of-data/S-age-gender-1.pdf">pdf</a> 
         </p>
         </figcaption>
     </figure>
@@ -238,13 +248,11 @@ in docx format (without figures).
         <strong>Result:</strong>
         Age seems to affect both the mean and variance of S for some genes
         either by decreasing (ZNF331) or increasing (DIRAS3), but not others
-        (MEST). Smoothing with local regression (LOESS) supports this.
+        (MEST).
     </p>
     <p>
         <strong>Interpretation:</strong>
         The result appears to suggest dependence of parental bias on age.
-        However, age seems to be associated with the brain-collecting(?) institution.  Possible association with other
-        variables may further complicate interpretation.
     </p>
     <p>
         <strong>See also:</strong>
@@ -335,16 +343,16 @@ in docx format (without figures).
     </p>
 </section>
 
-<section class=supplementary>
+<section>
     <h3>Regression models</h3>
     <figure>
-        <a href="{{ site.baseurl }}/monoall-ms/2016-04-22-glm-for-s-statistic/s-stat-cmp-simple-multiple-regr-peg3-1.png">
-            <img src="{{ site.baseurl }}/monoall-ms/2016-04-22-glm-for-s-statistic/s-stat-cmp-simple-multiple-regr-peg3-1.png">
+        <a href="{{ site.baseurl }}/monoall-ms/2016-08-23-glm-sampling-distributions/GRB10-1.png">
+            <img src="{{ site.baseurl }}/monoall-ms/2016-08-23-glm-sampling-distributions/GRB10-1.png">
         </a>
         <figcaption>
         predicted-curves
         <p>
-            <a href="{{ site.baseurl }}/monoall-ms/2016-04-22-glm-for-s-statistic/s-stat-cmp-simple-multiple-regr-peg3-1.pdf">pdf</a> 
+            <a href="{{ site.baseurl }}/monoall-ms/2016-08-23-glm-sampling-distributions/GRB10-1.pdf">pdf</a> 
         </p>
         </figcaption>
     </figure>
@@ -366,21 +374,7 @@ in docx format (without figures).
             <li>relationship among genes (independent or identically
                 distributed).</li>
         </ol>
-    </p>
-    <p>
-        <strong>Result:</strong>
-        In summary fitting various models revealed the similar qualitative
-        trends.  The figure shows that normal linear models are limited to a
-        narrow age interval otherwise they predict read count ratios greater
-        than one while logistic models suffer in another weakness: the need of
-        massive extrapolation.  Multiple regression yields typically shallower
-        dependence on age.
-    </p>
-    <p>
-        <strong>Interpretation:</strong>
-        The steeper dependence for simple regression alludes to a bias from the
-        association of age with other predictors.  Multiple regression accounts
-        for that.  The logistic models have other theoretical advantages
+        The logistic models have several theoretical advantages
         over the normal linear models besides keeping predicted ratios below 1
         <ul>
             <li>
@@ -392,7 +386,39 @@ in docx format (without figures).
         </ul>
     </p>
     <p>
+        <strong>Result:</strong>
+        In summary fitting various models revealed the similar qualitative
+        trends.  The figure shows that normal linear models predict, with
+        positive probability, read count ratios greater than 1 and fail to
+        account for the systematic increase of variance with decreasing
+        average read count ratio.  The rank transformation achieves nearly
+        constant variance but looses information and thereby substantially
+        worsens signal-to-noise (explained vs unexplained variance).
+        Logistic models capture patterns of data much better, although they
+        exlain a more moderate change in variance than what is observed
+        (overdispersion).  However, the steepest,
+        most informative, part of their sigmoidal predicted curve lies out of
+        the observed range of data (massive extrapolation).  The predicions
+        under the unweighted norlal linear models (unlm.S and unlm.R) are very
+        similar to their weighted counterparts (wnlm.S and wnlm.R) and are not
+        shown.
+    </p>
+    <p>
+        <strong>Interpretation:</strong>
+        As expected based on theoretical grounds logistic models indeed seem
+        to express several properties of the data a lot better than normal linear
+        models.  The data seems overdispersed indicating that it would be
+        beneficial to use hierachical models whose layers correspond to
+        various sources of biological and technical variation.  The former
+        includes fluctuation in gene expression (across time and cells) as
+        well as variability and shared information across genes.
+    </p>
+    <p>
         <strong>See also:</strong>
+        <a href="{{ site.baseurl }}{% post_url 2016-08-23-glm-sampling-distributions %}">
+            2016-08-23-glm-sampling-distributions
+        </a>
+    </p>
         <a href="{{ site.baseurl }}{% post_url 2016-04-22-glm-for-s-statistic %}">
             2016-04-22-glm-for-s-statistic
         </a>
@@ -496,13 +522,13 @@ in docx format (without figures).
 <section class=supplementary>
     <h3>All regression coefficients</h3>
     <figure>
-        <a href="{{ site.baseurl }}/monoall-ms/2016-06-22-extending-anova/reg-coef-logi.S-1.png">
-            <img src="{{ site.baseurl }}/monoall-ms/2016-06-22-extending-anova/reg-coef-logi.S-1.png" width=200>
+        <a href="{{ site.baseurl }}/monoall-ms/2016-06-22-extending-anova/reg-coef-logi-S-1.png">
+            <img src="{{ site.baseurl }}/monoall-ms/2016-06-22-extending-anova/reg-coef-logi-S-1.png" width=200>
         </a>
         <figcaption>
-        all-effects
+        all-effects-logi.S
         <p>
-            <a href="{{ site.baseurl }}/monoall-ms/2016-06-22-extending-anova/reg-coef-logi.S-1.pdf">pdf</a> 
+            <a href="{{ site.baseurl }}/monoall-ms/2016-06-22-extending-anova/reg-coef-logi-S-1.pdf">pdf</a> 
         </p>
         </figcaption>
     </figure>
@@ -520,7 +546,10 @@ in docx format (without figures).
     </p>
     <p>
         <strong>Interpretation:</strong>
-        TODO
+        The effect of age, at least on some genes, seems clear despite the
+        limitations of the logistic model.  The significance of other
+        biological explanatory variables is unclear because of the observed sources of
+        bias and high noise associated with technical variables.
     </p>
     <p>
         <strong>See also:</strong>
@@ -533,13 +562,13 @@ in docx format (without figures).
 <section class=supplementary>
     <h3>All regression coefficients (wnlm.R model)</h3>
     <figure>
-        <a href="{{ site.baseurl }}/monoall-ms/2016-06-22-extending-anova/reg-coef-wnlm.R-1.png">
-            <img src="{{ site.baseurl }}/monoall-ms/2016-06-22-extending-anova/reg-coef-wnlm.R-1.png" width=200>
+        <a href="{{ site.baseurl }}/monoall-ms/2016-06-22-extending-anova/reg-coef-wnlm-R-1.png">
+            <img src="{{ site.baseurl }}/monoall-ms/2016-06-22-extending-anova/reg-coef-wnlm-R-1.png" width=200>
         </a>
         <figcaption>
         all-effects-wnlm.R
         <p>
-            <a href="{{ site.baseurl }}/monoall-ms/2016-06-22-extending-anova/reg-coef-wnlm.R-1.pdf">pdf</a> 
+            <a href="{{ site.baseurl }}/monoall-ms/2016-06-22-extending-anova/reg-coef-wnlm-R-1.pdf">pdf</a> 
         </p>
         </figcaption>
     </figure>
@@ -572,13 +601,13 @@ in docx format (without figures).
 <section class=supplementary>
     <h3>Comparison of age effect under different regression models</h3>
     <figure>
-        <a href="{{ site.baseurl }}/monoall-ms/2016-06-17-extending-regression-analysis/beta-age-wnlm.R-vs-logi.S-1.png">
-            <img src="{{ site.baseurl }}/monoall-ms/2016-06-17-extending-regression-analysis/beta-age-wnlm.R-vs-logi.S-1.png" width=200>
+        <a href="{{ site.baseurl }}/monoall-ms/2016-06-17-extending-regression-analysis/beta-age-wnlm-R-vs-logi-S-1.png">
+            <img src="{{ site.baseurl }}/monoall-ms/2016-06-17-extending-regression-analysis/beta-age-wnlm-R-vs-logi-S-1.png" width=200>
         </a>
         <figcaption>
         age-effect-two-models
         <p>
-            <a href="{{ site.baseurl }}/monoall-ms/2016-06-17-extending-regression-analysis/beta-age-wnlm.R-vs-logi.S-1.pdf">pdf</a> 
+            <a href="{{ site.baseurl }}/monoall-ms/2016-06-17-extending-regression-analysis/beta-age-wnlm-R-vs-logi-S-1.pdf">pdf</a> 
         </p>
         </figcaption>
     </figure>
@@ -607,16 +636,56 @@ in docx format (without figures).
     </p>
 </section>
 
+<section class=supplementary>
+    <h3>Likelihood: association of regression coefficients</h3>
+    <figure>
+        <a href="{{ site.baseurl }}/monoall-ms/2016-08-21-likelihood-surface/ll-surf-coefs-1.png">
+            <img src="{{ site.baseurl }}/monoall-ms/2016-08-21-likelihood-surface/ll-surf-coefs-1.png" width=200>
+        </a>
+        <figcaption>
+        likelihood-surface
+        <p>
+            <a href="{{ site.baseurl }}/monoall-ms/2016-08-21-likelihood-surface/ll-surf-coefs-1.pdf">pdf</a> 
+        </p>
+        </figcaption>
+    </figure>
+    <p>
+        <strong>Motivation:</strong>
+        The observed associations (dependencies) among predictors are expected to induce associations
+        among the coefficients $\{\beta_i\}$ themselves, which in turn makes MLE
+        less reliable.  In the extreme case of collinearity coefficients become
+        unidentifiable and MLE fails.  Pairwise associations involving
+        \beta_\mathrm{Age} and other coefficients are investigated below.
+    </p>
+    <p>
+        <strong>Result:</strong>
+        \beta_\mathrm{Age} is associated with coefficients of both technical and biological predictors.  Association to the coefficient of RNA-quality RIN (RNA Integrity Number) is the strongest.
+    </p>
+    <p>
+        <strong>Interpretation:</strong>
+        These associations, especially the strongest ones, caution about the
+        inferences made with maximum likelihood criterion.  From these pairwise
+        associations the network of causal dependencies does not follow directly and
+        neither does the violation of the assumption of linearity.
+    </p>
+    <p>
+        <strong>See also:</strong>
+        <a href="{{ site.baseurl }}{% post_url 2016-08-21-likelihood-surface %}">
+            2016-08-21-likelihood-surface
+        </a>
+    </p>
+</section>
+
 <section>
     <h3>Associations obscure the size of the age effect</h3>
     <figure>
-        <a href="{{ site.baseurl }}/monoall-ms/2016-06-22-extending-anova/anova-effects-fw-rv-logi.S-1.png">
-            <img src="{{ site.baseurl }}/monoall-ms/2016-06-22-extending-anova/anova-effects-fw-rv-logi.S-1.png" width=200>
+        <a href="{{ site.baseurl }}/monoall-ms/2016-06-22-extending-anova/anova-effects-fw-rv-logi-S-1.png">
+            <img src="{{ site.baseurl }}/monoall-ms/2016-06-22-extending-anova/anova-effects-fw-rv-logi-S-1.png" width=200>
         </a>
         <figcaption>
         anova
         <p>
-            <a href="{{ site.baseurl }}/monoall-ms/2016-06-22-extending-anova/anova-effects-fw-rv-logi.S-1.pdf">pdf</a> 
+            <a href="{{ site.baseurl }}/monoall-ms/2016-06-22-extending-anova/anova-effects-fw-rv-logi-S-1.pdf">pdf</a> 
         </p>
         </figcaption>
     </figure>
@@ -657,13 +726,13 @@ in docx format (without figures).
 <section class=supplementary>
     <h3>Interaction of age with other predictors</h3>
     <figure>
-        <a href="{{ site.baseurl }}/monoall-ms/2016-07-08-conditional-inference/beta-age-cond-logi.S-1.png">
-            <img src="{{ site.baseurl }}/monoall-ms/2016-07-08-conditional-inference/beta-age-cond-logi.S-1.png" width=200>
+        <a href="{{ site.baseurl }}/monoall-ms/2016-07-08-conditional-inference/beta-age-cond-logi-S-1.png">
+            <img src="{{ site.baseurl }}/monoall-ms/2016-07-08-conditional-inference/beta-age-cond-logi-S-1.png" width=200>
         </a>
         <figcaption>
         interaction
         <p>
-            <a href="{{ site.baseurl }}/monoall-ms/2016-07-08-conditional-inference/beta-age-cond-logi.S-1.pdf">pdf</a> 
+            <a href="{{ site.baseurl }}/monoall-ms/2016-07-08-conditional-inference/beta-age-cond-logi-S-1.pdf">pdf</a> 
         </p>
         </figcaption>
     </figure>
@@ -703,13 +772,13 @@ in docx format (without figures).
 <section class=missing>
     <h3>Comparison to previous mouse study: genome-wide parental bias</h3>
     <figure>
-        <a href="{{ site.baseurl }}/monoall-ms/2016-08-08-imprinted-gene-clusters/beta-age-logi.S-braim.png">
-            <img src="{{ site.baseurl }}/monoall-ms/2016-08-08-imprinted-gene-clusters/beta-age-logi.S-braim.png" width=200>
+        <a href="{{ site.baseurl }}/monoall-ms/2016-08-08-imprinted-gene-clusters/beta-age-logi-S-braim.png">
+            <img src="{{ site.baseurl }}/monoall-ms/2016-08-08-imprinted-gene-clusters/beta-age-logi-S-braim.png" width=200>
         </a>
         <figcaption>
         TODO
         <p>
-            <a href="{{ site.baseurl }}/monoall-ms/2016-08-08-imprinted-gene-clusters/beta-age-logi.S-braim.pdf">pdf</a> 
+            <a href="{{ site.baseurl }}/monoall-ms/2016-08-08-imprinted-gene-clusters/beta-age-logi-S-braim.pdf">pdf</a> 
         </p>
         </figcaption>
     </figure>
@@ -736,13 +805,13 @@ in docx format (without figures).
 <section class=missing>
     <h3>Comparison to previous mouse study: age effect</h3>
     <figure>
-        <a href="{{ site.baseurl }}/monoall-ms/2016-08-08-imprinted-gene-clusters/beta-age-logi.S-braim.png">
-            <img src="{{ site.baseurl }}/monoall-ms/2016-08-08-imprinted-gene-clusters/beta-age-logi.S-braim.png" width=200>
+        <a href="{{ site.baseurl }}/monoall-ms/2016-08-08-imprinted-gene-clusters/beta-age-logi-S-braim.png">
+            <img src="{{ site.baseurl }}/monoall-ms/2016-08-08-imprinted-gene-clusters/beta-age-logi-S-braim.png" width=200>
         </a>
         <figcaption>
         TODO
         <p>
-            <a href="{{ site.baseurl }}/monoall-ms/2016-08-08-imprinted-gene-clusters/beta-age-logi.S-braim.pdf">pdf</a> 
+            <a href="{{ site.baseurl }}/monoall-ms/2016-08-08-imprinted-gene-clusters/beta-age-logi-S-braim.pdf">pdf</a> 
         </p>
         </figcaption>
     </figure>
