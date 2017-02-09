@@ -13,6 +13,6 @@ The Bayesian regression allelic imbalance model (BRAIM) was published by Dulac a
 
 Perez et al presents many interesting findings but here I focus only on BRAIM and compare it to the models I present in [this earlier post][binom models], which I will collectively refer to as AGK models using the initials of my name.  For my analysis read on [2016-04-14-braim-model.pdf][pdf].
 
-[binom models]: {{ site.baseurl }}{% post_url 2016-02-19-binomial-models %}
+[binom models]: {{ site.baseurl }}{% post_url /monoallelic-brain/2016-02-19-binomial-models %}
 [Perez et al]: http://elifesciences.org/content/4/e07860v2
 [pdf]: {{ site.baseurl }}/assets/projects/monoallelic-brain/2016-04-14-braim-model.pdf

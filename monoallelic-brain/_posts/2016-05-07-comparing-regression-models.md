@@ -8,5 +8,5 @@ This post follows up on a [previous regression analysis][regr], which used fitte
 
 {% include projects/monoallelic-brain/2016-05-07-comparing-regression-models.html %}
 
-[regr]: {{ site.baseurl }}{% post_url 2016-04-22-glm-for-s-statistic %}
+[regr]: {{ site.baseurl }}{% post_url /monoallelic-brain/2016-04-22-glm-for-s-statistic %}
 

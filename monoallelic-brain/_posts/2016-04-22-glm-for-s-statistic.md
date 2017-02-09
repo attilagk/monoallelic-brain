@@ -10,5 +10,5 @@ tags: [ regression, reproducible-research ]
 
 {% include projects/monoallelic-brain/2016-04-22-glm-for-s-statistic.html %}
 
-[nlm g13]: {{ site.baseurl }}{% post_url 2016-03-02-ifats-regression-analysis %}
+[nlm g13]: {{ site.baseurl }}{% post_url /monoallelic-brain/2016-03-02-ifats-regression-analysis %}
 [ifat]: https://docs.google.com/presentation/d/1YvpA1AJ-zzir1Iw0F25tO9x8gkSAzqaO4fjB7K3zBhE/
