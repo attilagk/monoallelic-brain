@@ -25,7 +25,7 @@ Download the presentation [here].
 * hierarchical models
 
 [here]: {{ site.baseurl }}/assets/lab-meetings/2016-05-10-monoallelic-brain.pdf
-[regr]: {{ site.baseurl }}{% post_url 2016-04-22-glm-for-s-statistic %}
-[modcomp]: {{ site.baseurl }}{% post_url 2016-05-07-comparing-regression-models %}
+[regr]: {{ site.baseurl }}{% post_url /monoallelic-brain/2016-04-22-glm-for-s-statistic %}
+[modcomp]: {{ site.baseurl }}{% post_url /monoallelic-brain/2016-05-07-comparing-regression-models %}
 [ifat-fig1]: https://docs.google.com/presentation/d/1YvpA1AJ-zzir1Iw0F25tO9x8gkSAzqaO4fjB7K3zBhE/edit#slide=id.p4
 [perez]: https://elifesciences.org/content/4/e07860/article-data

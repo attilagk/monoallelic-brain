@@ -21,5 +21,5 @@ Almost done.  But we're going to use dynamic docs and render them with `R`.  We 
 {% include lab-meetings/2016-03-25-live-demonstration.html %}
 
 [a page on the Internet]: http://jupyter.org
-[a previous post]: {{ site.baseurl }}{% post_url 2016-03-01-lab-notebook-sample-post %}
+[a previous post]: {{ site.baseurl }}{% post_url /lab-meetings/2016-03-01-lab-notebook-sample-post %}
 [ Google ]: http://google.com
