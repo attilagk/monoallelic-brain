@@ -1,6 +1,6 @@
 ---
 layout: post
-tags: [ regression ]
+tags: [ regression, anova ]
 title: Extending ANOVA
 ---
 
