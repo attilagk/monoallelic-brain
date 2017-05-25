@@ -12,7 +12,7 @@ Understand the strengths and weaknesses of BIC-seq ([Xi et al 2011]) and BIC-seq
 
 [Alkosdi et al 2014], [Pirooznia et al 2015], and [Zhao et al 2013] reviewed CNV detection approaches and software tools implementing those.  Below are the main approaches (Zhao et al 2013, Fig 1).  BIC-seq(2) is one of the read depth based techniques, whose main idea is that CNV results in read depth variation.
 
-![fig1]({{ site.baseurl }}/assets/projects/som-mosaic-scz/2016-05-27-bic-seq2-intro/zhao-2013-cnv-review-fig1.jpg)
+![fig1]({{ site.baseurl }}/assets/projects/bsm/2016-05-27-bic-seq2-intro/zhao-2013-cnv-review-fig1.jpg)
 
 ### Properties of read depth approaches
 

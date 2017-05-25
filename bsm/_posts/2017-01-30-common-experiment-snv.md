@@ -15,8 +15,8 @@ This analysis summarizes the more than 4 million variants in the vcf file `Commo
 
 Open [snv-2017-01-24.1-1000.tsv] to look at the first thousand variants and their annotations in an Excel-like program.  Similarly, open [snv-2017-01-24.Fibro_Common_7.recode.tsv] for somatic variants specific to the fibroblast sample (equivalently, brain specific variants).
 
-{% include projects/som-mosaic-scz/2017-01-30-common-experiment-snv.html %}
+{% include projects/bsm/2017-01-30-common-experiment-snv.html %}
 
-[snv-2017-01-24.1-1000.tsv]: {{ site.baseurl}}/assets/projects/som-mosaic-scz/snv-2017-01-24.1-1000.tsv
-[snv-2017-01-24.Fibro_Common_7.recode.tsv]: {{ site.baseurl}}/assets/projects/som-mosaic-scz/snv-2017-01-24.Fibro_Common_7.recode.tsv
+[snv-2017-01-24.1-1000.tsv]: {{ site.baseurl}}/assets/projects/bsm/snv-2017-01-24.1-1000.tsv
+[snv-2017-01-24.Fibro_Common_7.recode.tsv]: {{ site.baseurl}}/assets/projects/bsm/snv-2017-01-24.Fibro_Common_7.recode.tsv
 [HaplotypeCaller]: https://software.broadinstitute.org/gatk/gatkdocs/org_broadinstitute_gatk_tools_walkers_haplotypecaller_HaplotypeCaller.php
