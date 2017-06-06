@@ -4,3 +4,5 @@ _site
 assets
 monoall-ms
 _includes/projects/*
+*.swp
+Gemfile.lock
