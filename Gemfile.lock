@@ -223,6 +223,7 @@ DEPENDENCIES
   jekyll-scholar
   jekyll-theme-leap-day
   minima (~> 2.0)
+  octokit
 
 RUBY VERSION
    ruby 2.3.1p112

@@ -8,6 +8,7 @@ gem "github-pages", group: :jekyll_plugins
 gem "jekyll-scholar"
 gem "font-awesome-sass"
 gem "jekyll-paginate"
+gem "octokit"
 
 # If you have any plugins, put them here!
 group :jekyll_plugins do
