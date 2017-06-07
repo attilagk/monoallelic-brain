@@ -199,34 +199,11 @@ Filter based on earlier decisions on the goodness of fit of logi.S, which is sto
 
 ```r
 logi.S.OK <- read.csv("../../results/model-checking.csv", row.names = "gene")["logi.S.fit.OK"]
-```
-
-```
-## Warning in file(file, "rt"): cannot open file '../../results/model-
-## checking.csv': No such file or directory
-```
-
-```
-## Error in file(file, "rt"): cannot open the connection
-```
-
-```r
 # set results to NA where logi.S fitted poorly
 beta.99$logi.S[beta.99$logi.S$Gene %in% rownames(logi.S.OK)[! logi.S.OK$logi.S.fit.OK],
                c("Estimate", "Lower.CL", "Upper.CL")] <- NA
-```
-
-```
-## Error in rownames(logi.S.OK): object 'logi.S.OK' not found
-```
-
-```r
 beta.95$logi.S[beta.95$logi.S$Gene %in% rownames(logi.S.OK)[! logi.S.OK$logi.S.fit.OK],
                c("Estimate", "Lower.CL", "Upper.CL")] <- NA
-```
-
-```
-## Error in rownames(logi.S.OK): object 'logi.S.OK' not found
 ```
 
 

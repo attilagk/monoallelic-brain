@@ -190,36 +190,13 @@ Filtering out results for logi.S if the fit is bad for a given gene, using decis
 
 ```r
 logi.S.OK <- read.csv("../../results/model-checking.csv", row.names = "gene")["logi.S.fit.OK"]
-```
-
-```
-## Warning in file(file, "rt"): cannot open file '../../results/model-
-## checking.csv': No such file or directory
-```
-
-```
-## Error in file(file, "rt"): cannot open the connection
-```
-
-```r
 # filter betas for logi.S
 B.logi.S.f <- Betas$logi.S
 B.logi.S.f[B.logi.S.f$Gene %in% c(rownames(logi.S.OK)[! logi.S.OK$logi.S.fit.OK], "WA"), c("Estimate", "Lower.CL", "Upper.CL")] <- NA
-```
-
-```
-## Error in rownames(logi.S.OK): object 'logi.S.OK' not found
-```
-
-```r
 # filtered and unfiltered long format Betas
 Betas.l.f <- Betas.l <- do.call(cbind, Betas)
 # perform filtering by replacing data with NAs
 Betas.l.f[Betas.l.f$logi.S.Gene %in% c(rownames(logi.S.OK)[! logi.S.OK$logi.S.fit.OK], "WA"), grep("logi\\.S\\.[ELU]", names(Betas.l.f))] <- NA
-```
-
-```
-## Error in rownames(logi.S.OK): object 'logi.S.OK' not found
 ```
 
 
@@ -253,9 +230,7 @@ Without filtering genes with poor fit by logi.S
 mtype.compare.plot(mtypeA = "logi.S", mtypeB = "wnlm.Q", dt = Betas.l, do.key = TRUE)
 ```
 
-```
-## Error in ifelse(fit.OK, mypch[1], mypch[2]): object 'logi.S.OK' not found
-```
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-06-22-extending-anova/figure/logi-S-wnlm-Q-compare-1.png" title="plot of chunk logi-S-wnlm-Q-compare" alt="plot of chunk logi-S-wnlm-Q-compare" width="700px" />
 
 With filtering
 
@@ -264,9 +239,7 @@ With filtering
 mtype.compare.plot(mtypeA = "logi.S", mtypeB = "wnlm.Q", dt = Betas.l.f, do.key = TRUE)
 ```
 
-```
-## Error in ifelse(fit.OK, mypch[1], mypch[2]): object 'logi.S.OK' not found
-```
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-06-22-extending-anova/figure/logi-S-filtered-wnlm-Q-compare-1.png" title="plot of chunk logi-S-filtered-wnlm-Q-compare" alt="plot of chunk logi-S-filtered-wnlm-Q-compare" width="700px" />
 
 Only for 4 biological predictors
 
@@ -275,9 +248,7 @@ Only for 4 biological predictors
 mtype.compare.plot(mtypeA = "logi.S", mtypeB = "wnlm.Q", dt = Betas.l.f, do.key = TRUE)[c(1,4,6,17)]
 ```
 
-```
-## Error in ifelse(fit.OK, mypch[1], mypch[2]): object 'logi.S.OK' not found
-```
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-06-22-extending-anova/figure/logi-S-filtered-wnlm-Q-compare-4pred-1.png" title="plot of chunk logi-S-filtered-wnlm-Q-compare-4pred" alt="plot of chunk logi-S-filtered-wnlm-Q-compare-4pred" width="700px" />
 
 ### Scaling of the logit link function
 
@@ -285,34 +256,22 @@ There is very little impact on the $$2\times$$ difference in scaling of the logi
 
 Without filtering genes with poor fit by logi.S
 
-
-```
-## Error in ifelse(fit.OK, mypch[1], mypch[2]): object 'logi.S.OK' not found
-```
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-06-22-extending-anova/figure/logi-S-logi2-S-compare-1.png" title="plot of chunk logi-S-logi2-S-compare" alt="plot of chunk logi-S-logi2-S-compare" width="700px" />
 
 With filtering
 
-
-```
-## Error in ifelse(fit.OK, mypch[1], mypch[2]): object 'logi.S.OK' not found
-```
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-06-22-extending-anova/figure/logi-S-filtered-logi2-S-compare-1.png" title="plot of chunk logi-S-filtered-logi2-S-compare" alt="plot of chunk logi-S-filtered-logi2-S-compare" width="700px" />
 
 ### Data transformations for the normal linear model: $$Q$$ vs $$R$$
 
 Overall good agreement.
 
-
-```
-## Error in ifelse(fit.OK, mypch[1], mypch[2]): object 'logi.S.OK' not found
-```
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-06-22-extending-anova/figure/wnlm-R-wnlm-Q-compare-1.png" title="plot of chunk wnlm-R-wnlm-Q-compare" alt="plot of chunk wnlm-R-wnlm-Q-compare" width="700px" />
 
 ### Weighting for the normal linear model
 
 Overall good agreement, suggesting relatively small impact of weighting.
 
-
-```
-## Error in ifelse(fit.OK, mypch[1], mypch[2]): object 'logi.S.OK' not found
-```
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-06-22-extending-anova/figure/unlm-Q-wnlm-Q-compare-1.png" title="plot of chunk unlm-Q-wnlm-Q-compare" alt="plot of chunk unlm-Q-wnlm-Q-compare" width="700px" />
 <!-- MathJax scripts -->
 <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

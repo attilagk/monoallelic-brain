@@ -47,18 +47,13 @@ echo -r "ID:$ID" -r "LB:$LB" -r "SM:$SM" -r "PU:$PU"
 
 where `-r` is the read group option to the `~/bin/align` script, the variable `$ID` stores the read group id, `$LB`: library, `$SM`: sample, and `$PU`: platform unit.  When such expression is used with `~/bin/align`, the `@RG` line in the SAM header will look like
 
-
-```bash
+```
 @RG	ID:MSSM179_muscle_USPD16080279_HCGHCALXX_L8	LB:USPD16080279	SM:MSSM179_muscle	PU:HCGHCALXX_L8	PL:Illumina
-```
-
-```
-## Error in running command bash
 ```
 
 ## CRAM
 
-My assessment showed that converting bam files to cram results in 2-3 times compression (relative to bam) but working with the cram files is tedious because their use requires a slow conversion step that involves the reference genome.  Conclusion: this file format is well-suited for long-term storage and data archiving.
+Inspecting and reading about bam/cram showed that converting bam files to cram results in 2-3 times compression (relative to bam) but working with the cram files is tedious because their use requires a slow conversion step that involves the reference genome.  Conclusion: this file format is well-suited for long-term storage and data archiving.
 
 [inputfaq]: http://gatkforums.broadinstitute.org/gatk/discussion/1204/what-input-files-does-the-gatk-accept-require
 [bamfaq]: http://gatkforums.broadinstitute.org/gatk/discussion/1317/collected-faqs-about-input-files-for-sequence-read-data-bam-cram

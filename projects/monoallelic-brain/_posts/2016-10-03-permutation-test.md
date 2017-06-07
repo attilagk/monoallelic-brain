@@ -164,24 +164,8 @@ This filtering is based on earlier decisions on the goodness of fit of logi.S, w
 
 ```r
 both.p.val <- cbind(both.p.val, logi.S.OK <- read.csv("../../results/model-checking.csv", row.names = "gene")["logi.S.fit.OK"])
-```
-
-```
-## Warning in file(file, "rt"): cannot open file '../../results/model-
-## checking.csv': No such file or directory
-```
-
-```
-## Error in file(file, "rt"): cannot open the connection
-```
-
-```r
 # set results to NA where logi.S fitted poorly
 both.p.val[with(both.p.val, Model == "logi.S" & logi.S.fit.OK == FALSE), c("Estimate", "p.val.t.dist", "p.val.perm")] <- NA
-```
-
-```
-## Error in eval(substitute(expr), data, enclos = parent.frame()): object 'logi.S.fit.OK' not found
 ```
 
 Repeat the previous plot with the filtered results:
@@ -203,25 +187,11 @@ Figure for manuscript showing p-values calculated from both approaches (theory: 
 The plotting symbols are color coded according to gene rank (rainbow, red to violet).  The plotting symbols also display the rank with numbers, see the key on the top.  Genes acceptably fitted by both models are distinguished with a diamond symbol and **bold font** from those that could be fitted only by wnlm.Q.  Gray rectangle shows the decision rule, which rejects the null hypothesis if the p-value is smaller than 0.05 given both the t-distribution and the permutation-based test.
 
 
-
-```
-## Error in ifelse(logi.S.OK$logi.S.fit.OK, mypch[1], mypch[2]): object 'logi.S.OK' not found
-```
-
-```
-## Error in xyplot.formula(-log10(p.val.t.dist) ~ -log10(p.val.perm) | Coefficient * : object 'mykey' not found
-```
-
-```
-## Error in useOuterStrips(p.val.plot): object 'p.val.plot' not found
-```
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-10-03-permutation-test/figure/p-values-1.png" title="plot of chunk p-values" alt="plot of chunk p-values" width="700px" />
 
 Leave logi.S out and show results only under wnlm.Q:
 
-
-```
-## Error in useOuterStrips(p.val.plot[, 1]): object 'p.val.plot' not found
-```
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-10-03-permutation-test/figure/p-values-wnlm-Q-1.png" title="plot of chunk p-values-wnlm-Q" alt="plot of chunk p-values-wnlm-Q" width="700px" />
 
 ## Summarizing results
 
@@ -263,26 +233,8 @@ is.signif <-
          logi.S =
              with(both.p.val.w, logi.S.fit.OK & p.val.t.dist.logi.S < 5e-2 & p.val.perm.logi.S < 5e-2 &
                   Coefficient %in% c("Age", "GenderMale", "Ancestry.1", "DxSCZ")))
-```
-
-```
-## Error in eval(substitute(expr), data, enclos = parent.frame()): object 'logi.S.fit.OK' not found
-```
-
-```r
 is.signif$either <- with(is.signif, wnlm.Q | logi.S)
-```
-
-```
-## Error in with(is.signif, wnlm.Q | logi.S): object 'is.signif' not found
-```
-
-```r
 is.signif$both <- with(is.signif, wnlm.Q & logi.S)
-```
-
-```
-## Error in with(is.signif, wnlm.Q & logi.S): object 'is.signif' not found
 ```
 
 The pairs $$\{(j,g) \, \mid \, x\}$$ (where $$x \in \{\mathrm{wnlm.Q}, \mathrm{logi.S}, \mathrm{either}, \mathrm{both}\}$$) can be presented in two sensible ways: a **gene-centric** and a **coefficient-centric** way.
@@ -296,18 +248,47 @@ signif.gene.effects <-
            function(s)
                sapply(split(x <- both.p.val.w[s, c("Gene", "Coefficient")][ with(both.p.val.w[is.signif$either, ], order(Gene, Coefficient)), ], x$Gene, drop = TRUE),
                       function(g) toString(g$Coefficient)))
-```
-
-```
-## Error in lapply(is.signif, function(s) sapply(split(x <- both.p.val.w[s, : object 'is.signif' not found
-```
-
-```r
 signif.gene.effects
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'signif.gene.effects' not found
+## $wnlm.Q
+##            MAGEL2        AL132709.5      RP11-909M7.3            NAP1L5 
+##             "Age"      "Ancestry.1"           "DxSCZ"      "GenderMale" 
+##              MEG3              PEG3               NDN             PEG10 
+##      "GenderMale"      "GenderMale"      "GenderMale"           "DxSCZ" 
+##          KCNQ1OT1             ZDBF2             KCNK9            INPP5F 
+##      "GenderMale" "Age, Ancestry.1"             "Age"             "Age" 
+##              MEST             PWRN1             UBE3A 
+##           "DxSCZ"      "Ancestry.1"           "DxSCZ" 
+## 
+## $logi.S
+##                         KCNK9                          MEST 
+##                         "Age"           "GenderMale, DxSCZ" 
+##                         PWRN1                         UBE3A 
+##                  "Ancestry.1" "Ancestry.1, Age, GenderMale" 
+## 
+## $either
+##                               MAGEL2                           AL132709.5 
+##                                "Age"                         "Ancestry.1" 
+##                         RP11-909M7.3                               NAP1L5 
+##                              "DxSCZ"                         "GenderMale" 
+##                                 MEG3                                 PEG3 
+##                         "GenderMale"                         "GenderMale" 
+##                                  NDN                                PEG10 
+##                         "GenderMale"                              "DxSCZ" 
+##                             KCNQ1OT1                                ZDBF2 
+##                         "GenderMale"                    "Age, Ancestry.1" 
+##                                KCNK9                               INPP5F 
+##                                "Age"                                "Age" 
+##                                 MEST                                PWRN1 
+##                  "GenderMale, DxSCZ"                         "Ancestry.1" 
+##                                UBE3A 
+## "Age, GenderMale, DxSCZ, Ancestry.1" 
+## 
+## $both
+##        KCNK9         MEST        PWRN1 
+##        "Age"      "DxSCZ" "Ancestry.1"
 ```
 
 The coefficient-centric way lists, for each coefficient, all the significantly associated genes:
@@ -319,18 +300,33 @@ signif.effect.genes <-
            function(s)
                sapply(split(x <- both.p.val.w[s, c("Gene", "Coefficient")][ with(both.p.val.w[is.signif$either, ], order(Coefficient, Gene)), ], x$Coefficient, drop = TRUE),
                       function(g) toString(g$Gene)))
-```
-
-```
-## Error in lapply(is.signif, function(s) sapply(split(x <- both.p.val.w[s, : object 'is.signif' not found
-```
-
-```r
 signif.effect.genes
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'signif.effect.genes' not found
+## $wnlm.Q
+##                                 Age                          GenderMale 
+##      "MAGEL2, ZDBF2, KCNK9, INPP5F" "NAP1L5, MEG3, PEG3, NDN, KCNQ1OT1" 
+##                               DxSCZ                          Ancestry.1 
+##  "RP11-909M7.3, PEG10, MEST, UBE3A"          "AL132709.5, ZDBF2, PWRN1" 
+## 
+## $logi.S
+##            Age     GenderMale          DxSCZ     Ancestry.1 
+## "KCNK9, UBE3A"  "MEST, UBE3A"         "MEST" "PWRN1, UBE3A" 
+## 
+## $either
+##                                              Age 
+##            "MAGEL2, ZDBF2, KCNK9, INPP5F, UBE3A" 
+##                                       GenderMale 
+## "NAP1L5, MEG3, PEG3, NDN, KCNQ1OT1, MEST, UBE3A" 
+##                                            DxSCZ 
+##               "RP11-909M7.3, PEG10, MEST, UBE3A" 
+##                                       Ancestry.1 
+##                "AL132709.5, ZDBF2, PWRN1, UBE3A" 
+## 
+## $both
+##        Age      DxSCZ Ancestry.1 
+##    "KCNK9"     "MEST"    "PWRN1"
 ```
 
 ### Writing results to files
@@ -341,19 +337,8 @@ write.csv(both.p.val, "../../results/regr-coefs.csv", row.names = FALSE)
 write.csv(both.p.val.w, "../../results/regr-coefs-w.csv", row.names = FALSE)
 invisible(lapply(names(signif.gene.effects),
                  function(x) write.csv(data.frame(Gene = names(y <- signif.gene.effects[[x]]), Coefficient = y), file = paste0("../../results/signif-gene-effects-", x, ".csv"), row.names = FALSE)))
-```
-
-```
-## Error in lapply(names(signif.gene.effects), function(x) write.csv(data.frame(Gene = names(y <- signif.gene.effects[[x]]), : object 'signif.gene.effects' not found
-```
-
-```r
 invisible(lapply(names(signif.effect.genes),
                  function(x) write.csv(data.frame(Gene = names(y <- signif.effect.genes[[x]]), Coefficient = y), file = paste0("../../results/signif-effect-genes-", x, ".csv"), row.names = FALSE)))
-```
-
-```
-## Error in lapply(names(signif.effect.genes), function(x) write.csv(data.frame(Gene = names(y <- signif.effect.genes[[x]]), : object 'signif.effect.genes' not found
 ```
 <!-- MathJax scripts -->
 <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

@@ -29,15 +29,6 @@ our.genes$selected <- as.character(read.csv("../../data/genes.regression.new")[[
 our.genes$signif <- as.character(read.csv("../../results/signif-gene-effects-either.csv")[[1]])
 ```
 
-```
-## Warning in file(file, "rt"): cannot open file '../../results/signif-gene-
-## effects-either.csv': No such file or directory
-```
-
-```
-## Error in file(file, "rt"): cannot open the connection
-```
-
 ## Results
 
 The following genes were found to be differentially expressed by Fromer et al **AND**
@@ -52,7 +43,10 @@ The following genes were found to be differentially expressed by Fromer et al **
 
 ```
 ## $selected
-## [1] "PEG10" "IGF2"
+## [1] "PEG10" "IGF2" 
+## 
+## $signif
+## [1] "PEG10"
 ```
 
 The characteristics of the expression change for the selected genes:
@@ -76,11 +70,12 @@ read.csv("../../results/signif-gene-effects-either-manual-annot.csv", row.names 
 ```
 
 ```
-## [1] Description                        Gene.type                         
-## [3] Chromosome.Name                    Gene.Start..bp.                   
-## [5] rank..our.study.                   Associated.coefficient..our.study.
-## [7] Phenotype                          PMID                              
-## <0 rows> (or 0-length row.names)
+##                   Description      Gene.type Chromosome.Name
+## PEG10 paternally expressed 10 protein_coding               7
+##       Gene.Start..bp. rank..our.study. Associated.coefficient..our.study.
+## PEG10        94656325               14                              DxSCZ
+##       Phenotype     PMID
+## PEG10           16341224
 ```
 
 
@@ -90,6 +85,6 @@ grid.draw(venn.diagram(list(diff.e.genes$Gene.Symbol, our.genes$selected, c("RP1
 
 <img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-10-20-differential-expression-scz/figure/venn-triple-1.png" title="plot of chunk venn-triple" alt="plot of chunk venn-triple" width="700px" />
 
-Out of the 0 genes that our study found to be significantly associated to some biological predictor in terms of allelic bias, only 0 of them, , was/were found to be differentially expressed by Fromer et al.
+Out of the 15 genes that our study found to be significantly associated to some biological predictor in terms of allelic bias, only 1 of them, PEG10, was/were found to be differentially expressed by Fromer et al.
 <!-- MathJax scripts -->
 <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

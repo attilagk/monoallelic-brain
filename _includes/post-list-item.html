@@ -1,8 +1,8 @@
     <ul class="post-list">
         <li>
-            {{ post.id }}
+            <! {{ post.id }} >
             <a class="post-link" href="{{ site.baseurl }}{{ post.url }}"> {{ post.title }} </a>
-            <!-- <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span> -->
+            <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
             <!-- <ul>
                 {% for category in post.categories | sort %}
                 <li class="category">

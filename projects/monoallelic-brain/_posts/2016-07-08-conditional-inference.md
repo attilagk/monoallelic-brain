@@ -93,10 +93,7 @@ The same results plotted with different style
 
 Exclude those genes for which the fit was deemed insufficient.  Requires the file `model-checking.csv`, which was generated in a subsequent analysis.
 
-
-```
-## Error in file(file, "rt"): cannot open the connection
-```
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-07-08-conditional-inference/figure/beta-age-cond-logi-S-2-skip-1.png" title="plot of chunk beta-age-cond-logi-S-2-skip" alt="plot of chunk beta-age-cond-logi-S-2-skip" height="700px" />
 
 ## Conclusion
 
