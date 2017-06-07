@@ -1,1 +1,0 @@
-/home/attila/projects/monoallelic-brain/notebook/2017-01-27-ravis-comments.md

@@ -1,1 +1,0 @@
-/home/attila/projects/monoallelic-brain/notebook/2016-01-22-notes-on-draft.md

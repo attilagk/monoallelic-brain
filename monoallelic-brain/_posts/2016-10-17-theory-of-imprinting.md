@@ -1,1 +1,0 @@
-/home/attila/projects/monoallelic-brain/notebook/2016-10-17-theory-of-imprinting.md

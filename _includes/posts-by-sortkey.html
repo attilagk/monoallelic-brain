@@ -5,9 +5,9 @@
 
 <div class="post-content">
 
-    {% include category-tag-list.html %}
-
     {% for item in site.[{{page.sortkey}}] %}
+    {% assign t = item | first %}
+    {% unless t == "projects" %}
     {% assign t = item | first %}
     {% assign posts = item | last %}
     <h3 id="{{ t }}"> {{ t }} </h3>
@@ -18,6 +18,7 @@
 
     {% endif %}
     {% endfor %}
+    {% endunless %}
     {% endfor %}
 
 </div>

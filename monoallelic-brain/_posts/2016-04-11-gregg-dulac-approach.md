@@ -1,1 +1,0 @@
-/home/attila/projects/monoallelic-brain/notebook/2016-04-11-gregg-dulac-approach.md

@@ -1,1 +1,0 @@
-/home/attila/projects/tests/notebook/2017-05-17-alignment-formats/2017-05-17-alignment-formats.md
