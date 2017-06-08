@@ -45,8 +45,8 @@ cat $${BN}.log
 ```
 
 ```
-## grep: 22066{BN}.log: No such file or directory
-## cat: 22066{BN}.log: No such file or directory
+## grep: 6255{BN}.log: No such file or directory
+## cat: 6255{BN}.log: No such file or directory
 ```
 
 Read number of kept variants and also read the sites of singletons:

@@ -1,6 +1,6 @@
 <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">Posts by {{ page.sortkey |
-        capitalize }}</h1>
+    <!-- <h1 class="post-title" itemprop="name headline">Posts by {{ page.sortkey |
+        capitalize }}</h1> -->
 </header>
 
 <div class="post-content">
@@ -10,7 +10,7 @@
     {% unless t == "projects" %}
     {% assign t = item | first %}
     {% assign posts = item | last %}
-    <h3 id="{{ t }}"> {{ t }} </h3>
+    <h1 id="{{ t }}"> {{ t }} </h1>
     {% for post in posts %}
     {% if post.[{{page.sortkey}}] contains t %}
 

@@ -8,3 +8,5 @@ _includes/projects/*
 Gemfile.lock
 *.png
 *.pdf
+*.md
+*.Rmd
