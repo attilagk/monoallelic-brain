@@ -113,8 +113,13 @@ sortkey: categories
             <div class="panels">
                 {% for item in site.categories %}
                 {% assign category = item[0] %}
+                {% if category == 'projects' %}
+                {% assign class = 'active-panel' %}
+                {% else %}
+                {% assign class = '' %}
+                {% endif %}
                 {% assign postsincategory = item[1] %}
-                <article class="active-panel">
+                <article class="{{ class }}">
                     <h2>
                         {{ category }}
                     </h2>
@@ -126,37 +131,9 @@ sortkey: categories
                             <div class="inner-container-2">
                                 <img src="{{ site.baseurl }}/{{ post.categories |
                                 join: '/' }}/R{{ post.url | remove: '.html'
-                                }}/figure/{{ post.featimg }}" alt="Dolor cum accusantium rerum distinctio qui
-                                Dignissimos maxime quam eum laboriosam autem?
-                                Ratione possimus voluptatibus officiis
-                                excepturi ab In tempora nulla optio ipsam corporis
-                                quaerat! In molestias quasi magni odit aut
-                                tempora, dolore. Ad praesentium id veniam quis maiores
-                                molestiae, voluptatem voluptatibus. Tempore laudantium
-                                culpa sequi atque aperiam asperiores Consectetur
-                                blanditiis ad natus error pariatur. Amet autem officia
-                                sapiente accusamus error Natus pariatur ipsa natus rem
-                                voluptatum Autem voluptate inventore aut velit facere
-                                Molestias laborum minima voluptatibus cumque illo? Esse quam
-                                aliquid porro ipsam veritatis, dolore asperiores quae Ex magni
-                                aliquam dolores commodi rem labore Officiis similique inventore
-                                exercitationem optio?">
+                                }}/figure/{{ post.featimg }}" alt="Ipsum nam quibusdam laudantium perferendis quod, fugit! Sequi minima architecto nostrum magnam quis Quibusdam deleniti rem eius ea iusto minus tenetur Quos similique expedita dignissimos ex dolorem Aut non voluptatum animi amet architecto amet Sed debitis debitis dicta saepe veritatis? Similique ducimus aspernatur culpa facere ea animi. Necessitatibus quibusdam cupiditate quod ab possimus enim Sint placeat facere minus tenetur et. Quaerat explicabo officiis corporis sunt officiis? Facere officiis autem suscipit totam magnam similique. Sequi porro consectetur molestias asperiores reiciendis a quidem Nobis vitae nemo sed totam soluta minima a, sint, nam! Nihil iure eaque ducimus veritatis aliquid Corporis iusto beatae?">
                                 <div class="excerpt">
-                                    <p>Dolor cum accusantium rerum distinctio qui
-                                        Dignissimos maxime quam eum laboriosam autem?
-                                        Ratione possimus voluptatibus officiis
-                                        excepturi ab In tempora nulla optio ipsam corporis
-                                        quaerat! In molestias quasi magni odit aut
-                                        tempora, dolore. Ad praesentium id veniam quis maiores
-                                        molestiae, voluptatem voluptatibus. Tempore laudantium
-                                        culpa sequi atque aperiam asperiores Consectetur
-                                        blanditiis ad natus error pariatur. Amet autem officia
-                                        sapiente accusamus error Natus pariatur ipsa natus rem
-                                        voluptatum Autem voluptate inventore aut velit facere
-                                        Molestias laborum minima voluptatibus cumque illo? Esse quam
-                                        aliquid porro ipsam veritatis, dolore asperiores quae Ex magni
-                                        aliquam dolores commodi rem labore Officiis similique inventore
-                                        exercitationem optio?</p>
+                                    <p>Ipsum nam quibusdam laudantium perferendis quod, fugit! Sequi minima architecto nostrum magnam quis Quibusdam deleniti rem eius ea iusto minus tenetur Quos similique expedita dignissimos ex dolorem Aut non voluptatum animi amet architecto amet Sed debitis debitis dicta saepe veritatis? Similique ducimus aspernatur culpa facere ea animi. Necessitatibus quibusdam cupiditate quod ab possimus enim Sint placeat facere minus tenetur et. Quaerat explicabo officiis corporis sunt officiis? Facere officiis autem suscipit totam magnam similique. Sequi porro consectetur molestias asperiores reiciendis a quidem Nobis vitae nemo sed totam soluta minima a, sint, nam! Nihil iure eaque ducimus veritatis aliquid Corporis iusto beatae?</p>
                                 </div>
                             </div>
                         </a>
@@ -169,4 +146,36 @@ sortkey: categories
 
         </section>
     </body>
+
+    <script>
+
+    var tabs = document.querySelectorAll('.info-box li a');
+    var panels = document.querySelectorAll('.info-box article');
+
+    for(i = 0; i < tabs.length; i++) {
+      var tab = tabs[i];
+      setTabHandler(tab, i);
+    }
+
+    function setTabHandler(tab, tabPos) {
+      tab.onclick = function() {
+        for(i = 0; i < tabs.length; i++) {
+          if(tabs[i].getAttribute('class')) {
+            tabs[i].removeAttribute('class');
+          }
+        }
+
+        tab.setAttribute('class', 'active');
+
+        for(i = 0; i < panels.length; i++) {
+          if(panels[i].getAttribute('class')) {
+            panels[i].removeAttribute('class');
+          }
+        }
+
+        panels[tabPos].setAttribute('class', 'active-panel');
+      }
+    }
+
+    </script>
 </html>
