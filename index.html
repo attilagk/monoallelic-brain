@@ -1,21 +1,89 @@
 ---
-layout: default
 sortkey: categories
 ---
-<head>
-<style>
-.category, .tag {
-    font-size: small;
-    margin: 2px;
-    display: inline;
-}
-</style>
-</head>
-<div class="home">
-    <header class="post-header">
-        <!-- <h1 class="post-title" itemprop="name headline">Posts by Date</h1> -->
-    </header>
-
-{% include posts-by-sortkey.html %}
-
-</div>
+<!DOCTYPE html>
+<html>
+    <head>
+    <style>
+        .inner {
+            max-width: 100%;
+        }
+        .wrapper {
+            /* width: auto; */
+        }
+        .wrapper section {
+            max-width: 100%;
+        }
+        .outer-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .inner-container {
+            /* position: relative; */
+            min-width: 350px;
+            max-width: 350px;
+            min-height: 150px;
+            margin: 5px;
+            margin-bottom: 0px;
+            padding: 10px;
+            border: 0px solid gray;
+            background-color: white;
+            box-shadow: 2px 2px 5px gray;
+            color: initial;
+        }
+        .inner-container h1, h2, h3, h4, p {
+            margin-bottom: 0px;
+        }
+        .inner-container-2 {
+            padding-top: 0px;
+            position: relative;
+            color: initial;
+        }
+        .inner-container-2 > img {
+            width: 100%;
+        }
+        .inner-container-2 .excerpt {
+            position: absolute;
+            top: 0px;
+            opacity: 0.1;
+            transition: opacity 0.5s;
+        }
+        .inner-container-2 .excerpt:hover {
+            opacity: 1;
+            background-color: rgba(255,255,255,0.9);
+            transition: opacity 0.5s;
+        }
+    </style>
+    </head>
+    <body>
+    
+    <div class="home">
+    
+        <h1 class="page-heading">{{ site.title }}</h1>
+    
+      <div class="outer-container" style="">
+          {% for post in site.posts %}
+    
+          <a class="inner-container" href="{{ post.url | prepend: site.baseurl }}" style="">
+              <h3 class="post-title"> {{ post.title }} </h3>
+              <p>{{ post.date | date: "%b %d, %Y" }}</p>
+              <div class="inner-container-2">
+                  <img src="{{ site.baseurl }}/{{ post.categories | join: '/' }}/R{{ post.url | remove: '.html' }}/figure/{{ post.featimg }}" alt="">
+                  <div class="excerpt">
+                      <p>{{ post.excerpt }} </p>
+                  </div>
+              </div>
+              </a>
+          {% endfor %}
+      </div>
+    
+      <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+    
+    </div>
+</body>
+<!-- <div class="home">
+        <header class="post-header">
+        </header>
+    {% include posts-by-sortkey.html %}
+    </div> -->
+</html>

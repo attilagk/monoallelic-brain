@@ -17,7 +17,7 @@ github_username:  attilagk
 
 # Build settings
 markdown: kramdown
-theme: jekyll-theme-slate
+theme: jekyll-theme-dinky
 #theme: minima
 
 gems: [jekyll-paginate, jekyll/scholar]
@@ -25,3 +25,4 @@ gems: [jekyll-paginate, jekyll/scholar]
 paginate: 10
 
 future: TRUE
+permalink: /:year-:month-:day-:title.html

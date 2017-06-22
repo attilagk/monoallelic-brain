@@ -84,9 +84,9 @@ characterized by
 
 1. the *linear predictor* $$\eta = \sum_r x_r \beta_r$$, where $$\beta_r$$ are regression *coefficients* mediating the *effects* of $$X$$ on the response
 1. the *link function*: a one to one mapping of $$\eta$$ onto the mean response $$\mu\equiv \mathrm{E} Y$$
-1. $$P(Y_i|\eta_i)$$, the *conditional distribution of the response* given the predictor for observation (individual) $$i$$
+1. $$P(Y_i\mid \eta_i)$$, the *conditional distribution of the response* given the predictor for observation (individual) $$i$$
 
-For the logi and logi2 models the response, for each observation (individual) is distributed binomially and the denominator is used as weight for that observation.  Using $$S_{ig}$$ as response suggests using the corresponding observed $$n_{ig}$$ as weights.  In contrast the nlm model has linear link function and normal (Gaussian) response distribution; under this model the weight is uniformly 1 across observations (individuals) for single and pooled genes.  For averaged genes the weights are, as previously, also taken as uniformly 1.  In this case, however, a more rigorous treatment would be defining the weight at observation $$i$$ as the number $$|G|_i$$ of averaged genes at that $$i$$ since that number varies due to non-uniformly missing data and filtering.
+For the logi and logi2 models the response, for each observation (individual) is distributed binomially and the denominator is used as weight for that observation.  Using $$S_{ig}$$ as response suggests using the corresponding observed $$n_{ig}$$ as weights.  In contrast the nlm model has linear link function and normal (Gaussian) response distribution; under this model the weight is uniformly 1 across observations (individuals) for single and pooled genes.  For averaged genes the weights are, as previously, also taken as uniformly 1.  In this case, however, a more rigorous treatment would be defining the weight at observation $$i$$ as the number $$\mid G\mid _i$$ of averaged genes at that $$i$$ since that number varies due to non-uniformly missing data and filtering.
 
 The link functions are given by the following equations
 $$
@@ -223,25 +223,12 @@ The apparent dependence of the response on age is marginal in the sense that oth
 
 Importantly, these plots below suggest that, at least for PEG3, the response's dependence on age seems genuine and not entirely due to confounding effects of other variables.
 
-![plot of chunk coplot-s-peg3]({{ site.baseurl }}/projects/monoallelic-brain/R/2016-04-22-glm-for-s-statistic/figure/coplot-s-peg3-1.png)
 
 ```
-## 
-##  Missing rows: 8, 13, 16, 17, 32, 54, 57, 59, 60, 66, 67, 68, 77, 79, 84, 100, 116, 122, 131, 142, 150, 161, 177, 189, 192, 194, 197, 205, 208, 212, 216, 219, 226, 234, 246, 251, 252, 264, 277, 279, 284, 285, 289, 300, 302, 311, 312, 321, 322, 339, 341, 347, 349, 350, 358, 359, 366, 369, 372, 376, 377, 384, 394, 409, 418, 423, 429, 432, 439, 445, 446, 451, 472, 475, 480, 490, 492, 508, 512, 513, 519, 520, 524, 532, 536, 554, 575
-```
-
-![plot of chunk coplot-s-peg3]({{ site.baseurl }}/projects/monoallelic-brain/R/2016-04-22-glm-for-s-statistic/figure/coplot-s-peg3-2.png)
-
-```
-## 
-##  Missing rows: 8, 13, 16, 17, 32, 54, 57, 59, 60, 66, 67, 68, 77, 79, 84, 100, 116, 122, 131, 142, 150, 161, 177, 189, 192, 194, 197, 205, 208, 212, 216, 219, 226, 234, 246, 251, 252, 264, 277, 279, 284, 285, 289, 300, 302, 311, 312, 321, 322, 339, 341, 347, 349, 350, 358, 359, 366, 369, 372, 376, 377, 384, 394, 409, 418, 423, 429, 432, 439, 445, 446, 451, 472, 475, 480, 490, 492, 508, 512, 513, 519, 520, 524, 532, 536, 554, 575
-```
-
-![plot of chunk coplot-s-peg3]({{ site.baseurl }}/projects/monoallelic-brain/R/2016-04-22-glm-for-s-statistic/figure/coplot-s-peg3-3.png)
-
-```
-## 
-##  Missing rows: 8, 13, 16, 17, 32, 54, 57, 59, 60, 66, 67, 68, 77, 79, 84, 100, 116, 122, 131, 142, 150, 161, 177, 189, 192, 194, 197, 205, 208, 212, 216, 219, 226, 234, 246, 251, 252, 264, 277, 279, 284, 285, 289, 300, 302, 311, 312, 321, 322, 339, 341, 347, 349, 350, 358, 359, 366, 369, 372, 376, 377, 384, 394, 409, 418, 423, 429, 432, 439, 445, 446, 451, 472, 475, 480, 490, 492, 508, 512, 513, 519, 520, 524, 532, 536, 554, 575
+## Error: <text>:2:30: unexpected input
+## 1: # condition R_PEG3 vs age on a given institution, RIN value and ancestry
+## 2: coplot(S_PEG3 ~ Age.of.Death \
+##                                 ^
 ```
 
 ## Regression analysis
