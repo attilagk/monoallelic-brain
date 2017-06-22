@@ -30,6 +30,7 @@ sortkey: categories
             background-color: white;
             box-shadow: 2px 2px 5px gray;
             color: initial;
+            overflow: auto;
         }
         .inner-container h1, h2, h3, h4, p {
             margin-bottom: 0px;
@@ -56,34 +57,39 @@ sortkey: categories
     </style>
     </head>
     <body>
-    
-    <div class="home">
-    
-        <h1 class="page-heading">{{ site.title }}</h1>
-    
-      <div class="outer-container" style="">
-          {% for post in site.posts %}
-    
-          <a class="inner-container" href="{{ post.url | prepend: site.baseurl }}" style="">
-              <h3 class="post-title"> {{ post.title }} </h3>
-              <p>{{ post.date | date: "%b %d, %Y" }}</p>
-              <div class="inner-container-2">
-                  <img src="{{ site.baseurl }}/{{ post.categories | join: '/' }}/R{{ post.url | remove: '.html' }}/figure/{{ post.featimg }}" alt="">
-                  <div class="excerpt">
-                      <p>{{ post.excerpt }} </p>
-                  </div>
-              </div>
-              </a>
-          {% endfor %}
-      </div>
-    
-      <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
-    
-    </div>
-</body>
-<!-- <div class="home">
-        <header class="post-header">
-        </header>
-    {% include posts-by-sortkey.html %}
-    </div> -->
+        <div class="home">
+            <h1 class="page-heading">{{ site.title }}</h1>
+            <div class="outer-container">
+                {% for post in site.posts %}
+                <a class="inner-container" href="{{ post.url | prepend: site.baseurl }}" style="">
+                    <h3 class="post-title"> {{ post.title }} </h3>
+                    <p>{{ post.date | date: "%b %d, %Y" }}</p>
+                    <div class="inner-container-2">
+                        <img src="{{ site.baseurl }}/{{ post.categories |
+                        join: '/' }}/R{{ post.url | remove: '.html'
+                        }}/figure/{{ post.featimg }}" alt="">
+                        <div class="excerpt">
+                            <p>Dolor cum accusantium rerum distinctio qui
+                                Dignissimos maxime quam eum laboriosam autem?
+                                Ratione possimus voluptatibus officiis
+                            excepturi ab In tempora nulla optio ipsam corporis
+                            quaerat! In molestias quasi magni odit aut
+                        tempora, dolore. Ad praesentium id veniam quis maiores
+                        molestiae, voluptatem voluptatibus. Tempore laudantium
+                    culpa sequi atque aperiam asperiores Consectetur
+                    blanditiis ad natus error pariatur. Amet autem officia
+                sapiente accusamus error Natus pariatur ipsa natus rem
+                voluptatum Autem voluptate inventore aut velit facere
+            Molestias laborum minima voluptatibus cumque illo? Esse quam
+            aliquid porro ipsam veritatis, dolore asperiores quae Ex magni
+        aliquam dolores commodi rem labore Officiis similique inventore
+        exercitationem optio?</p>
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+            <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+        </div>
+    </body>
 </html>
