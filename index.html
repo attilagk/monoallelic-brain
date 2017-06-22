@@ -61,8 +61,22 @@ sortkey: categories
                 transition: opacity 0.5s;
             }
 
-            section.info-box {
+            .info-box .panels {
+                clear: both;
+                position: relative;
+            }
+            .info-box article {
+                background-color: white;
                 width: auto;
+                color: white;
+                position: absolute;
+                padding: 10px;
+                top: 0;
+                left: 0;
+            }
+
+            section.info-box {
+                width: 100%;
             }
             .info-box li {
                 float: left;
@@ -82,74 +96,77 @@ sortkey: categories
         </style>
     </head>
     <body>
+        <h1 class="page-heading">{{ site.title }}</h1>
         <section class="info-box">
-            <div class="home">
-                <ul>
-                    {% for item in site.categories %}
-                    {% assign category = item[0] %}
-                    {% if category == 'projects' %}
-                    {% assign class = 'active' %}
-                    {% assign category = 'all' %}
-                    {% else %}
-                    {% assign class = '' %}
-                    {% endif %}
-                    <li><a href="#" class="{{ class }}">{{ category }}</a></li>
-                    {% endfor %}
-                </ul>
-                <h1 class="page-heading">{{ site.title }}</h1>
+            <ul>
+                {% for item in site.categories %}
+                {% assign category = item[0] %}
+                {% if category == 'projects' %}
+                {% assign class = 'active' %}
+                {% assign category = 'all' %}
+                {% else %}
+                {% assign class = '' %}
+                {% endif %}
+                <li><a href="#" class="{{ class }}">{{ category }}</a></li>
+                {% endfor %}
+            </ul>
+            <div class="panels">
                 {% for item in site.categories %}
                 {% assign category = item[0] %}
                 {% assign postsincategory = item[1] %}
-                <h2>
-                    {{ category }}
-                </h2>
-                <div class="outer-container">
-                    {% for post in postsincategory %}
-                    <a class="inner-container" href="{{ post.url | prepend: site.baseurl }}" style="">
-                        <h3 class="post-title"> {{ post.title }} </h3>
-                        <p>{{ post.date | date: "%b %d, %Y" }}</p>
-                        <div class="inner-container-2">
-                            <img src="{{ site.baseurl }}/{{ post.categories |
-                            join: '/' }}/R{{ post.url | remove: '.html'
-                            }}/figure/{{ post.featimg }}" alt="Dolor cum accusantium rerum distinctio qui
-                            Dignissimos maxime quam eum laboriosam autem?
-                            Ratione possimus voluptatibus officiis
-                            excepturi ab In tempora nulla optio ipsam corporis
-                            quaerat! In molestias quasi magni odit aut
-                            tempora, dolore. Ad praesentium id veniam quis maiores
-                            molestiae, voluptatem voluptatibus. Tempore laudantium
-                            culpa sequi atque aperiam asperiores Consectetur
-                            blanditiis ad natus error pariatur. Amet autem officia
-                            sapiente accusamus error Natus pariatur ipsa natus rem
-                            voluptatum Autem voluptate inventore aut velit facere
-                            Molestias laborum minima voluptatibus cumque illo? Esse quam
-                            aliquid porro ipsam veritatis, dolore asperiores quae Ex magni
-                            aliquam dolores commodi rem labore Officiis similique inventore
-                            exercitationem optio?">
-                            <div class="excerpt">
-                                <p>Dolor cum accusantium rerum distinctio qui
-                                    Dignissimos maxime quam eum laboriosam autem?
-                                    Ratione possimus voluptatibus officiis
-                                    excepturi ab In tempora nulla optio ipsam corporis
-                                    quaerat! In molestias quasi magni odit aut
-                                    tempora, dolore. Ad praesentium id veniam quis maiores
-                                    molestiae, voluptatem voluptatibus. Tempore laudantium
-                                    culpa sequi atque aperiam asperiores Consectetur
-                                    blanditiis ad natus error pariatur. Amet autem officia
-                                    sapiente accusamus error Natus pariatur ipsa natus rem
-                                    voluptatum Autem voluptate inventore aut velit facere
-                                    Molestias laborum minima voluptatibus cumque illo? Esse quam
-                                    aliquid porro ipsam veritatis, dolore asperiores quae Ex magni
-                                    aliquam dolores commodi rem labore Officiis similique inventore
-                                    exercitationem optio?</p>
+                <article class="active-panel">
+                    <h2>
+                        {{ category }}
+                    </h2>
+                    <div class="outer-container">
+                        {% for post in postsincategory %}
+                        <a class="inner-container" href="{{ post.url | prepend: site.baseurl }}" style="">
+                            <h3 class="post-title"> {{ post.title }} </h3>
+                            <p>{{ post.date | date: "%b %d, %Y" }}</p>
+                            <div class="inner-container-2">
+                                <img src="{{ site.baseurl }}/{{ post.categories |
+                                join: '/' }}/R{{ post.url | remove: '.html'
+                                }}/figure/{{ post.featimg }}" alt="Dolor cum accusantium rerum distinctio qui
+                                Dignissimos maxime quam eum laboriosam autem?
+                                Ratione possimus voluptatibus officiis
+                                excepturi ab In tempora nulla optio ipsam corporis
+                                quaerat! In molestias quasi magni odit aut
+                                tempora, dolore. Ad praesentium id veniam quis maiores
+                                molestiae, voluptatem voluptatibus. Tempore laudantium
+                                culpa sequi atque aperiam asperiores Consectetur
+                                blanditiis ad natus error pariatur. Amet autem officia
+                                sapiente accusamus error Natus pariatur ipsa natus rem
+                                voluptatum Autem voluptate inventore aut velit facere
+                                Molestias laborum minima voluptatibus cumque illo? Esse quam
+                                aliquid porro ipsam veritatis, dolore asperiores quae Ex magni
+                                aliquam dolores commodi rem labore Officiis similique inventore
+                                exercitationem optio?">
+                                <div class="excerpt">
+                                    <p>Dolor cum accusantium rerum distinctio qui
+                                        Dignissimos maxime quam eum laboriosam autem?
+                                        Ratione possimus voluptatibus officiis
+                                        excepturi ab In tempora nulla optio ipsam corporis
+                                        quaerat! In molestias quasi magni odit aut
+                                        tempora, dolore. Ad praesentium id veniam quis maiores
+                                        molestiae, voluptatem voluptatibus. Tempore laudantium
+                                        culpa sequi atque aperiam asperiores Consectetur
+                                        blanditiis ad natus error pariatur. Amet autem officia
+                                        sapiente accusamus error Natus pariatur ipsa natus rem
+                                        voluptatum Autem voluptate inventore aut velit facere
+                                        Molestias laborum minima voluptatibus cumque illo? Esse quam
+                                        aliquid porro ipsam veritatis, dolore asperiores quae Ex magni
+                                        aliquam dolores commodi rem labore Officiis similique inventore
+                                        exercitationem optio?</p>
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                    {% endfor %}
-                </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </article>
                 {% endfor %}
-                <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
             </div>
+            <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+
         </section>
     </body>
 </html>
