@@ -76,12 +76,20 @@ section.container-with-menu {
     list-style-type: none;
     width: 150px;
 }
+.container-with-menu li {
+    line-height: 1.5;
+}
 .container-with-menu li a {
     display: inline-block;
     text-decoration: none;
     width: 100%;
-    line-height: 3;
+    line-height: 1.5;
+    background: white;
     text-align: center;
+}
+.container-with-menu li a.active {
+    /* font-weight: bold; */
+    background: silver;
 }
 .container-with-menu .active-panel {
     z-index: 1;
