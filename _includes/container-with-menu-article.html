@@ -1,16 +1,25 @@
+<!-- this article element represents the abstract of a post: the featured
+    image (if exists) and the post excerpt -->
 <article class="{{ class }}">
     <h2>
+        <!-- the selected category or tag -->
         {{ label }}
     </h2>
     <div class="outer-container">
+        <!-- for each post within that catetory or for that tag... -->
         {% for post in postsincategory %}
+        <!-- the inner-container will be anchored to the post's url -->
         <a class="inner-container" href="{{ post.url | prepend: site.baseurl }}" style="">
+            <!-- post's title, date -->
             <h3 class="post-title"> {{ post.title }} </h3>
             <p>{{ post.date | date: "%b %d, %Y" }}</p>
+            <!-- inner-container-2 is styled so that post's featured image and excerpt are overlaid -->
             <div class="inner-container-2">
+                <!-- post's featured image -->
                 <img src="{{ site.baseurl }}/{{ post.categories |
                 join: '/' }}/R{{ post.url | remove: '.html'
                 }}/figure/{{ post.featimg }}" alt="Ipsum nam quibusdam laudantium perferendis quod, fugit! Sequi minima architecto nostrum magnam quis Quibusdam deleniti rem eius ea iusto minus tenetur Quos similique expedita dignissimos ex dolorem Aut non voluptatum animi amet architecto amet Sed debitis debitis dicta saepe veritatis? Similique ducimus aspernatur culpa facere ea animi. Necessitatibus quibusdam cupiditate quod ab possimus enim Sint placeat facere minus tenetur et. Quaerat explicabo officiis corporis sunt officiis? Facere officiis autem suscipit totam magnam similique. Sequi porro consectetur molestias asperiores reiciendis a quidem Nobis vitae nemo sed totam soluta minima a, sint, nam! Nihil iure eaque ducimus veritatis aliquid Corporis iusto beatae?">
+                <!-- post's excerpt -->
                 <div class="excerpt">
                     <p>Ipsum nam quibusdam laudantium perferendis quod, fugit! Sequi minima architecto nostrum magnam quis Quibusdam deleniti rem eius ea iusto minus tenetur Quos similique expedita dignissimos ex dolorem Aut non voluptatum animi amet architecto amet Sed debitis debitis dicta saepe veritatis? Similique ducimus aspernatur culpa facere ea animi. Necessitatibus quibusdam cupiditate quod ab possimus enim Sint placeat facere minus tenetur et. Quaerat explicabo officiis corporis sunt officiis? Facere officiis autem suscipit totam magnam similique. Sequi porro consectetur molestias asperiores reiciendis a quidem Nobis vitae nemo sed totam soluta minima a, sint, nam! Nihil iure eaque ducimus veritatis aliquid Corporis iusto beatae?</p>
                 </div>

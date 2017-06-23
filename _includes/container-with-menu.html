@@ -1,17 +1,22 @@
 <body>
+    <!-- sortkey is either 'categories' or 'tags' -->
     <h1>Articles by {{ page.sortkey }}</h1>
     {% case page.sortkey %}
     {% when 'categories' %}
+    <!-- otherlabel will be used to switch between tags and categories -->
     {% assign otherlabel = 'tags' %}
+    <!-- otherhtml will be included upon that switch -->
     {% assign otherhtml = 'index-tags.html' %}
     {% when 'tags' %}
     {% assign otherlabel = 'categories' %}
     {% assign otherhtml = 'index.html' %}
     {% endcase %}
     <a href="{{ otherhtml }}">
+        <!-- button for switching -->
         <button style="margin-bottom: 2em;">arrange by {{ otherlabel }}</button>
     </a>
     <section class="container-with-menu">
+        <!-- menu of labels: categories or tags -->
         <ul>
             <li><a href="#" class="active">all {{ page.sortkey }}</a></li>
             {% for item in site.[{{page.sortkey}}] %}
@@ -21,25 +26,29 @@
             {% endunless %}
             {% endfor %}
         </ul>
+        <!-- panels: each corresponds to a label; panels are overlaid on each other -->
         <div class="panels">
+            <!-- active panel is the one with all articles -->
             {% assign postsincategory = site.posts %}
             {% assign class = 'active-panel' %}
-
             {% case page.sortkey %}
             {% when 'categories' %}
             {% assign label = 'all categories' %}
             {% when 'tags' %}
             {% assign label = 'all tags' %}
             {% endcase %}
-
-            {% include container-with-menu-article.html %}
-
+            <!-- include first html corresponding to actie panel-->
+            {% include index-article.html %}
+            <!-- for each label -->
             {% for item in site.[{{page.sortkey}}] %}
+            <!-- store label in 'label' variable -->
             {% assign label = item[0] %}
             {% unless label == 'projects' %}
             {% assign class = '' %}
+            <!-- store articles for that label in 'postsincategory' variable -->
             {% assign postsincategory = item[1] %}
-            {% include container-with-menu-article.html %}
+            <!-- include again -->
+            {% include index-article.html %}
             {% endunless %}
             {% endfor %}
         </div>
@@ -48,6 +57,7 @@
 </body>
 
 <script>
+//script taken from https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Practical_positioning_examples
 var tabs = document.querySelectorAll('.container-with-menu li a');
 var panels = document.querySelectorAll('.container-with-menu article');
 for(i = 0; i < tabs.length; i++) {
