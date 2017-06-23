@@ -7,150 +7,16 @@ sortkey: categories
         <meta charset='utf-8'>
         <link rel="stylesheet" type="text/css" media="screen" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
         <title>{{ site.title | default: site.github.repository_name }}</title>
-        <style>
-            .inner {
-                max-width: 100%;
-            }
-            .wrapper {
-                /* width: auto; */
-            }
-            .wrapper section {
-                max-width: 100%;
-            }
-            .outer-container {
-                display: flex;
-                flex-wrap: wrap;
-            }
-            .inner-container {
-                /* position: relative; */
-                min-width: 350px;
-                max-width: 350px;
-                min-height: 150px;
-                margin: 5px;
-                margin-bottom: 0px;
-                padding: 10px;
-                border: 0px solid gray;
-                background-color: white;
-                box-shadow: 2px 2px 5px gray;
-                color: initial;
-                overflow: hidden;
-            }
-            .inner-container h1, h2, h3, h4, p {
-                margin: 0px;
-            }
-            .inner-container-2 {
-                padding-top: 0px;
-                position: relative;
-                color: initial;
-            }
-            .inner-container-2 > img {
-                width: 100%;
-                padding: 0;
-                border: 0;
-                margin:0;
-            }
-            .inner-container-2 .excerpt {
-                position: absolute;
-                top: 0px;
-                opacity: 0.05;
-                transition: opacity 0.5s;
-            }
-            .inner-container-2 .excerpt:hover {
-                opacity: 1;
-                background-color: rgba(255,255,255,0.9);
-                transition: opacity 0.5s;
-            }
-
-            .info-box .panels {
-                clear: both;
-                position: relative;
-            }
-            .info-box article {
-                background-color: white;
-                width: auto;
-                color: white;
-                position: absolute;
-                padding: 10px;
-                top: 0;
-                left: 0;
-            }
-
-            section.info-box {
-                width: 100%;
-            }
-            .info-box li {
-                float: left;
-                list-style-type: none;
-                width: 150px;
-            }
-            .info-box li a {
-                display: inline-block;
-                text-decoration: none;
-                width: 100%;
-                line-height: 3;
-                text-align: center;
-            }
-            .info-box .active-panel {
-                z-index: 1;
-            }
-        </style>
+        <link rel="stylesheet" href="css/index.css">
     </head>
     <body>
         <h1 class="page-heading">{{ site.title }}</h1>
-        <section class="info-box">
-            <ul>
-                {% for item in site.categories %}
-                {% assign category = item[0] %}
-                {% if category == 'projects' %}
-                {% assign class = 'active' %}
-                {% assign category = 'all' %}
-                {% else %}
-                {% assign class = '' %}
-                {% endif %}
-                <li><a href="#" class="{{ class }}">{{ category }}</a></li>
-                {% endfor %}
-            </ul>
-            <div class="panels">
-                {% for item in site.categories %}
-                {% assign category = item[0] %}
-                {% if category == 'projects' %}
-                {% assign class = 'active-panel' %}
-                {% else %}
-                {% assign class = '' %}
-                {% endif %}
-                {% assign postsincategory = item[1] %}
-                <article class="{{ class }}">
-                    <h2>
-                        {{ category }}
-                    </h2>
-                    <div class="outer-container">
-                        {% for post in postsincategory %}
-                        <a class="inner-container" href="{{ post.url | prepend: site.baseurl }}" style="">
-                            <h3 class="post-title"> {{ post.title }} </h3>
-                            <p>{{ post.date | date: "%b %d, %Y" }}</p>
-                            <div class="inner-container-2">
-                                <img src="{{ site.baseurl }}/{{ post.categories |
-                                join: '/' }}/R{{ post.url | remove: '.html'
-                                }}/figure/{{ post.featimg }}" alt="Ipsum nam quibusdam laudantium perferendis quod, fugit! Sequi minima architecto nostrum magnam quis Quibusdam deleniti rem eius ea iusto minus tenetur Quos similique expedita dignissimos ex dolorem Aut non voluptatum animi amet architecto amet Sed debitis debitis dicta saepe veritatis? Similique ducimus aspernatur culpa facere ea animi. Necessitatibus quibusdam cupiditate quod ab possimus enim Sint placeat facere minus tenetur et. Quaerat explicabo officiis corporis sunt officiis? Facere officiis autem suscipit totam magnam similique. Sequi porro consectetur molestias asperiores reiciendis a quidem Nobis vitae nemo sed totam soluta minima a, sint, nam! Nihil iure eaque ducimus veritatis aliquid Corporis iusto beatae?">
-                                <div class="excerpt">
-                                    <p>Ipsum nam quibusdam laudantium perferendis quod, fugit! Sequi minima architecto nostrum magnam quis Quibusdam deleniti rem eius ea iusto minus tenetur Quos similique expedita dignissimos ex dolorem Aut non voluptatum animi amet architecto amet Sed debitis debitis dicta saepe veritatis? Similique ducimus aspernatur culpa facere ea animi. Necessitatibus quibusdam cupiditate quod ab possimus enim Sint placeat facere minus tenetur et. Quaerat explicabo officiis corporis sunt officiis? Facere officiis autem suscipit totam magnam similique. Sequi porro consectetur molestias asperiores reiciendis a quidem Nobis vitae nemo sed totam soluta minima a, sint, nam! Nihil iure eaque ducimus veritatis aliquid Corporis iusto beatae?</p>
-                                </div>
-                            </div>
-                        </a>
-                        {% endfor %}
-                    </div>
-                </article>
-                {% endfor %}
-            </div>
-            <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
-
-        </section>
     </body>
-
+    {% include container-with-menu.html %}
     <script>
 
-    var tabs = document.querySelectorAll('.info-box li a');
-    var panels = document.querySelectorAll('.info-box article');
+    var tabs = document.querySelectorAll('.container-with-menu li a');
+    var panels = document.querySelectorAll('.container-with-menu article');
 
     for(i = 0; i < tabs.length; i++) {
       var tab = tabs[i];
