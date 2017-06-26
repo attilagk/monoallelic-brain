@@ -2,7 +2,10 @@
 layout: default
 comments: true
 tags: [ semantic-publication, lab-notebook, programming, reproducible-research ]
+featimg: "trigonometric-fun-1.png"
 ---
+
+TODO
 
 ## Introduction
 
@@ -110,7 +113,7 @@ curve(foo, from=-1, to=1, n=1001, type='l')
 ## Warning in sin(1/y): NaNs produced
 ```
 
-![plot of chunk unnamed-chunk-3]({{ site.baseurl }}/projects/lab-meetings//R/2016-03-01-lab-notebook-sample-post/figure/unnamed-chunk-3-1.png)
+![plot of chunk trigonometric-fun]({{ site.baseurl }}/projects/lab-meetings/R/2016-03-01-lab-notebook-sample-post/figure/trigonometric-fun-1.png)
 
 #### Other languages
 
@@ -127,10 +130,10 @@ echo $D | tr '[:lower:][:upper:]' '[:upper:][:lower:]'
 ```
 
 ```
-## Tue Jun 6 19:02:19 EDT 2017
-## TUE JUN 6 19:02:19 EDT 2017
-## tue jun 6 19:02:19 edt 2017
-## tUE jUN 6 19:02:19 edt 2017
+## Mon Jun 26 16:12:51 EDT 2017
+## MON JUN 26 16:12:51 EDT 2017
+## mon jun 26 16:12:51 edt 2017
+## mON jUN 26 16:12:51 edt 2017
 ```
 
 Fibonacci series up to 7 terms in `python`:

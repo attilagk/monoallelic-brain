@@ -1,7 +1,10 @@
 ---
 layout: default
 tags: [ chaggai, reproducible-research, programming ]
+featimg: "histogram-qq-plot-1.png"
 ---
+
+TODO
 
 ## Outline
 
@@ -91,7 +94,7 @@ curve(foo, from=-1, to=1, n=1001, type='l')
 ## Warning in sin(1/y): NaNs produced
 ```
 
-![plot of chunk unnamed-chunk-4]({{ site.baseurl }}/projects/lab-meetings//R/2016-03-25-live-demonstration/figure/unnamed-chunk-4-1.png)
+![plot of chunk unnamed-chunk-4]({{ site.baseurl }}/projects/lab-meetings/R/2016-03-25-live-demonstration/figure/unnamed-chunk-4-1.png)
 
 ## Other languages
 
@@ -108,10 +111,10 @@ echo $D | tr '[:lower:][:upper:]' '[:upper:][:lower:]'
 ```
 
 ```
-## Tue Jun 6 19:07:17 EDT 2017
-## TUE JUN 6 19:07:17 EDT 2017
-## tue jun 6 19:07:17 edt 2017
-## tUE jUN 6 19:07:17 edt 2017
+## Mon Jun 26 16:10:18 EDT 2017
+## MON JUN 26 16:10:18 EDT 2017
+## mon jun 26 16:10:18 edt 2017
+## mON jUN 26 16:10:18 edt 2017
 ```
 
 Fibonacci series up to 7 terms in `python`:
@@ -180,7 +183,7 @@ names(samples)
 ```
 
 
-![plot of chunk unnamed-chunk-10]({{ site.baseurl }}/projects/lab-meetings//R/2016-03-25-live-demonstration/figure/unnamed-chunk-10-1.png)
+![plot of chunk histogram-qq-plot]({{ site.baseurl }}/projects/lab-meetings/R/2016-03-25-live-demonstration/figure/histogram-qq-plot-1.png)
 
 
 ```r
@@ -190,7 +193,7 @@ levels(samples$Institution)
 ```
 ## [1] "MSSM" "Penn" "Pitt"
 ```
-![plot of chunk unnamed-chunk-12]({{ site.baseurl }}/projects/lab-meetings//R/2016-03-25-live-demonstration/figure/unnamed-chunk-12-1.png)
+![plot of chunk unnamed-chunk-11]({{ site.baseurl }}/projects/lab-meetings/R/2016-03-25-live-demonstration/figure/unnamed-chunk-11-1.png)
 
 ```r
 levels(samples$Dx)
@@ -200,8 +203,8 @@ levels(samples$Dx)
 ## [1] "BP"      "Control" "SCZ"
 ```
 
-![plot of chunk unnamed-chunk-14]({{ site.baseurl }}/projects/lab-meetings//R/2016-03-25-live-demonstration/figure/unnamed-chunk-14-1.png)
-![plot of chunk unnamed-chunk-15]({{ site.baseurl }}/projects/lab-meetings//R/2016-03-25-live-demonstration/figure/unnamed-chunk-15-1.png)
+![plot of chunk unnamed-chunk-13]({{ site.baseurl }}/projects/lab-meetings/R/2016-03-25-live-demonstration/figure/unnamed-chunk-13-1.png)
+![plot of chunk unnamed-chunk-14]({{ site.baseurl }}/projects/lab-meetings/R/2016-03-25-live-demonstration/figure/unnamed-chunk-14-1.png)
 
 [a page on the Internet]: http://jupyter.org
 [ Google ]: http://google.com

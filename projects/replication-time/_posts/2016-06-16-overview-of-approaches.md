@@ -4,6 +4,8 @@ tags: [ chaggai, discussion, modeling ]
 title: Overview of Approaches to Studying Replication Timing
 ---
 
+TODO
+
 ## Introduction
 
 Motivated by Chaggai's progress reports on 7 and 14 of June 2016, and our personal communication, I comment here on the methodology adopted from the two previous studies Chaggai has followed upon, namely those by [Koren et al] and [Mukhopadhyay et al].  I conclude with a very schematic outline for suggested analyses.

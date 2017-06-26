@@ -4,6 +4,8 @@ tags: [ meeting ]
 title: Notes on a BSM Network Workshop
 ---
 
+TODO
+
 ## Introduction
 
 A BSM Network workshop took place on September 16, 2016 at the Lieber Institute for Brain Development at Johns Hopkins University in Baltimore.  Andy and I participated from Mount Sinai.  See [the program brossure]({{ site.baseurl}}/assets/projects/bsm/bsm-network-workshop-2016-sep-program.pdf) for all presentations and sessions.
@@ -63,3 +65,5 @@ Weichen works in Ryan Mills' group in the University of Michigan.  The whole gro
 ## References
 
 {% bibliography --file 2016-10-14-notes-on-bsm-network-workshop.bib %}
+<!-- MathJax scripts -->
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

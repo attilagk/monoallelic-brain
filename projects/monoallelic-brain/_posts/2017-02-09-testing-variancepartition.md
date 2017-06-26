@@ -2,7 +2,10 @@
 title: Testing variancePartition
 layout: default
 tags: [ regression, anova, ]
+featimg: "varpart-log-1.png"
 ---
+
+TODO
 
 Load packages...
 
@@ -149,13 +152,13 @@ main <- "Q: quasi-log transformation"
 plotVarPart(vp.Q, main = main)
 ```
 
-<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2017-02-09-testing-variancepartition/figure/unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" width="700px" />
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2017-02-09-testing-variancepartition/figure/varpart-log-1.png" title="plot of chunk varpart-log" alt="plot of chunk varpart-log" width="700px" />
 
 ```r
 plotPercentBars(vp.Q)
 ```
 
-<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2017-02-09-testing-variancepartition/figure/unnamed-chunk-4-2.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" width="700px" />
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2017-02-09-testing-variancepartition/figure/varpart-log-2.png" title="plot of chunk varpart-log" alt="plot of chunk varpart-log" width="700px" />
 
 
 
@@ -165,12 +168,12 @@ main <- "S: untransformed"
 plotVarPart(vp.S, main = main)
 ```
 
-<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2017-02-09-testing-variancepartition/figure/unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" width="700px" />
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2017-02-09-testing-variancepartition/figure/varpart-untransformed-1.png" title="plot of chunk varpart-untransformed" alt="plot of chunk varpart-untransformed" width="700px" />
 
 ```r
 plotPercentBars(vp.S)
 ```
 
-<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2017-02-09-testing-variancepartition/figure/unnamed-chunk-6-2.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" width="700px" />
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2017-02-09-testing-variancepartition/figure/varpart-untransformed-2.png" title="plot of chunk varpart-untransformed" alt="plot of chunk varpart-untransformed" width="700px" />
 <!-- MathJax scripts -->
 <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

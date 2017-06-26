@@ -4,6 +4,8 @@ title: Transcription Factor Binding QTL from Pooled ChIP-Seq
 tags: [ abstract, journal-club ]
 ---
 
+TODO
+
 Presenting and discussing the [article] *Pooled ChIP-Seq Links Variation in
 Transcription Factor Binding to Complex Disease Risk* by Ashley K. Tehranchi,
 Marsha Myrthil, Trevor Martin, Brian L. Hie, David Golan, Hunter B. Fraser

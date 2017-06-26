@@ -4,6 +4,8 @@ tags: [ alignment, ]
 title: 'Alignment speed: bwa mem vs bowtie2'
 ---
 
+TODO
+
 ### Benchmark data
 
 The same Illumina paired DNA sequence reads were taken as test data, each gzipped file roughly 2 GB large:

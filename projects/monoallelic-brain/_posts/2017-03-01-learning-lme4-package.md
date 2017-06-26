@@ -2,7 +2,10 @@
 layout: default
 tags: [regression, anova ]
 title: Mixed Model Demo Using the lme4 Package
+featimg: "observed-predicted-1.png"
 ---
+
+TODO
 
 
 ```r
@@ -41,7 +44,7 @@ Plotting the average reaction time against the test day for each subject...
 xyplot(Reaction ~ Days | Subject, data = sleepstudy, layout = c(6, 3))
 ```
 
-<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2017-03-01-learning-lme4-package/figure/unnamed-chunk-2-1.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" width="700px" />
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2017-03-01-learning-lme4-package/figure/observed-only-1.png" title="plot of chunk observed-only" alt="plot of chunk observed-only" width="700px" />
 
 We see that subjects appear to differ in terms of the average reaction time across all days; they also seem to differ in terms of how reaction time depends on the day.  But subjects also share certain characteristics: for most subjects reaction time increases with days, and taken all days together, the average reaction time is somewhere around $$300 ms$$.  We want to model both the shared characteristics as well as the heterogeneity among subjects.
 
@@ -82,7 +85,7 @@ xyplot(Reaction + yhat.M1 + yhat.M2 ~ Days | Subject, data = df, type = "l", yla
        auto.key = list(text = c("observed", "predicted by M1", "predicted by M2"), points = FALSE, lines = TRUE))
 ```
 
-<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2017-03-01-learning-lme4-package/figure/unnamed-chunk-4-1.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" width="700px" />
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2017-03-01-learning-lme4-package/figure/observed-predicted-1.png" title="plot of chunk observed-predicted" alt="plot of chunk observed-predicted" width="700px" />
 
 ### Hypothesis testing
 

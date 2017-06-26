@@ -2,7 +2,10 @@
 layout: default
 title: Logistic Models Using the S statistic as Response
 tags: [ regression, reproducible-research ]
+featimg: "s-stat-cmp-simple-multiple-regr-peg3-1.png"
 ---
+
+TODO
 
 ## Introduction
 

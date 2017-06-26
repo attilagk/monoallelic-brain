@@ -1,7 +1,10 @@
 ---
 title: Somatic SNVs and Indels by HaplotypeCaller
 layout: default
+featimg: "barchart-1.png"
 ---
+
+TODO
 
 ## Introduction
 
@@ -45,8 +48,8 @@ cat $${BN}.log
 ```
 
 ```
-## grep: 6255{BN}.log: No such file or directory
-## cat: 6255{BN}.log: No such file or directory
+## grep: 18151{BN}.log: No such file or directory
+## cat: 18151{BN}.log: No such file or directory
 ```
 
 Read number of kept variants and also read the sites of singletons:
@@ -99,7 +102,7 @@ The same information as a barchart:
 barchart(singleton.freq, main = "Sample-specific variants")
 ```
 
-<img src="{{ site.baseurl }}/projects/bsm/R/2017-01-30-common-experiment-snv/figure/unnamed-chunk-6-1.png" title="plot of chunk unnamed-chunk-6" alt="plot of chunk unnamed-chunk-6" width="700px" />
+<img src="{{ site.baseurl }}/projects/bsm/R/2017-01-30-common-experiment-snv/figure/barchart-1.png" title="plot of chunk barchart" alt="plot of chunk barchart" width="700px" />
 
 ## Discussion
 <!-- MathJax scripts -->
