@@ -16,13 +16,20 @@
             <!-- inner-container-2 is styled so that post's featured image and excerpt are overlaid -->
             <div class="inner-container-2">
                 <!-- post's featured image -->
+                {% capture exc %}
+                    <p>{{ post.excerpt | strip_html }}</p>
+                {% endcapture %}
+                {% if post.featimg %}
                 <img src="{{ site.baseurl }}/{{ post.categories |
                 join: '/' }}/R{{ post.url | remove: '.html'
                 }}/figure/{{ post.featimg }}" alt="{{ post.excerpt | strip_html }}">
-                <!-- post's excerpt -->
                 <div class="excerpt">
-                    <p>{{ post.excerpt | strip_html }}</p>
+                    {{ exc }}
                 </div>
+                {% else %}
+                    {{ exc }}
+                {% endif %}
+                <!-- post's excerpt -->
             </div>
         </a>
         {% endfor %}
