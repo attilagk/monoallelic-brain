@@ -100,10 +100,10 @@ section.container-with-menu {
             line-height: 1.5;
             background-color: $bg-col;
             text-align: center;
-        }
-        &.active {
-            /* font-weight: bold; */
-            background: silver;
+            &.active {
+                /* font-weight: bold; */
+                background: silver;
+            }
         }
     }
     .active-panel {

@@ -4,16 +4,12 @@ tags: [ regression, reproducible-research ]
 title: Repeating Ifat's Regression Analysis with 5 More Genes
 ---
 
-TODO
-
-
-
-## Goal
-
-Reproduce and extend Ifat's previous regression analysis (documented [here][regression-slide], see also speaker notes for that slide) using the following sets of genes:
+Goal: reproduce and extend Ifat's previous regression analysis (documented [here][regression-slide], see also speaker notes for that slide) using the following sets of genes:
 
 * "8 genes that looked promising on the 2X2 table fisher exact test"
 * "all 13 genes from slide 3"
+
+
 
 
 ```r

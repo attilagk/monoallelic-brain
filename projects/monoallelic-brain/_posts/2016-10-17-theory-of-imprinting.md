@@ -2,9 +2,7 @@
 layout: default
 ---
 
-TODO
-
-## Introduction
+This is a schematic review of literature on kinship theory and brain function that is relevant to our project.
 
 ## Kinship theory
 
