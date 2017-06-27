@@ -23,6 +23,9 @@
                 <img src="{{ site.baseurl }}/{{ post.categories |
                 join: '/' }}/R{{ post.url | remove: '.html'
                 }}/figure/{{ post.featimg }}" alt="{{ post.excerpt | strip_html }}">
+                <div class="infosign">
+                    <i class="fa fa-info-circle fa-2x" aria-hidden="true"></i>
+                </div>
                 <div class="excerpt">
                     {{ exc }}
                 </div>

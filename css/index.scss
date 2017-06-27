@@ -1,6 +1,5 @@
 ---
 ---
-
 $bg-col: #FBFAF7;
 $menu-col: #C30000;
 
@@ -51,10 +50,14 @@ $menu-col: #C30000;
         border: 0;
         margin:0;
     }
+    .infosign {
+        position: absolute;
+        top: 0px;
+    }
     .excerpt {
         position: absolute;
         top: 0px;
-        opacity: 0.05;
+        opacity: 0.0;
         transition: opacity 0.5s;
         &:hover {
             opacity: 1;
