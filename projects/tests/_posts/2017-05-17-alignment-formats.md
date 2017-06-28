@@ -3,7 +3,7 @@ layout: default
 tags: [ GATK, SAM, BAM, alignment, genome, FASTA ]
 ---
 
-TODO
+Variant callers, especially those from the GATK suite, have precise formatting requirements for their input data, the genomic alignments.  The order of contigs in the reference genome, the read group and other annotations is sometimes strictly constrained but these constraints often turn out after failed attempts due to verbose and disorganized documentation.
 
 ## Input files
 

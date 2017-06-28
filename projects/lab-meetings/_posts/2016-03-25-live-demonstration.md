@@ -4,7 +4,7 @@ tags: [ chaggai, reproducible-research, programming ]
 featimg: "histogram-qq-plot-1.png"
 ---
 
-TODO
+I demonstrate the technicalities, content elements (prosaic description, code, graphs) and appearance of this lab notebook on a simple analysis of age distribution in the CommonMind cohort.
 
 ## Outline
 
@@ -111,10 +111,10 @@ echo $D | tr '[:lower:][:upper:]' '[:upper:][:lower:]'
 ```
 
 ```
-## Mon Jun 26 16:10:18 EDT 2017
-## MON JUN 26 16:10:18 EDT 2017
-## mon jun 26 16:10:18 edt 2017
-## mON jUN 26 16:10:18 edt 2017
+## Wed Jun 28 12:43:03 EDT 2017
+## WED JUN 28 12:43:03 EDT 2017
+## wed jun 28 12:43:03 edt 2017
+## wED jUN 28 12:43:03 edt 2017
 ```
 
 Fibonacci series up to 7 terms in `python`:

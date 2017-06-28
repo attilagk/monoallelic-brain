@@ -5,6 +5,8 @@ tags: [ strelka, mutect2 ]
 featimg: "scaling-length-log-1.png"
 ---
 
+Rationale: (1) understand determinants of the runtime of variant calling programs mutect2 and stelka; (2) obtain hints for speed-up by parallelization
+
 
 ```
 ## Loading required package: Matrix
@@ -13,11 +15,6 @@ featimg: "scaling-length-log-1.png"
 ```
 ## Loading required package: methods
 ```
-
-## Rationale
-
-* understand determinants of the runtime of variant calling programs mutect2 and stelka
-* hints for speed-up by parallelization
 
 ## Experimental setup
 

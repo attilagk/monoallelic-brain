@@ -5,7 +5,7 @@ tags: [ semantic-publication, lab-notebook, programming, reproducible-research ]
 featimg: "trigonometric-fun-1.png"
 ---
 
-TODO
+Several features of this lab notebook are presented and discussed in light of scientific reproducibility, semantic publishing, and recent technologies.
 
 ## Introduction
 
@@ -130,10 +130,10 @@ echo $D | tr '[:lower:][:upper:]' '[:upper:][:lower:]'
 ```
 
 ```
-## Mon Jun 26 16:12:51 EDT 2017
-## MON JUN 26 16:12:51 EDT 2017
-## mon jun 26 16:12:51 edt 2017
-## mON jUN 26 16:12:51 edt 2017
+## Wed Jun 28 12:46:29 EDT 2017
+## WED JUN 28 12:46:29 EDT 2017
+## wed jun 28 12:46:29 edt 2017
+## wED jUN 28 12:46:29 edt 2017
 ```
 
 Fibonacci series up to 7 terms in `python`:

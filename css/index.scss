@@ -67,18 +67,6 @@ $menu-col: #C30000;
     }
 }
 
-.container-with-menu .panels {
-    clear: both;
-    position: relative;
-    article {
-        background-color: $bg-col;
-        width: auto;
-        position: absolute;
-        padding: 10px;
-        top: 0;
-        left: 0;
-    }
-}
 
 section.container-with-menu {
     width: 100%;
@@ -86,6 +74,18 @@ section.container-with-menu {
 }
 
 .container-with-menu {
+    .panels {
+        clear: both;
+        position: relative;
+        article {
+            background-color: $bg-col;
+            width: auto;
+            position: absolute;
+            padding: 10px;
+            top: 0;
+            left: 0;
+        }
+    }
     li {
         float: left;
         list-style-type: none;
@@ -102,7 +102,8 @@ section.container-with-menu {
             text-align: center;
             &.active {
                 /* font-weight: bold; */
-                background: silver;
+                background-color: $menu-col;
+                color: $bg-col;
             }
         }
     }

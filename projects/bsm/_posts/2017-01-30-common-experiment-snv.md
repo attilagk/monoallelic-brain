@@ -4,10 +4,6 @@ layout: default
 featimg: "barchart-1.png"
 ---
 
-TODO
-
-## Introduction
-
 From Alison Barton in Peter Park's lab we received a set of annotated SNV and indel variants called by the GATK [HaplotypeCaller] based on three samples from the same individual:
 
 1. Fibro_Common_7 (fibroblasts)
@@ -48,8 +44,8 @@ cat $${BN}.log
 ```
 
 ```
-## grep: 18151{BN}.log: No such file or directory
-## cat: 18151{BN}.log: No such file or directory
+## grep: 6883{BN}.log: No such file or directory
+## cat: 6883{BN}.log: No such file or directory
 ```
 
 Read number of kept variants and also read the sites of singletons:

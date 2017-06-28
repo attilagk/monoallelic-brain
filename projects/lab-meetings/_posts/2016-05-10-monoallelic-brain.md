@@ -4,10 +4,6 @@ title: Age and Monoallelic Expression in the Human Brain
 tags: [ progress-report, monoallelic-expression, regression, modeling ]
 ---
 
-TODO
-
-## Scope
-
 This progress report presents mostly two posts related to regression analysis.
 Download the presentation [here].
 
@@ -26,6 +22,6 @@ Download the presentation [here].
 * regression-based classification of genes to correct for confounding variables (age, institution)
 * hierarchical models
 
-[here]: {{ site.baseurl }}/assets/lab-meetings/2016-05-10-monoallelic-brain.pdf
+[here]: https://www.dropbox.com/s/821k38gmaufb7ov/2016-05-10-monoallelic-brain.pdf?dl=0
 [ifat-fig1]: https://docs.google.com/presentation/d/1YvpA1AJ-zzir1Iw0F25tO9x8gkSAzqaO4fjB7K3zBhE/edit#slide=id.p4
 [perez]: https://elifesciences.org/content/4/e07860/article-data

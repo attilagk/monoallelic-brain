@@ -4,7 +4,7 @@ tags: [ alignment, ]
 title: 'Alignment speed: bwa mem vs bowtie2'
 ---
 
-TODO
+The bwa and bowtie2 aligners are compared in terms of their runtime (both real and user time).  The two aligners run similarly fast.
 
 ### Benchmark data
 

@@ -3,9 +3,7 @@ layout: default
 tags: [ abstract, journal-club, monoallelic-expression, evolution, topology, tissue-type ]
 ---
 
-TODO
-
-## Topics
+Main foci of discussion: topological data analysis, role of imprinting, and transcriptomics/metabolomics resources.
 
 * topological data analysis
     * horizontal gene transfer: viral reassortment and bacterial recombination

@@ -4,10 +4,7 @@ title: Aging and Genomic Imprinting in the Human Brain
 tags: [ progress-report, monoallelic-expression, likelihood, regression, modeling ]
 ---
 
-TODO
-
-The pdf presentation of progress report can be download [here].  The page [monoall-ms] summarizes the whole project and forms the basis of this presentation as well as the manuscript under preparation.
+The pdf presentation of progress report can be download [here].
 
 
-[here]: {{ site.baseurl }}/assets/lab-meetings/2016-08-23-monoallelic-brain.pdf
-[monoall-ms]: {{ site.baseurl }}/monoall-ms/monoall-ms.html
+[here]: https://www.dropbox.com/s/crw5dn1rsidhspu/2016-08-23-monoallelic-brain.pdf?dl=0
