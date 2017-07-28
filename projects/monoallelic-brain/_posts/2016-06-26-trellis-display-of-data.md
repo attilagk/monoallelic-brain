@@ -59,6 +59,40 @@ plot(P$s.age.inst$ggplot2)
 ```r
 P <- list()
 # lattice implementation
+P$s.age.Dx$lattice <-
+    xyplot(S ~ Age | Gene, data = Y.long, groups = Dx,
+           subset = Gene %in% gene.ids,
+           panel = function(x, y, ...) {
+               panel.xyplot(x, y, pch = 21, ...)
+               #panel.smoother(x, y, col = "black", lwd = 2, ...)
+           },
+           par.settings = list(add.text = list(cex = 0.8),
+                               superpose.symbol = list(cex = 0.5,
+                                                       fill = trellis.par.get("superpose.symbol")$fill[c(2, 1)],
+                                                       col = trellis.par.get("superpose.symbol")$col[c(2, 1)])),
+           auto.key = list(title = "Dx", columns = 2),
+           ylab = "read count ratio, S",
+           xlab = "age",
+           aspect = "fill", layout = c(6, 5))
+# ggplot2 implementation
+g <- ggplot(data = Y.long, aes(x = Age, y = S))
+g <- g + geom_point(pch = "o", aes(color = Dx))
+g <- g + geom_smooth(method = "loess", color = "black")
+g <- g + facet_wrap(~ Gene)
+P$s.age.Dx$ggplot2 <- g
+plot(P$s.age.Dx$lattice)
+```
+
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-06-26-trellis-display-of-data/figure/S-age-Dx-1.png" title="plot of chunk S-age-Dx" alt="plot of chunk S-age-Dx" width="700px" />
+
+```r
+#plot(P$s.age.Dx$ggplot2)
+```
+
+
+```r
+P <- list()
+# lattice implementation
 P$s.age.gender$lattice <-
     xyplot(S ~ Age | Gene, data = Y.long, groups = Gender,
            subset = Gene %in% gene.ids,

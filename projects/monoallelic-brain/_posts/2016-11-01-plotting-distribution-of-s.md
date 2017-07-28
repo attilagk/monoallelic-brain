@@ -102,11 +102,20 @@ The same information (extended with AFF) in box and whisker representation:
 
 <img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-11-01-plotting-distribution-of-s/figure/S-Dx-bw-1.png" title="plot of chunk S-Dx-bw" alt="plot of chunk S-Dx-bw" width="700px" />
 
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-11-01-plotting-distribution-of-s/figure/S-Dx-strip-1.png" title="plot of chunk S-Dx-strip" alt="plot of chunk S-Dx-strip" width="700px" />
+
+
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-11-01-plotting-distribution-of-s/figure/S-Dx-age-1.png" title="plot of chunk S-Dx-age" alt="plot of chunk S-Dx-age" width="700px" />
+
 #### $$Q$$ statistic
 
 <img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-11-01-plotting-distribution-of-s/figure/Q-Dx-density-1.png" title="plot of chunk Q-Dx-density" alt="plot of chunk Q-Dx-density" width="700px" />
 
 <img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-11-01-plotting-distribution-of-s/figure/Q-Dx-bw-1.png" title="plot of chunk Q-Dx-bw" alt="plot of chunk Q-Dx-bw" width="700px" />
+
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-11-01-plotting-distribution-of-s/figure/Q-Dx-strip-1.png" title="plot of chunk Q-Dx-strip" alt="plot of chunk Q-Dx-strip" width="700px" />
+
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-11-01-plotting-distribution-of-s/figure/Q-Dx-age-1.png" title="plot of chunk Q-Dx-age" alt="plot of chunk Q-Dx-age" width="700px" />
 
 Only with MEST, the most significantly affected gene by Dx (see a later post), conditioning on various RIN intervals
 

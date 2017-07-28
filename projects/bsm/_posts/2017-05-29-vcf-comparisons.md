@@ -1,10 +1,10 @@
 ---
 layout: default
 title: "Comparing Callsets: Callers and Reference Tissues"
-featimg: "venn-caller-neun_mn-snvs-1.png"
+featimg: "venn-caller-neun_mn-neun_pl-snvs-1.png"
 ---
 
-The MuTect2 and Strelka somatic variant callers are used to produced unfiltered and heuristically filtered call sets.  Two pairwise tissue comparisons are used: (1) NeuN+ vs NeuN- reference or (2) NeuN+ vs muscle reference.  These result in substantially concordant call sets.
+The MuTect2 and Strelka somatic variant callers are used here to produced unfiltered and heuristically filtered call sets.  Two pairwise tissue comparisons are used: (1) NeuN+ vs NeuN- reference or (2) NeuN+ vs muscle reference.  These result in substantially concordant call sets.
 
 
 
@@ -33,64 +33,104 @@ find results/ -name callset-sizes.tsv | xargs head
 
 ```
 ## ==> results/mutect2-PASS/1_isec-callers/NeuN_mn-NeuN_pl/indels/callset-sizes.tsv <==
-## 19	0000.vcf	private to	mutect2.bcf
-## 92	0001.vcf	private to	strelka.bcf
-## 1	0002.vcf	shared by both	mutect2.bcf strelka.bcf
+## 19	/0000.vcf	private to	/mutect2.bcf
+## 92	/0001.vcf	private to	/strelka.bcf
+## 1	/0002.vcf	shared by both	/mutect2.bcf /strelka.bcf
 ## 
 ## ==> results/mutect2-PASS/1_isec-callers/NeuN_mn-NeuN_pl/snvs/callset-sizes.tsv <==
-## 402	0000.vcf	private to	mutect2.bcf
-## 551	0001.vcf	private to	strelka.bcf
-## 41	0002.vcf	shared by both	mutect2.bcf strelka.bcf
+## 402	/0000.vcf	private to	/mutect2.bcf
+## 551	/0001.vcf	private to	/strelka.bcf
+## 41	/0002.vcf	shared by both	/mutect2.bcf /strelka.bcf
 ## 
 ## ==> results/mutect2-PASS/1_isec-callers/muscle-NeuN_pl/indels/callset-sizes.tsv <==
-## 17	0000.vcf	private to	mutect2.bcf
-## 99	0001.vcf	private to	strelka.bcf
-## 0	0002.vcf	shared by both	mutect2.bcf strelka.bcf
+## 17	/0000.vcf	private to	/mutect2.bcf
+## 99	/0001.vcf	private to	/strelka.bcf
+## 0	/0002.vcf	shared by both	/mutect2.bcf /strelka.bcf
 ## 
 ## ==> results/mutect2-PASS/1_isec-callers/muscle-NeuN_pl/snvs/callset-sizes.tsv <==
-## 408	0000.vcf	private to	mutect2.bcf
-## 591	0001.vcf	private to	strelka.bcf
-## 42	0002.vcf	shared by both	mutect2.bcf strelka.bcf
+## 408	/0000.vcf	private to	/mutect2.bcf
+## 591	/0001.vcf	private to	/strelka.bcf
+## 42	/0002.vcf	shared by both	/mutect2.bcf /strelka.bcf
+## 
+## ==> results/mutect2-PASS/1_isec-callers/muscle-NeuN_mn/indels/callset-sizes.tsv <==
+## 5	/0000.vcf	private to	/mutect2.bcf
+## 40	/0001.vcf	private to	/strelka.bcf
+## 0	/0002.vcf	shared by both	/mutect2.bcf /strelka.bcf
+## 
+## ==> results/mutect2-PASS/1_isec-callers/muscle-NeuN_mn/snvs/callset-sizes.tsv <==
+## 57	/0000.vcf	private to	/mutect2.bcf
+## 302	/0001.vcf	private to	/strelka.bcf
+## 83	/0002.vcf	shared by both	/mutect2.bcf /strelka.bcf
 ## 
 ## ==> results/mutect2-PASS/2_cmp-reftissues/indels/callset-sizes.tsv <==
-## 1	0000.vcf	private to	NeuN_mn-NeuN_pl.bcf
-## 0	0001.vcf	private to	muscle-NeuN_pl.bcf
-## 0	0002.vcf	shared by both	NeuN_mn-NeuN_pl.bcf muscle-NeuN_pl.bcf
+## nrec	ABC	tissue_pair_A	tissue_pair_B	tissue_pair_C
+## 0	100	muscle-NeuN_pl	NeuN_mn-NeuN_pl	muscle-NeuN_mn
+## 0	010	muscle-NeuN_pl	NeuN_mn-NeuN_pl	muscle-NeuN_mn
+## 0	001	muscle-NeuN_pl	NeuN_mn-NeuN_pl	muscle-NeuN_mn
+## 0	110	muscle-NeuN_pl	NeuN_mn-NeuN_pl	muscle-NeuN_mn
+## 0	101	muscle-NeuN_pl	NeuN_mn-NeuN_pl	muscle-NeuN_mn
+## 0	011	muscle-NeuN_pl	NeuN_mn-NeuN_pl	muscle-NeuN_mn
+## 0	111	muscle-NeuN_pl	NeuN_mn-NeuN_pl	muscle-NeuN_mn
 ## 
 ## ==> results/mutect2-PASS/2_cmp-reftissues/snvs/callset-sizes.tsv <==
-## 10	0000.vcf	private to	NeuN_mn-NeuN_pl.bcf
-## 11	0001.vcf	private to	muscle-NeuN_pl.bcf
-## 31	0002.vcf	shared by both	NeuN_mn-NeuN_pl.bcf muscle-NeuN_pl.bcf
+## nrec	ABC	tissue_pair_A	tissue_pair_B	tissue_pair_C
+## 8	100	muscle-NeuN_pl	NeuN_mn-NeuN_pl	muscle-NeuN_mn
+## 0	010	muscle-NeuN_pl	NeuN_mn-NeuN_pl	muscle-NeuN_mn
+## 0	001	muscle-NeuN_pl	NeuN_mn-NeuN_pl	muscle-NeuN_mn
+## 31	110	muscle-NeuN_pl	NeuN_mn-NeuN_pl	muscle-NeuN_mn
+## 3	101	muscle-NeuN_pl	NeuN_mn-NeuN_pl	muscle-NeuN_mn
+## 0	011	muscle-NeuN_pl	NeuN_mn-NeuN_pl	muscle-NeuN_mn
+## 0	111	muscle-NeuN_pl	NeuN_mn-NeuN_pl	muscle-NeuN_mn
 ## 
 ## ==> results/mutect2-unfilt/1_isec-callers/NeuN_mn-NeuN_pl/indels/callset-sizes.tsv <==
-## 710	0000.vcf	private to	mutect2.bcf
-## 80	0001.vcf	private to	strelka.bcf
-## 13	0002.vcf	shared by both	mutect2.bcf strelka.bcf
+## 710	/0000.vcf	private to	/mutect2.bcf
+## 80	/0001.vcf	private to	/strelka.bcf
+## 13	/0002.vcf	shared by both	/mutect2.bcf /strelka.bcf
 ## 
 ## ==> results/mutect2-unfilt/1_isec-callers/NeuN_mn-NeuN_pl/snvs/callset-sizes.tsv <==
-## 11251	0000.vcf	private to	mutect2.bcf
-## 258	0001.vcf	private to	strelka.bcf
-## 334	0002.vcf	shared by both	mutect2.bcf strelka.bcf
+## 11251	/0000.vcf	private to	/mutect2.bcf
+## 258	/0001.vcf	private to	/strelka.bcf
+## 334	/0002.vcf	shared by both	/mutect2.bcf /strelka.bcf
 ## 
 ## ==> results/mutect2-unfilt/1_isec-callers/muscle-NeuN_pl/indels/callset-sizes.tsv <==
-## 693	0000.vcf	private to	mutect2.bcf
-## 90	0001.vcf	private to	strelka.bcf
-## 9	0002.vcf	shared by both	mutect2.bcf strelka.bcf
+## 693	/0000.vcf	private to	/mutect2.bcf
+## 90	/0001.vcf	private to	/strelka.bcf
+## 9	/0002.vcf	shared by both	/mutect2.bcf /strelka.bcf
 ## 
 ## ==> results/mutect2-unfilt/1_isec-callers/muscle-NeuN_pl/snvs/callset-sizes.tsv <==
-## 11274	0000.vcf	private to	mutect2.bcf
-## 265	0001.vcf	private to	strelka.bcf
-## 368	0002.vcf	shared by both	mutect2.bcf strelka.bcf
+## 11274	/0000.vcf	private to	/mutect2.bcf
+## 265	/0001.vcf	private to	/strelka.bcf
+## 368	/0002.vcf	shared by both	/mutect2.bcf /strelka.bcf
+## 
+## ==> results/mutect2-unfilt/1_isec-callers/muscle-NeuN_mn/indels/callset-sizes.tsv <==
+## 191	/0000.vcf	private to	/mutect2.bcf
+## 33	/0001.vcf	private to	/strelka.bcf
+## 7	/0002.vcf	shared by both	/mutect2.bcf /strelka.bcf
+## 
+## ==> results/mutect2-unfilt/1_isec-callers/muscle-NeuN_mn/snvs/callset-sizes.tsv <==
+## 3882	/0000.vcf	private to	/mutect2.bcf
+## 129	/0001.vcf	private to	/strelka.bcf
+## 256	/0002.vcf	shared by both	/mutect2.bcf /strelka.bcf
 ## 
 ## ==> results/mutect2-unfilt/2_cmp-reftissues/indels/callset-sizes.tsv <==
-## 7	0000.vcf	private to	NeuN_mn-NeuN_pl.bcf
-## 3	0001.vcf	private to	muscle-NeuN_pl.bcf
-## 6	0002.vcf	shared by both	NeuN_mn-NeuN_pl.bcf muscle-NeuN_pl.bcf
+## nrec	ABC	tissue_pair_A	tissue_pair_B	tissue_pair_C
+## 2	100	muscle-NeuN_pl	NeuN_mn-NeuN_pl	muscle-NeuN_mn
+## 0	010	muscle-NeuN_pl	NeuN_mn-NeuN_pl	muscle-NeuN_mn
+## 0	001	muscle-NeuN_pl	NeuN_mn-NeuN_pl	muscle-NeuN_mn
+## 6	110	muscle-NeuN_pl	NeuN_mn-NeuN_pl	muscle-NeuN_mn
+## 1	101	muscle-NeuN_pl	NeuN_mn-NeuN_pl	muscle-NeuN_mn
+## 0	011	muscle-NeuN_pl	NeuN_mn-NeuN_pl	muscle-NeuN_mn
+## 0	111	muscle-NeuN_pl	NeuN_mn-NeuN_pl	muscle-NeuN_mn
 ## 
 ## ==> results/mutect2-unfilt/2_cmp-reftissues/snvs/callset-sizes.tsv <==
-## 109	0000.vcf	private to	NeuN_mn-NeuN_pl.bcf
-## 143	0001.vcf	private to	muscle-NeuN_pl.bcf
-## 225	0002.vcf	shared by both	NeuN_mn-NeuN_pl.bcf muscle-NeuN_pl.bcf
+## nrec	ABC	tissue_pair_A	tissue_pair_B	tissue_pair_C
+## 120	100	muscle-NeuN_pl	NeuN_mn-NeuN_pl	muscle-NeuN_mn
+## 0	010	muscle-NeuN_pl	NeuN_mn-NeuN_pl	muscle-NeuN_mn
+## 0	001	muscle-NeuN_pl	NeuN_mn-NeuN_pl	muscle-NeuN_mn
+## 225	110	muscle-NeuN_pl	NeuN_mn-NeuN_pl	muscle-NeuN_mn
+## 23	101	muscle-NeuN_pl	NeuN_mn-NeuN_pl	muscle-NeuN_mn
+## 0	011	muscle-NeuN_pl	NeuN_mn-NeuN_pl	muscle-NeuN_mn
+## 0	111	muscle-NeuN_pl	NeuN_mn-NeuN_pl	muscle-NeuN_mn
 ```
 
 Import sizes of various callsets to R:
@@ -98,71 +138,55 @@ Import sizes of various callsets to R:
 
 ```r
 indirs <- paste0("results/mutect2-", c("unfilt", "PASS"), "/")
-indirs <- paste0(rep(indirs, each = 3), c(paste0("1_isec-callers/", c("NeuN_mn-NeuN_pl", "muscle-NeuN_pl")), "2_cmp-reftissues"))
+indirs <- paste0(rep(indirs, each = 3), c(paste0("1_isec-callers/", c("muscle-NeuN_pl", "NeuN_mn-NeuN_pl", "muscle-NeuN_mn"))))
 indirs <- paste0(rep(indirs, each = 2), c("/indels/", "/snvs/"))
 names(indirs) <- LETTERS[seq_along(indirs)]
-clsets <-
+clsets1 <-
     lapply(indirs, function(x) {
            df <- read.delim(paste0(x, "callset-sizes.tsv"), header = FALSE,
                             col.names = c("set.size", "file.vcf", "set.operator", "set.operand"))
            df$directory <- factor(x)
            return(df)
        })
-clsets <- do.call(rbind, clsets)
+clsets1 <- do.call(rbind, clsets1)
 ```
 
 ### Comparing callers
 
-#### NeuN_mn reference tissue, SNVs
+#### NeuN_mn--NeuN_pl, SNVs
 
 Without filtering mutect2 calls many more variants than strelka.  With filtering (PASS) mutect2 still calls slightly more variants than stelka without filtering.  The overlap between the two callers is substantial and filtering makes mutect2 calls even more concordant with strelka calls.
 
 
 ```r
-my.venn3(dir = "1_isec-callers/NeuN_mn-NeuN_pl/snvs/", cls = clsets)
+my.venn3a(dir = "1_isec-callers/NeuN_mn-NeuN_pl/snvs/", cls = clsets1)
 ```
 
-<img src="{{ site.baseurl }}/projects/bsm/R/2017-05-29-vcf-comparisons/figure/venn-caller-neun_mn-snvs-1.png" title="plot of chunk venn-caller-neun_mn-snvs" alt="plot of chunk venn-caller-neun_mn-snvs" width="400px" />
+<img src="{{ site.baseurl }}/projects/bsm/R/2017-05-29-vcf-comparisons/figure/venn-caller-neun_mn-neun_pl-snvs-1.png" title="plot of chunk venn-caller-neun_mn-neun_pl-snvs" alt="plot of chunk venn-caller-neun_mn-neun_pl-snvs" width="400px" />
 
-#### NeuN_mn reference tissue, indels
+#### NeuN_mn--NeuN_pl, indels
 
 Callsets of indels share some but not all of the above properties with SNV callsets.  Importantly, the concordance seems lower for indels than for NSPs, but the much lower number of indel records leaves a greater room for certain patterns emerging by chance.
 
-<img src="{{ site.baseurl }}/projects/bsm/R/2017-05-29-vcf-comparisons/figure/venn-caller-neun_mn-indels-1.png" title="plot of chunk venn-caller-neun_mn-indels" alt="plot of chunk venn-caller-neun_mn-indels" width="400px" />
+<img src="{{ site.baseurl }}/projects/bsm/R/2017-05-29-vcf-comparisons/figure/venn-caller-neun_mn-neun_pl-indels-1.png" title="plot of chunk venn-caller-neun_mn-neun_pl-indels" alt="plot of chunk venn-caller-neun_mn-neun_pl-indels" width="400px" />
 
 
-#### muscle reference tissue, SNVs
+#### muscle--NeuN_pl, SNVs
 
 These results are very similar to the previous ones; the muscle reference gives very slightly more candidate variants than NeuN_mn reference, which aligns with the expectation that muscle cell lineage is further away from the NeuN_pl lineage compared to NeuN_mn.  But the differences are very subtle.
 
-<img src="{{ site.baseurl }}/projects/bsm/R/2017-05-29-vcf-comparisons/figure/venn-caller-muscle-snvs-1.png" title="plot of chunk venn-caller-muscle-snvs" alt="plot of chunk venn-caller-muscle-snvs" width="400px" />
+<img src="{{ site.baseurl }}/projects/bsm/R/2017-05-29-vcf-comparisons/figure/venn-caller-muscle-neun_pl-snvs-1.png" title="plot of chunk venn-caller-muscle-neun_pl-snvs" alt="plot of chunk venn-caller-muscle-neun_pl-snvs" width="400px" />
 
-#### muscle reference tissue, indels
+#### muscle--NeuN_pl, indels
 
-<img src="{{ site.baseurl }}/projects/bsm/R/2017-05-29-vcf-comparisons/figure/venn-caller-muscle-indels-1.png" title="plot of chunk venn-caller-muscle-indels" alt="plot of chunk venn-caller-muscle-indels" width="400px" />
+<img src="{{ site.baseurl }}/projects/bsm/R/2017-05-29-vcf-comparisons/figure/venn-caller-muscle-neun_pl-indels-1.png" title="plot of chunk venn-caller-muscle-neun_pl-indels" alt="plot of chunk venn-caller-muscle-neun_pl-indels" width="400px" />
 
-### Comparing reference tissues: unfiltered
+#### muscle--NeuN_mn, SNVs
 
-The next Venn-Euler diagrams feature two sets corresponding to muscle and NeuN_mn reference tissue.  Both sets are **intersections** of mutect2 and strelka call sets.  This first set of diagrams was obtained **without** filtering mutect2 calls.  The overlap is relatively larger than either set difference---records that are private to either muscle or NeuN_mn reference.  This suggests that the choice of reference tissue is not critical.  Fewer records are private to NeuN_mn than to muscle.  This is again consistent with the muscle lineage being more distant to the NeuN_pl lineage.
+<img src="{{ site.baseurl }}/projects/bsm/R/2017-05-29-vcf-comparisons/figure/venn-caller-muscle-neun-mn-snvs-1.png" title="plot of chunk venn-caller-muscle-neun-mn-snvs" alt="plot of chunk venn-caller-muscle-neun-mn-snvs" width="400px" />
 
-### SNVs
+#### muscle--NeuN_mn, indels
 
-<img src="{{ site.baseurl }}/projects/bsm/R/2017-05-29-vcf-comparisons/figure/venn-ref-tissue-snvs-1.png" title="plot of chunk venn-ref-tissue-snvs" alt="plot of chunk venn-ref-tissue-snvs" width="400px" />
-
-#### indels
-
-<img src="{{ site.baseurl }}/projects/bsm/R/2017-05-29-vcf-comparisons/figure/venn-ref-tissue-indels-1.png" title="plot of chunk venn-ref-tissue-indels" alt="plot of chunk venn-ref-tissue-indels" width="400px" />
-
-### Comparing reference tissues: filtered
-
-The next set of diagrams was obtained **with** filtered mutect2 calls.  These results show the same qualitative picture as the ones without filtering.
-
-### SNVs
-
-<img src="{{ site.baseurl }}/projects/bsm/R/2017-05-29-vcf-comparisons/figure/venn-ref-tissue-snvs-PASS-1.png" title="plot of chunk venn-ref-tissue-snvs-PASS" alt="plot of chunk venn-ref-tissue-snvs-PASS" width="400px" />
-
-#### indels
-
-<img src="{{ site.baseurl }}/projects/bsm/R/2017-05-29-vcf-comparisons/figure/venn-ref-tissue-indels-PASS-1.png" title="plot of chunk venn-ref-tissue-indels-PASS" alt="plot of chunk venn-ref-tissue-indels-PASS" width="400px" />
+<img src="{{ site.baseurl }}/projects/bsm/R/2017-05-29-vcf-comparisons/figure/venn-caller-muscle-neun-mn-indels-1.png" title="plot of chunk venn-caller-muscle-neun-mn-indels" alt="plot of chunk venn-caller-muscle-neun-mn-indels" width="400px" />
 <!-- MathJax scripts -->
 <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

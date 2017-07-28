@@ -3,7 +3,7 @@ layout: default
 tags: [regression, anova ]
 ---
 
-An ad-hoc forward model selection strategy is used to evaluate the effect of the terms of the linear predictor in mixed effects models.  A strongly reduced starting model is prompted by earlier analysis using linear models conditioned on genes.  The model space is explored using that prior knowledge combined with information criteria (BIC and AIC) and likelihood ratio test.  The biologically interesting finding is that Ancestry and Age have significant effect but only when their interaction with genes is considered.  Their marginal effect (without that interaction) is very weak.
+An ad-hoc forward model selection strategy is used to evaluate the effect of the terms of the linear predictor in mixed effects models.  A strongly reduced starting model is prompted by earlier analysis using linear models conditioned on genes.  The model space is explored using that prior knowledge combined with information criteria (BIC and AIC) and likelihood ratio test.  The biologically interesting finding is that Ancestry.1, Ancestry.3 and Age have significant gene-specific effects but no gene-independent effects.  Dx (schizophrenia) has neither gene-specific nor gene-independent effect.
 
 
 ```
@@ -31,7 +31,7 @@ dat <- merge.data(gene.ids = gene.ids)
 
 ## Model selection
 
-The strategy is to start from a model $$M1$$ that includes the strongest predictor terms based on previous analysis using separately modeling genes, then confirm the significant effect of these terms.  After this, single---mainly technical---terms are added separately (not yet accumulatively) to $$M1$$ to asses the effect of these.  The terms that improve the fit according to some criterion will be jointly added to $$M1$$ resulting in $$M2$$.  A similar procedure involving two sets of biological terms takes model selection further resulting in $$M3$$ and $$M4$$.
+The strategy is to start from a model $$M1$$ that includes the strongest predictor terms based on previous analysis using separately modeling genes, then confirm the significant effect of these terms.  After this, single---mainly technical---terms are added separately (not yet accumulatively) to $$M1$$ to asses the effect of these.  The terms that improve the fit according to some criterion will be jointly added to $$M1$$ resulting in $$M2$$.  A similar procedure involving two sets of biological terms takes model selection further resulting in $$M3$$, $$M4$$, etc.
 
 ### Starting with model $$M1$$
 
@@ -99,7 +99,7 @@ print.av(summarize.anova(av))
 #### Notable results
 
 * every term improves model fit by all three criteria (AIC, BIC, $$\chi^2$$ test)
-* in particular, *Age* conditioned on *Gene* leads to the 3rd largest improvement (behind *Gene* and *Individual*)
+* in particular, the *(Age\|Gene)* leads to the 3rd largest improvement (behind *(1\|Gene)* and *(1\|Individual)*)
     * however, this result needs to be confirmed in the context of a more general model 
 
 ### Extending $$M1$$ to $$M2$$ with technical terms
@@ -159,11 +159,9 @@ print.av(summarize.anova(av.1))
 
 #### Notable results
 
-* interaction of *Gene* with certain other predictors leads to large improvement in fit
-    * this is not surprising since *Gene* has by far the largest impact among other main effects (see above)
-    * but the fact that the improvement is due to accounting for interaction between a biological predictor (*Age*) and some technical predictor (*RIN*, *Insitution*, or *PMI*) is difficult to explain mechanistically
-* *Age* shows essentially no interaction with *Institution* or *RNA_batch*
-    * this is expected: the effect of *Age* should not depend on e.g. the *Institution*; so the result shows the advantage of joint modeling because previous results with separate, gene-based, modeling suggested strong interaction between *Age* and *Institution*
+* the *Gene*-specific random slope effect of certain predictors---e.g. *(RIN\|Gene)*---leads to large improvements in fit
+    * this is not surprising since the improvement by the *(1\|Gene)* is the largest among all tested terms (see above)
+    * but it is difficult to explain mechanistically the improvement by e.g. *(RIN\|Gene)* because how could *Gene* influence the effect of *RIN*?
 
 ### Extending $$M2$$ with biological terms
 
@@ -250,9 +248,8 @@ print.av(summarize.anova(av.2))
 
 #### Notable results
 
-* ancestry components are not equally important: only *Ancestry.1* and *Ancestry.3* appears to matter
-* their main effect is weaker than their interaction with *Gene*
-    * this is expected: the effect of *Age* should not depend on e.g. the *Institution*; so the result shows the advantage of joint modeling because previous results with separate, gene-based, modeling suggested strong interaction between *Age* and *Institution*
+* *Ancestry.n* components are not equally important: only *Ancestry.1* and *Ancestry.3* appears to matter
+* their effects are *Gene*-specific
 
 ### Model $$M3$$ and $$M4$$
 
@@ -310,7 +307,7 @@ While the fitting of the more simple model $$M3$$ converges that of the more com
 
 ### Adding more biological terms
 
-Now add *Gender* and *Dx* either as fixed effect, a random effect (both as main effect and as an interaction term with *Gene*)
+Now add terms including gender *Gender* and *Dx*:
 
 
 ```r
@@ -325,7 +322,7 @@ av.3$Dx.ran <- anova(M3, m <- update(M3, . ~ . + (1 | Dx)))
 av.3$Dx.Gene <- anova(m, update(m, . ~ . + (1 | Dx:Gene)))
 ```
 
-Note that adding *Gender* and *Dx* in the following way is not the proper way because they are factors.  Moreover, the fit does not converge.
+Note that adding *Gender* and *Dx* in the following way (i.e.*(Gender+...\|Gene)*) is not the proper way because *Gender* and *Dx* are factors, whose effect cannot be modeled as a slope.  Despite this the `lme4` allows fitting models with such formulas.  But as the warnings below show the fit does not converge.
 
 
 ```r
@@ -361,14 +358,290 @@ print.av(summarize.anova(av.3))
 ## Dx.Gene           0.5       7.5      1.5     1    2.1e-01
 ```
 
-Only *Gender*---but not *Dx*---improves the fit a little and only in interaction with *Gene*
+Only *(1\|Gender:Gene)* improves fit appreciably, while *Dx* has no effect (neither random, nor fixed, nor in interaction with *Gene*).
 
-### An important result
+### The impact of removing *(Age|Gene)* from M3
+
+This is to investigate how much improvement *(Age\|Gene)* can lead to in the more complex *M3* (cf. improvement by *(Age\|Gene)* in *M1*).  The result below shows the improvement is less in *M3* but still highly significant.
 
 
 ```r
-av.4 <- anova(update(M1b, . ~ . + (scale(RIN) + scale(Ancestry.1) | Gene)),
-              update(M1b, . ~ . + (scale(Age) + scale(RIN) + scale(Ancestry.1) | Gene)))
+print.av(summarize.anova(list(anova(update(M1b, . ~ . + (scale(RIN) + scale(Ancestry.1) | Gene)),
+              update(M1b, . ~ . + (scale(Age) + scale(RIN) + scale(Ancestry.1) | Gene))))))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```
+##   Delta.AIC Delta.BIC    Chisq    df      p.Chi
+## 1     -23.4       4.7     31.4     4    2.5e-06
+```
+
+### *M5* and *M6*: more biological terms
+
+Based on the findings above *M5* and *M5.Dx.Gene* are defined (the latter is renamed to *M6* later).  These are thus better fitting models than any of the previous ones.
+
+
+```r
+(M5 <- update(M1b, . ~ . + (1 | Gender:Gene) + (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene)))
+```
+
+```
+## Linear mixed model fit by REML ['lmerMod']
+## Formula: 
+## Q ~ scale(RIN) + (1 | RNA_batch) + (1 | Institution) + (1 | Institution:Individual) +  
+##     (1 | Gene:Institution) + (1 | Gender:Gene) + (scale(Age) +  
+##     scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene)
+##    Data: dat
+## REML criterion at convergence: 19921.19
+## Random effects:
+##  Groups                 Name              Std.Dev. Corr                   
+##  Institution:Individual (Intercept)       0.32947                         
+##  Gene:Institution       (Intercept)       0.19838                         
+##  Gender:Gene            (Intercept)       0.05939                         
+##  Gene                   (Intercept)       1.22077                         
+##                         scale(Age)        0.06600  -0.45                  
+##                         scale(RIN)        0.17777   0.19 -0.71            
+##                         scale(Ancestry.1) 0.08317   0.24  0.04  0.04      
+##                         scale(Ancestry.3) 0.04528  -0.31  0.37 -0.20 -0.88
+##  RNA_batch              (Intercept)       0.16581                         
+##  Institution            (Intercept)       0.21710                         
+##  Residual                                 0.75584                         
+## Number of obs: 8213, groups:  
+## Institution:Individual, 579; Gene:Institution, 90; Gender:Gene, 60; Gene, 30; RNA_batch, 9; Institution, 3
+## Fixed Effects:
+## (Intercept)   scale(RIN)  
+##     3.13115      0.05611
+```
+
+```r
+(M5.Dx.Gene <- update(M5, . ~ . + (1 | Dx:Gene)))
+```
+
+```
+## Linear mixed model fit by REML ['lmerMod']
+## Formula: 
+## Q ~ scale(RIN) + (1 | RNA_batch) + (1 | Institution) + (1 | Institution:Individual) +  
+##     (1 | Gene:Institution) + (1 | Gender:Gene) + (scale(Age) +  
+##     scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene) +  
+##     (1 | Dx:Gene)
+##    Data: dat
+## REML criterion at convergence: 19919.61
+## Random effects:
+##  Groups                 Name              Std.Dev. Corr                   
+##  Institution:Individual (Intercept)       0.32953                         
+##  Dx:Gene                (Intercept)       0.03872                         
+##  Gene:Institution       (Intercept)       0.19903                         
+##  Gender:Gene            (Intercept)       0.06114                         
+##  Gene                   (Intercept)       1.22093                         
+##                         scale(Age)        0.06523  -0.45                  
+##                         scale(RIN)        0.17692   0.20 -0.70            
+##                         scale(Ancestry.1) 0.08326   0.24  0.05  0.04      
+##                         scale(Ancestry.3) 0.04468  -0.30  0.37 -0.20 -0.88
+##  RNA_batch              (Intercept)       0.16608                         
+##  Institution            (Intercept)       0.21711                         
+##  Residual                                 0.75525                         
+## Number of obs: 8213, groups:  
+## Institution:Individual, 579; Dx:Gene, 90; Gene:Institution, 90; Gender:Gene, 60; Gene, 30; RNA_batch, 9; Institution, 3
+## Fixed Effects:
+## (Intercept)   scale(RIN)  
+##     3.13076      0.05625
+```
+
+The following sequence of ANOVAs tests the effects of biological terms in these better fitting but also more complex models:
+
+
+```r
+av.5 <- list()
+av.5$Age.Gene <-
+    anova(update(M5, . ~ . - (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene) + (scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene)),
+          M5)
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5$Ancestry.1.Gene <-
+    anova(update(M5, . ~ . - (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene) + (scale(Age) + scale(RIN) + scale(Ancestry.3) | Gene)),
+          M5)
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5$Ancestry.2.Gene <-
+    anova(M5,
+          update(M5, . ~ . - (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene) + (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.2) + scale(Ancestry.3) | Gene)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5$Ancestry.3.Gene <-
+    anova(update(M5, . ~ . - (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene) + (scale(Age) + scale(RIN) + scale(Ancestry.1) | Gene)),
+          M5)
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5$Ancestry.4.Gene <-
+    anova(M5,
+          update(M5, . ~ . - (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene) + (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.4) + scale(Ancestry.3) | Gene)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5$Ancestry.5.Gene <-
+    anova(M5,
+          update(M5, . ~ . - (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene) + (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.5) + scale(Ancestry.3) | Gene)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5$Gender.Gene <-
+    anova(update(M5, . ~ . - (1 | Gender:Gene)), M5)
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5$Gender <- anova(M5, update(M5, . ~ . + (1 | Gender)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+# note that the next one is an addition to M5
+av.5$Dx.Gene <-
+    anova(M5, update(M5, . ~ . + (1 | Dx:Gene)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5$Dx <- anova(M5, update(M5, . ~ . + (1 | Dx)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+Now fit *M6* and perform ANOVAs similarly to *M5*
+
+
+```r
+M6 <- M5.Dx.Gene
+av.6 <- list()
+av.6$Age.Gene <-
+    anova(update(M6, . ~ . - (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene) + (scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene)),
+          M6)
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.6$Ancestry.1.Gene <-
+    anova(update(M6, . ~ . - (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene) + (scale(Age) + scale(RIN) + scale(Ancestry.3) | Gene)),
+          M6)
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.6$Ancestry.2.Gene <-
+    anova(M6,
+          update(M6, . ~ . - (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene) + (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.2) + scale(Ancestry.3) | Gene)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.6$Ancestry.3.Gene <-
+    anova(update(M6, . ~ . - (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene) + (scale(Age) + scale(RIN) + scale(Ancestry.1) | Gene)),
+          M6)
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.6$Ancestry.4.Gene <-
+    anova(M6,
+          update(M6, . ~ . - (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene) + (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.4) + scale(Ancestry.3) | Gene)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.6$Ancestry.5.Gene <-
+    anova(M6,
+          update(M6, . ~ . - (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene) + (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.5) + scale(Ancestry.3) | Gene)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.6$Gender.Gene <-
+    anova(update(M6, . ~ . - (1 | Gender:Gene)), M6)
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.6$Gender <- anova(M6, update(M6, . ~ . + (1 | Gender)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.6$Dx.Gene <-
+    anova(update(M6, . ~ . - (1 | Dx:Gene)), M6)
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.6$Dx <- anova(M6, update(M6, . ~ . + (1 | Dx)))
 ```
 
 ```
@@ -377,13 +650,183 @@ av.4 <- anova(update(M1b, . ~ . + (scale(RIN) + scale(Ancestry.1) | Gene)),
 
 
 ```r
-print.av(summarize.anova(list(av.4)))
+av.5$Gene <-
+    anova(update(M5, . ~ . - (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene) + (-1 + scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene)),
+          M5)
 ```
 
 ```
-##   Delta.AIC Delta.BIC    Chisq    df      p.Chi
-## 1     -23.4       4.7     31.4     4    2.5e-06
+## refitting model(s) with ML (instead of REML)
 ```
+
+```r
+av.6$Gene <-
+    anova(update(M6, . ~ . - (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene) + (-1 + scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene)),
+          M6)
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+Effect of *Age*, *Ancestry.n* independently from other variables.
+
+
+```r
+av.5$Age <- anova(M5, update(M5, . ~ . + scale(Age)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5$Ancestry.1 <- anova(M5, update(M5, . ~ . + scale(Ancestry.1)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5$Ancestry.2 <- anova(M5, update(M5, . ~ . + scale(Ancestry.2)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5$Ancestry.3 <- anova(M5, update(M5, . ~ . + scale(Ancestry.3)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5$Ancestry.4 <- anova(M5, update(M5, . ~ . + scale(Ancestry.4)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5$Ancestry.5 <- anova(M5, update(M5, . ~ . + scale(Ancestry.5)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+
+```r
+av.6$Age <- anova(M6, update(M6, . ~ . + scale(Age)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.6$Ancestry.1 <- anova(M6, update(M6, . ~ . + scale(Ancestry.1)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.6$Ancestry.2 <- anova(M6, update(M6, . ~ . + scale(Ancestry.2)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.6$Ancestry.3 <- anova(M6, update(M6, . ~ . + scale(Ancestry.3)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.6$Ancestry.4 <- anova(M6, update(M6, . ~ . + scale(Ancestry.4)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.6$Ancestry.5 <- anova(M6, update(M6, . ~ . + scale(Ancestry.5)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+#### Results of ANOVA
+
+
+```r
+print.av(summarize.anova(av.5))
+```
+
+```
+##                 Delta.AIC Delta.BIC    Chisq    df      p.Chi
+## Age.Gene            -18.9      16.2     28.9     5    2.5e-05
+## Ancestry.1.Gene     -71.2     -36.2     81.2     5    4.6e-16
+## Ancestry.2.Gene       6.3      48.3      5.7     6    4.5e-01
+## Ancestry.3.Gene     -17.9      17.2     27.9     5    3.8e-05
+## Ancestry.4.Gene       6.9      48.9      5.1     6    5.3e-01
+## Ancestry.5.Gene      10.8      52.9      1.2     6    9.8e-01
+## Gender.Gene          -5.7       1.3      7.7     1    5.5e-03
+## Gender                2.0       9.0      0.0     1        1.0
+## Dx.Gene               0.4       7.4      1.6     1    2.1e-01
+## Dx                    2.0       9.0      0.0     1        1.0
+## Gene               -126.8     -91.7    136.8     5    8.5e-28
+## Age                   1.3       8.3      0.7     1    3.9e-01
+## Ancestry.1            0.6       7.6      1.4     1    2.4e-01
+## Ancestry.2            1.7       8.7      0.3     1    5.6e-01
+## Ancestry.3            1.6       8.6      0.4     1    5.4e-01
+## Ancestry.4            0.9       8.0      1.1     1    3.0e-01
+## Ancestry.5            1.9       9.0      0.1     1    8.1e-01
+```
+
+```r
+print.av(summarize.anova(av.6))
+```
+
+```
+##                 Delta.AIC Delta.BIC    Chisq    df      p.Chi
+## Age.Gene            -17.5      17.5     27.5     5    4.5e-05
+## Ancestry.1.Gene     -71.4     -36.4     81.4     5    4.2e-16
+## Ancestry.2.Gene       6.4      48.4      5.6     6    4.7e-01
+## Ancestry.3.Gene     -17.1      18.0     27.1     5    5.5e-05
+## Ancestry.4.Gene       6.9      49.0      5.1     6    5.4e-01
+## Ancestry.5.Gene      10.9      53.0      1.1     6    9.8e-01
+## Gender.Gene          -6.4       0.6      8.4     1    3.8e-03
+## Gender                2.0       9.0      0.0     1        1.0
+## Dx.Gene               0.4       7.4      1.6     1    2.1e-01
+## Dx                    2.0       9.0      0.0     1        1.0
+## Gene               -126.1     -91.0    136.1     5    1.2e-27
+## Age                   1.2       8.3      0.8     1    3.9e-01
+## Ancestry.1            0.6       7.6      1.4     1    2.4e-01
+## Ancestry.2            1.7       8.7      0.3     1    5.6e-01
+## Ancestry.3            1.6       8.6      0.4     1    5.4e-01
+## Ancestry.4            1.0       8.0      1.0     1    3.1e-01
+## Ancestry.5            1.9       9.0      0.1     1    8.1e-01
+```
+
+#### Summary
+
+* significant *Gene*-specific random effect of *Age*, *Ancestry.1* *Ancestry.3*,  and *Gender*
+* no effect of *Dx*
+
 
 ### Saving model formulas
 
@@ -391,7 +834,7 @@ Save all model formulas in the `results` directory
 
 
 ```r
-write.csv(data.frame(lapply(list(M1 = M1, M1b = M1b, M2 = M2, M3 = M3, M4 = M4),
+write.csv(data.frame(lapply(list(M1 = M1, M1b = M1b, M2 = M2, M3 = M3, M4 = M4, M5 = M5),
                             function(x) as.character(formula(x)))),
           file = "../../results/M-formulas.csv", row.names = FALSE)
 ```
