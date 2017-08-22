@@ -834,10 +834,9 @@ Save all model formulas in the `results` directory
 
 
 ```r
-write.csv(data.frame(lapply(list(M1 = M1, M1b = M1b, M2 = M2, M3 = M3, M4 = M4, M5 = M5),
+write.csv(data.frame(lapply(list(M1 = M1, M1b = M1b, M2 = M2, M3 = M3, M4 = M4, M5 = M5, M6 = M6),
                             function(x) as.character(formula(x)))),
           file = "../../results/M-formulas.csv", row.names = FALSE)
 ```
-
 <!-- MathJax scripts -->
 <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
