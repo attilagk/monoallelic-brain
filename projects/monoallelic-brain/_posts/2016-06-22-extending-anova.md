@@ -171,7 +171,7 @@ Betas <- lapply(M, function(m) { x <- get.estimate.CI(m$forward); x <- x[ ! x$Co
 
 
 ```r
-my.segplot(data = Betas$logi.S, xlim = my.xlim)
+my.segplot(data = reverse.genes(Betas$logi.S), main = expression(paste("99 % CI for ", beta, " under logi.S")))
 ```
 
 <img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-06-22-extending-anova/figure/reg-coef-logi-S-1.png" title="plot of chunk reg-coef-logi-S" alt="plot of chunk reg-coef-logi-S" width="700px" />
@@ -206,6 +206,10 @@ my.segplot(data = B.logi.S.f, xlim = my.xlim)
 ```
 
 <img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-06-22-extending-anova/figure/reg-coef-logi-S-filt-1.png" title="plot of chunk reg-coef-logi-S-filt" alt="plot of chunk reg-coef-logi-S-filt" width="700px" />
+
+### Figure for manuscript
+
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-06-22-extending-anova/figure/reg-coef-unlm-Q-ms-1.png" title="plot of chunk reg-coef-unlm-Q-ms" alt="plot of chunk reg-coef-unlm-Q-ms" width="700px" />
 
 ## Comparison of models
 

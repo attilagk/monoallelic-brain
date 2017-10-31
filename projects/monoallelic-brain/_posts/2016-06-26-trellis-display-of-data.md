@@ -89,39 +89,7 @@ plot(P$s.age.Dx$lattice)
 #plot(P$s.age.Dx$ggplot2)
 ```
 
-
-```r
-P <- list()
-# lattice implementation
-P$s.age.gender$lattice <-
-    xyplot(S ~ Age | Gene, data = Y.long, groups = Gender,
-           subset = Gene %in% gene.ids,
-           panel = function(x, y, ...) {
-               panel.xyplot(x, y, pch = 21, ...)
-               #panel.smoother(x, y, col = "black", lwd = 2, ...)
-           },
-           par.settings = list(add.text = list(cex = 0.8),
-                               superpose.symbol = list(cex = 0.5,
-                                                       fill = trellis.par.get("superpose.symbol")$fill[c(2, 1)],
-                                                       col = trellis.par.get("superpose.symbol")$col[c(2, 1)])),
-           auto.key = list(title = "gender", columns = 2),
-           ylab = "read count ratio, S",
-           xlab = "age",
-           aspect = "fill", layout = c(6, 5))
-# ggplot2 implementation
-g <- ggplot(data = Y.long, aes(x = Age, y = S))
-g <- g + geom_point(pch = "o", aes(color = Gender))
-g <- g + geom_smooth(method = "loess", color = "black")
-g <- g + facet_wrap(~ Gene)
-P$s.age.gender$ggplot2 <- g
-plot(P$s.age.gender$lattice)
-```
-
 <img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-06-26-trellis-display-of-data/figure/S-age-gender-1.png" title="plot of chunk S-age-gender" alt="plot of chunk S-age-gender" width="700px" />
-
-```r
-#plot(P$s.age.gender$ggplot2)
-```
 
 
 ```r
@@ -132,6 +100,10 @@ P$s.age$lattice <-
                                strip.background = list(col = "gray90"),
                                plot.symbol = list(pch = 21, cex = 0.5, col = "black", fill = "gray", alpha = 0.5)),
            auto.key = list(title = "gender", columns = 2),
+           panel = function(x, y, ...) {
+               panel.xyplot(x, y, pch = 21, cex = 0.3, ...)
+               panel.smoother(x, y, col = "plum", lwd = 2, ...)
+           },
            ylab = "read count ratio, S",
            xlab = "age",
            aspect = "fill", layout = c(6, 5))
@@ -139,6 +111,27 @@ plot(P$s.age$lattice)
 ```
 
 <img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-06-26-trellis-display-of-data/figure/S-age-1.png" title="plot of chunk S-age" alt="plot of chunk S-age" width="700px" />
+
+
+```r
+P$s.age$lattice <-
+    xyplot(Q ~ Age | Gene, data = Y.long,
+           subset = Gene %in% gene.ids,
+           par.settings = list(add.text = list(cex = 0.8),
+                               strip.background = list(col = "gray90"),
+                               plot.symbol = list(pch = 21, cex = 0.5, col = "black", fill = "gray", alpha = 0.5)),
+           auto.key = list(title = "gender", columns = 2),
+           panel = function(x, y, ...) {
+               panel.xyplot(x, y, pch = 21, cex = 0.3, ...)
+               panel.smoother(x, y, col = "plum", lwd = 2, ...)
+           },
+           ylab = "read count ratio, S",
+           xlab = "age",
+           aspect = "fill", layout = c(6, 5))
+plot(P$s.age$lattice)
+```
+
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-06-26-trellis-display-of-data/figure/Q-age-1.png" title="plot of chunk Q-age" alt="plot of chunk Q-age" width="700px" />
 
 
 ```r

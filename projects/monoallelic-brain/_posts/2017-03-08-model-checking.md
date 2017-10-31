@@ -41,6 +41,16 @@ M3$wnlm.Q <- lmer(reformulate(fm$M3[3], response = "Q"), data = dat, weights = N
 ```
 
 ```
+## Warning in checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv, : Model is nearly unidentifiable: very large eigenvalue
+##  - Rescale variables?
+```
+
+```r
+M3$unlm.S <- lmer(reformulate(fm$M3[3], response = "S"), data = dat)
+M3$wnlm.S <- lmer(reformulate(fm$M3[3], response = "S"), data = dat, weights = N)
+```
+
+```
 ## Warning in optwrap(optimizer, devfun, getStart(start, rho$lower, rho$pp), :
 ## convergence code 1 from bobyqa: bobyqa -- maximum number of function
 ## evaluations exceeded
@@ -58,7 +68,6 @@ M3$wnlm.Q <- lmer(reformulate(fm$M3[3], response = "Q"), data = dat, weights = N
 ```
 
 ```r
-M3$unlm.S <- lmer(reformulate(fm$M3[3], response = "S"), data = dat)
 M3$logi.S <- glmer(reformulate(fm$M3[3], response = "H.N"), data = dat, family = binomial)
 ```
 
@@ -70,7 +79,44 @@ M3$logi.S <- glmer(reformulate(fm$M3[3], response = "H.N"), data = dat, family =
 
 ```
 ## Warning in checkConv(attr(opt, "derivs"), opt$par, ctrl = control
-## $checkConv, : Model failed to converge with max|grad| = 0.719882 (tol =
+## $checkConv, : unable to evaluate scaled gradient
+```
+
+```
+## Warning in checkConv(attr(opt, "derivs"), opt$par, ctrl = control
+## $checkConv, : Model failed to converge: degenerate Hessian with 1 negative
+## eigenvalues
+```
+
+```r
+# do fit of simpler models to cache results right here
+M1 <- list()
+M1$unlm.Q <- lmer(reformulate(fm$M1[3], response = "Q"), data = dat)
+M1$wnlm.Q <- lmer(reformulate(fm$M1[3], response = "Q"), data = dat, weights = N)
+```
+
+```
+## Warning in checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv, : Model is nearly unidentifiable: very large eigenvalue
+##  - Rescale variables?
+```
+
+```r
+M1$unlm.S <- lmer(reformulate(fm$M1[3], response = "S"), data = dat)
+M1$wnlm.S <- lmer(reformulate(fm$M1[3], response = "S"), data = dat, weights = N)
+```
+
+```
+## Warning in checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv, : Model is nearly unidentifiable: very large eigenvalue
+##  - Rescale variables?
+```
+
+```r
+M1$logi.S <- glmer(reformulate(fm$M1[3], response = "H.N"), data = dat, family = binomial)
+```
+
+```
+## Warning in checkConv(attr(opt, "derivs"), opt$par, ctrl = control
+## $checkConv, : Model failed to converge with max|grad| = 0.00437736 (tol =
 ## 0.001, component 1)
 ```
 
@@ -86,7 +132,11 @@ get.diagnostic.data <- function(lM, sel.col = 2:7) {
         cbind(data.frame(Residual = residuals(m <- lM[[x]]), Fitted.value = predict(m), Family = x),
               model.frame(m)[sel.col])
     l <- lapply(names(lM), helper)
-    do.call(rbind, l)
+    long <- do.call(rbind, l)
+    lv <- c("unlm.S", "unlm.Q", "wnlm.S", "wnlm.Q", "logi.S")
+    #lv <- c("logi.S", "unlm.S", "unlm.Q", "wnlm.S", "wnlm.Q")
+    long$Family <- factor(long$Family, levels = lv, ordered = TRUE)
+    return(long)
 }
 ```
 
@@ -97,7 +147,8 @@ The distribution of residuals under all four model families shows smaller or lar
 
 ```r
 diag.M3 <- get.diagnostic.data(M3)
-arg <- list(main = "Normality of residuals", xlab = "normal quantiles", ylab = "empirical quantiles", pch = "+")
+arg <- list(main = "Normality of residuals.
+Mixed multiple regression model, all genes", xlab = "normal quantiles", ylab = "empirical quantiles", pch = "+")
 qqmath(~ Residual | Family, data = diag.M3, scales = list(y = list(relation = "free")),
        xlab = arg$xlab, ylab = arg$ylab, main = arg$main, pch = arg$pch, abline = c(0, 1))
 ```
@@ -117,9 +168,11 @@ Inspecting the homogeneity of error variance (or equivalently standard deviation
 
 
 ```r
-arg <- list(main = "Error variance", xlab = "fitted value", ylab = expression(sqrt(residual)), pch = "+")
+arg <- list(main = "Homogeneity of error variance.
+Mixed multiple regression model, all genes", xlab = "fitted value", ylab = expression(sqrt(residual)), pch = "+")
 xyplot(sqrt(abs(Residual)) ~ Fitted.value | Family, data = diag.M3, scales = list(relation = "free"),
-       xlab = arg$xlab, ylab = arg$ylab, main = arg$main, pch = arg$pch)
+       xlab = arg$xlab, ylab = arg$ylab, main = arg$main, pch = arg$pch,
+       panel = function(...) { panel.xyplot(...); panel.loess(..., col = "black") })
 ```
 
 <img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2017-03-08-model-checking/figure/scedasticity-families-M3-1.png" title="plot of chunk scedasticity-families-M3" alt="plot of chunk scedasticity-families-M3" width="700px" />
@@ -133,36 +186,14 @@ xyplot(sqrt(abs(Residual)) ~ Fitted.value | Gene, data = diag.M3, subset = Famil
 
 ### Results under a simpler model, $$M1$$
 
-Very similar patterns are seen under $$M1$$ to those under $$M3$$.  The fitting of the respective models from the *wnlm.Q* and *logi.S* families again converges with problems.
+Very similar patterns are seen under $$M1$$ to those under $$M3$$.  The fitting of the respective models from the *wnlm.Q* and *logi.S* families again converges with problems (see above).
 
 
-```r
-M1 <- list()
-M1$unlm.Q <- lmer(reformulate(fm$M1[3], response = "Q"), data = dat)
-M1$wnlm.Q <- lmer(reformulate(fm$M1[3], response = "Q"), data = dat, weights = N)
-```
-
-```
-## Warning in checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv, : Model is nearly unidentifiable: very large eigenvalue
-##  - Rescale variables?
-```
-
-```r
-M1$unlm.S <- lmer(reformulate(fm$M1[3], response = "S"), data = dat)
-M1$logi.S <- glmer(reformulate(fm$M1[3], response = "H.N"), data = dat, family = binomial)
-```
-
-```
-## Warning in checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv, : Model failed to converge with max|grad| = 0.00436075 (tol = 0.001, component 1)
-
-## Warning in checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv, : Model is nearly unidentifiable: very large eigenvalue
-##  - Rescale variables?
-```
 
 
 ```r
 diag.M1 <- get.diagnostic.data(M1)
-arg <- list(main = "Normality of residuals", xlab = "normal quantiles", ylab = "empirical quantiles", pch = "+")
+arg <- list(main = "mixed multiple regression model, all genes", xlab = "normal quantiles", ylab = "empirical quantiles", pch = "+")
 qqmath(~ Residual | Family, data = diag.M1, scales = list(y = list(relation = "free")),
        xlab = arg$xlab, ylab = arg$ylab, main = arg$main, pch = arg$pch, abline = c(0, 1))
 ```
@@ -171,7 +202,7 @@ qqmath(~ Residual | Family, data = diag.M1, scales = list(y = list(relation = "f
 
 
 ```r
-arg <- list(main = "Error variance", xlab = "fitted value", ylab = expression(sqrt(residual)), pch = "+")
+arg <- list(main = "mixed multiple regression model, all genes", xlab = "fitted value", ylab = expression(sqrt(residual)), pch = "+")
 xyplot(sqrt(abs(Residual)) ~ Fitted.value | Family, data = diag.M1, scales = list(relation = "free"),
        xlab = arg$xlab, ylab = arg$ylab, main = arg$main, pch = arg$pch)
 ```

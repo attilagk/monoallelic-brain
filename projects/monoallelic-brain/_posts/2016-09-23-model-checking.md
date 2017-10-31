@@ -136,7 +136,8 @@ myqqnorm <- function(mtype, skip = FALSE, ...)
 myqqnorm.demo <- function(g = "ZNF331") {
     qqmath(~ res.std.dev | model.type, data = diagnostics, subset = gene == g & model.type != "wnlm.R",
                ylim = c(-4, 4), abline = c(0, 1), pch = "+",
-               main = g, xlab = "normal quantiles", ylab = "standardized residual",
+               main = paste("Normality of residuals.
+Fixed multiple regression model,", g), xlab = "normal quantiles", ylab = "standardized residual",
            )[c(1:2, 5, 4)]
 }
 myqqnorm.demo("ZNF331")
@@ -150,6 +151,20 @@ myqqnorm.demo("PEG3")
 ```
 
 <img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-09-23-model-checking/figure/qqnorm-PEG3-1.png" title="plot of chunk qqnorm-PEG3" alt="plot of chunk qqnorm-PEG3" width="700px" />
+
+
+```r
+myqqnorm.demo("ZDBF2")
+```
+
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-09-23-model-checking/figure/qqnorm-ZDBF2-1.png" title="plot of chunk qqnorm-ZDBF2" alt="plot of chunk qqnorm-ZDBF2" width="700px" />
+
+
+```r
+myqqnorm.demo("KCNK9")
+```
+
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-09-23-model-checking/figure/qqnorm-KCNK9-1.png" title="plot of chunk qqnorm-KCNK9" alt="plot of chunk qqnorm-KCNK9" width="700px" />
 
 ### Homogeneity of error (homoscedasticity)
 
@@ -197,7 +212,9 @@ myhomoscedas.demo <- function(g) {
                panel.smoother(..., method = "loess", col = "black", se = FALSE)
            }, subset = gene == g & model.type != "wnlm.R", pch = "+",
            scales = list(x = list(relation = "free", draw = TRUE)),
-           xlab = "fitted value", ylab = expression(sqrt(std.deviance.resid)), main = g)[c(1:2, 5, 4)]
+           xlab = "fitted value", ylab = expression(sqrt(std.deviance.resid)),
+           main = paste("Homogeneity of error variance.
+Fixed multiple regression model,", g))[c(1:2, 5, 4)]
 }
 myhomoscedas.demo("ZNF331")
 ```
@@ -210,6 +227,20 @@ myhomoscedas.demo("PEG3")
 ```
 
 <img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-09-23-model-checking/figure/homoscedas-PEG3-1.png" title="plot of chunk homoscedas-PEG3" alt="plot of chunk homoscedas-PEG3" width="700px" />
+
+
+```r
+myhomoscedas.demo("ZDBF2")
+```
+
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-09-23-model-checking/figure/homoscedas-ZDBF2-1.png" title="plot of chunk homoscedas-ZDBF2" alt="plot of chunk homoscedas-ZDBF2" width="700px" />
+
+
+```r
+myhomoscedas.demo("KCNK9")
+```
+
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-09-23-model-checking/figure/homoscedas-KCNK9-1.png" title="plot of chunk homoscedas-KCNK9" alt="plot of chunk homoscedas-KCNK9" width="700px" />
 
 ### Influence of individual cases
 
@@ -255,7 +286,9 @@ myinfluence <- function(mtype, xlim = c(-0.2, 4), ylim = c(-0.04, 0.8), skip = F
 ```r
 myinfluence.demo <- function(g) {
     xyplot(cooks.dist ~ leverage / (1 - leverage) | model.type, data = diagnostics,
-           subset = gene == g & model.type != "wnlm.R", ylab = "Cook's distance", main = g)[c(1:2, 5, 4)]
+           subset = gene == g & model.type != "wnlm.R", ylab = "Cook's distance",
+           main = paste("Influence of outliers.
+Fixed multiple regression model,", g))[c(1:2, 5, 4)]
 }
 myinfluence.demo("ZNF331")
 ```
@@ -268,6 +301,20 @@ myinfluence.demo("PEG3")
 ```
 
 <img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-09-23-model-checking/figure/influence-PEG3-1.png" title="plot of chunk influence-PEG3" alt="plot of chunk influence-PEG3" width="700px" />
+
+
+```r
+myinfluence.demo("ZDBF2")
+```
+
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-09-23-model-checking/figure/influence-ZDBF2-1.png" title="plot of chunk influence-ZDBF2" alt="plot of chunk influence-ZDBF2" width="700px" />
+
+
+```r
+myinfluence.demo("KCNK9")
+```
+
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-09-23-model-checking/figure/influence-KCNK9-1.png" title="plot of chunk influence-KCNK9" alt="plot of chunk influence-KCNK9" width="700px" />
 
 ### Identifying outliers
 
