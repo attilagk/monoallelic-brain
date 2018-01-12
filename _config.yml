@@ -26,3 +26,6 @@ paginate: 10
 
 future: TRUE
 permalink: /:year-:month-:day-:title.html
+# Google analytics tracking ID; see article below
+# https://desiredpersona.com/google-analytics-jekyll/
+google_analytics: UA-112433885-1

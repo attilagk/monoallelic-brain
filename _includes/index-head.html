@@ -4,5 +4,10 @@
     <title>{{ site.title | default: site.github.repository_name }}</title>
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
+<!-- Google analytics tracking ID; see article below
+    https://desiredpersona.com/google-analytics-jekyll/-->
+    {% if site.google_analytics and jekyll.environment == 'production' %}
+    {% include analytics.html %}
+    {% endif %}
 </head>
 

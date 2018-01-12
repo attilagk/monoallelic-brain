@@ -9,6 +9,7 @@ gem "jekyll-scholar"
 gem "font-awesome-sass"
 gem "jekyll-paginate"
 gem "octokit"
+gem "jekyll-analytics"
 
 # If you have any plugins, put them here!
 group :jekyll_plugins do
