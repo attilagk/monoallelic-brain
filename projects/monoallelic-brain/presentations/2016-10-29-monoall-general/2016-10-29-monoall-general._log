@@ -1,0 +1,424 @@
+Input File::2016-10-29-monoall-general.tex::0::0::Input File
+Input File::beamer.cls::0::0::Input File
+Input File::beamerbasercs.sty::0::0::Input File
+Input Package::beamerbasercs.sty::0::0::beamerbasercs 2015/03/08 (rcs-revision 368aa9ba9d38)
+Input Package::beamer.cls::0::0::beamer 2015/01/05 3.36 A class for typesetting presentations (rcs-revision 8a39122e1f63)
+Input File::beamerbasemodes.sty::0::0::Input File
+Input Package::beamerbasemodes.sty::0::0::beamerbasemodes 2013/09/03 (rcs-revision 768f2d98ca64)
+Input File::beamerbasedecode.sty::0::0::Input File
+Input Package::beamerbasedecode.sty::0::0::beamerbasedecode 2010/05/01 (rcs-revision efa082c6111d)
+Input File::ifpdf.sty::0::0::Input File
+Input Package::ifpdf.sty::0::0::ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package Info::ifpdf.sty::0::0::pdfTeX in PDF mode is detected. (ifpdf)
+Input File::beamerbaseoptions.sty::0::0::Input File
+Input Package::beamerbaseoptions.sty::0::0::beamerbaseoptions 2013/03/10 (rcs-revision 47431932db0d)
+Input File::keyval.sty::0::0::Input File
+Input Package::keyval.sty::0::0::keyval 2014/10/28 v1.15 key=value parser (DPC)
+Input File::geometry.sty::0::0::Input File
+Input Package::geometry.sty::0::0::geometry 2010/09/12 v5.6 Page Geometry
+Input File::ifvtex.sty::0::0::Input File
+Input Package::ifvtex.sty::0::0::ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
+Package Info::ifvtex.sty::0::0::VTeX not detected. (ifvtex)
+Input File::ifxetex.sty::0::0::Input File
+Input Package::ifxetex.sty::0::0::ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+Input File::size11.clo::0::0::Input File
+Input File::pgfcore.sty::0::0::Input File
+Input File::graphicx.sty::0::0::Input File
+Input Package::graphicx.sty::0::0::graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+Input File::graphics.sty::0::0::Input File
+Input Package::graphics.sty::0::0::graphics 2016/01/03 v1.0q Standard LaTeX Graphics (DPC,SPQR)
+Input File::trig.sty::0::0::Input File
+Input Package::trig.sty::0::0::trig 2016/01/03 v1.10 sin cos tan (DPC)
+Input File::graphics.cfg::0::0::Input File
+Package Info::graphics.sty::95::0::Driver file: pdftex.def. (graphics)
+Input File::pdftex.def::0::0::Input File
+Input File::infwarerr.sty::0::0::Input File
+Input Package::infwarerr.sty::0::0::infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+Input File::ltxcmds.sty::0::0::Input File
+Input Package::ltxcmds.sty::0::0::ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+Input File::pgfsys.sty::0::0::Input File
+Input File::pgfrcs.sty::0::0::Input File
+Input File::pgfutil-common.tex::0::0::Input File
+Input File::pgfutil-common-lists.tex::0::0::Input File
+Input File::pgfutil-latex.def::0::0::Input File
+Input File::everyshi.sty::0::0::Input File
+Input Package::everyshi.sty::0::0::everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
+Input File::pgfrcs.code.tex::0::0::Input File
+Input Package::pgfrcs.code.tex::0::0::pgfrcs 2015/08/07 v3.0.1a (rcs-revision 1.31)
+Input File::pgfsys.code.tex::0::0::Input File
+Input Package::pgfsys.code.tex::0::0::pgfsys 2014/07/09 v3.0.1a (rcs-revision 1.48)
+Input File::pgfkeys.code.tex::0::0::Input File
+Input File::pgfkeysfiltered.code.tex::0::0::Input File
+Input File::pgf.cfg::0::0::Input File
+Input File::pgfsys-pdftex.def::0::0::Input File
+Input File::pgfsys-common-pdf.def::0::0::Input File
+Input File::pgfsyssoftpath.code.tex::0::0::Input File
+Input File::pgfsysprotocol.code.tex::0::0::Input File
+Input File::xcolor.sty::0::0::Input File
+Input Package::xcolor.sty::0::0::xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
+Input File::color.cfg::0::0::Input File
+Package Info::xcolor.sty::225::0::Driver file: pdftex.def. (xcolor)
+Package Info::xcolor.sty::1337::0::Model `cmy' substituted by `cmy0'. (xcolor)
+Package Info::xcolor.sty::1341::0::Model `hsb' substituted by `rgb'. (xcolor)
+Package Info::xcolor.sty::1353::0::Model `RGB' extended. (xcolor)
+Package Info::xcolor.sty::1355::0::Model `HTML' substituted by `rgb'. (xcolor)
+Package Info::xcolor.sty::1356::0::Model `Hsb' substituted by `hsb'. (xcolor)
+Package Info::xcolor.sty::1357::0::Model `tHsb' substituted by `hsb'. (xcolor)
+Package Info::xcolor.sty::1358::0::Model `HSB' substituted by `hsb'. (xcolor)
+Package Info::xcolor.sty::1359::0::Model `Gray' substituted by `gray'. (xcolor)
+Package Info::xcolor.sty::1360::0::Model `wave' substituted by `hsb'. (xcolor)
+Input File::pgfcore.code.tex::0::0::Input File
+Input Package::pgfcore.code.tex::0::0::pgfcore 2010/04/11 v3.0.1a (rcs-revision 1.7)
+Input File::pgfmath.code.tex::0::0::Input File
+Input File::pgfmathcalc.code.tex::0::0::Input File
+Input File::pgfmathutil.code.tex::0::0::Input File
+Input File::pgfmathparser.code.tex::0::0::Input File
+Input File::pgfmathfunctions.code.tex::0::0::Input File
+Input File::pgfmathfunctions.basic.code.tex::0::0::Input File
+Input File::pgfmathfunctions.trigonometric.code.tex::0::0::Input File
+Input File::pgfmathfunctions.random.code.tex::0::0::Input File
+Input File::pgfmathfunctions.comparison.code.tex::0::0::Input File
+Input File::pgfmathfunctions.base.code.tex::0::0::Input File
+Input File::pgfmathfunctions.round.code.tex::0::0::Input File
+Input File::pgfmathfunctions.misc.code.tex::0::0::Input File
+Input File::pgfmathfunctions.integerarithmetics.code.tex::0::0::Input File
+Input File::pgfmathfloat.code.tex::0::0::Input File
+Input File::pgfcorepoints.code.tex::0::0::Input File
+Input File::pgfcorepathconstruct.code.tex::0::0::Input File
+Input File::pgfcorepathusage.code.tex::0::0::Input File
+Input File::pgfcorescopes.code.tex::0::0::Input File
+Input File::pgfcoregraphicstate.code.tex::0::0::Input File
+Input File::pgfcoretransformations.code.tex::0::0::Input File
+Input File::pgfcorequick.code.tex::0::0::Input File
+Input File::pgfcoreobjects.code.tex::0::0::Input File
+Input File::pgfcorepathprocessing.code.tex::0::0::Input File
+Input File::pgfcorearrows.code.tex::0::0::Input File
+Input File::pgfcoreshade.code.tex::0::0::Input File
+Input File::pgfcoreimage.code.tex::0::0::Input File
+Input File::pgfcoreexternal.code.tex::0::0::Input File
+Input File::pgfcorelayers.code.tex::0::0::Input File
+Input File::pgfcoretransparency.code.tex::0::0::Input File
+Input File::pgfcorepatterns.code.tex::0::0::Input File
+Input File::xxcolor.sty::0::0::Input File
+Input Package::xxcolor.sty::0::0::xxcolor 2003/10/24 ver 0.1
+Input File::atbegshi.sty::0::0::Input File
+Input Package::atbegshi.sty::0::0::atbegshi 2011/10/05 v1.16 At begin shipout hook (HO)
+Input File::hyperref.sty::0::0::Input File
+Input Package::hyperref.sty::0::0::hyperref 2012/11/06 v6.83m Hypertext links for LaTeX
+Input File::hobsub-hyperref.sty::0::0::Input File
+Input Package::hobsub-hyperref.sty::0::0::hobsub-hyperref 2012/05/28 v1.13 Bundle oberdiek, subset hyperref (HO)
+Input File::hobsub-generic.sty::0::0::Input File
+Input Package::hobsub-generic.sty::0::0::hobsub-generic 2012/05/28 v1.13 Bundle oberdiek, subset generic (HO)
+Input Package::hobsub-generic.sty::0::0::hobsub 2012/05/28 v1.13 Construct package bundles (HO)
+Package Info::hobsub-generic.sty::0::0::Skipping package `infwarerr' (already loaded). (hobsub)
+Package Info::hobsub-generic.sty::0::0::Skipping package `ltxcmds' (already loaded). (hobsub)
+Input Package::hobsub-generic.sty::0::0::ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package Info::hobsub-generic.sty::0::0::LuaTeX not detected. (ifluatex)
+Package Info::hobsub-generic.sty::0::0::Skipping package `ifvtex' (already loaded). (hobsub)
+Input Package::hobsub-generic.sty::0::0::intcalc 2007/09/27 v1.1 Expandable calculations with integers (HO)
+Package Info::hobsub-generic.sty::0::0::Skipping package `ifpdf' (already loaded). (hobsub)
+Input Package::hobsub-generic.sty::0::0::etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+Package Info::hobsub-generic.sty::0::0::Could not find \expanded. That can mean that you are not using pdfTeX 1.50 or that some package has redefined \expanded. In the latter case, load this package earlier. (etexcmds)
+Input Package::hobsub-generic.sty::0::0::kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+Input Package::hobsub-generic.sty::0::0::kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+Input Package::hobsub-generic.sty::0::0::pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO)
+Package Info::hobsub-generic.sty::0::0::LuaTeX not detected. (pdftexcmds)
+Package Info::hobsub-generic.sty::0::0::\pdf@primitive is available. (pdftexcmds)
+Package Info::hobsub-generic.sty::0::0::\pdf@ifprimitive is available. (pdftexcmds)
+Package Info::hobsub-generic.sty::0::0::\pdfdraftmode found. (pdftexcmds)
+Input Package::hobsub-generic.sty::0::0::pdfescape 2011/11/25 v1.13 Implements pdfTeX's escape features (HO)
+Input Package::hobsub-generic.sty::0::0::bigintcalc 2012/04/08 v1.3 Expandable calculations on big integers (HO)
+Input Package::hobsub-generic.sty::0::0::bitset 2011/01/30 v1.1 Handle bit-vector datatype (HO)
+Input Package::hobsub-generic.sty::0::0::uniquecounter 2011/01/30 v1.2 Provide unlimited unique counter (HO)
+Package Info::hobsub-hyperref.sty::0::0::Skipping package `hobsub' (already loaded). (hobsub)
+Input Package::hobsub-hyperref.sty::0::0::letltxmacro 2010/09/02 v1.4 Let assignment for LaTeX macros (HO)
+Input Package::hobsub-hyperref.sty::0::0::hopatch 2012/05/28 v1.2 Wrapper for package hooks (HO)
+Input Package::hobsub-hyperref.sty::0::0::xcolor-patch 2011/01/30 xcolor patch
+Input Package::hobsub-hyperref.sty::0::0::atveryend 2011/06/30 v1.8 Hooks at the very end of document (HO)
+Package Info::hobsub-hyperref.sty::0::0::\enddocument detected (standard20110627). (atveryend)
+Package Info::hobsub-hyperref.sty::0::0::Skipping package `atbegshi' (already loaded). (hobsub)
+Input Package::hobsub-hyperref.sty::0::0::refcount 2011/10/16 v3.4 Data extraction from label references (HO)
+Input Package::hobsub-hyperref.sty::0::0::hycolor 2011/01/30 v1.7 Color options for hyperref/bookmark (HO)
+Input File::auxhook.sty::0::0::Input File
+Input Package::auxhook.sty::0::0::auxhook 2011/03/04 v1.3 Hooks for auxiliary files (HO)
+Input File::kvoptions.sty::0::0::Input File
+Input Package::kvoptions.sty::0::0::kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+Input File::pd1enc.def::0::0::Input File
+Input File::hyperref.cfg::0::0::Input File
+Package Info::hyperref.sty::4319::0::Option `bookmarks' set `true'. (hyperref)
+Package Info::hyperref.sty::4319::0::Option `bookmarksopen' set `true'. (hyperref)
+Package Info::hyperref.sty::4319::0::Option `implicit' set `false'. (hyperref)
+Package Info::hyperref.sty::4443::0::Hyper figures OFF. (hyperref)
+Package Info::hyperref.sty::4448::0::Link nesting OFF. (hyperref)
+Package Info::hyperref.sty::4451::0::Hyper index ON. (hyperref)
+Package Info::hyperref.sty::4458::0::Plain pages OFF. (hyperref)
+Package Info::hyperref.sty::4463::0::Backreferencing OFF. (hyperref)
+Package Info::hyperref.sty::0::0::Implicit mode OFF; no redefinition of LaTeX internals. (hyperref)
+Package Info::hyperref.sty::4688::0::Bookmarks ON. (hyperref)
+Input File::url.sty::0::0::Input File
+Input Package::url.sty::0::0::url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+LaTeX Info::hyperref.sty::5041::0::Redefining \url.
+Package Info::hyperref.sty::6295::0::Hyper figures OFF. (hyperref)
+Package Info::hyperref.sty::6300::0::Link nesting OFF. (hyperref)
+Package Info::hyperref.sty::6303::0::Hyper index ON. (hyperref)
+Package Info::hyperref.sty::6310::0::backreferencing OFF. (hyperref)
+Package Info::hyperref.sty::6315::0::Link coloring OFF. (hyperref)
+Package Info::hyperref.sty::6320::0::Link coloring with OCG OFF. (hyperref)
+Package Info::hyperref.sty::6325::0::PDF/A mode OFF. (hyperref)
+LaTeX Info::hyperref.sty::6365::0::Redefining \ref.
+LaTeX Info::hyperref.sty::6369::0::Redefining \pageref.
+Input File::hpdftex.def::0::0::Input File
+Input File::rerunfilecheck.sty::0::0::Input File
+Input Package::rerunfilecheck.sty::0::0::rerunfilecheck 2011/04/15 v1.7 Rerun checks for auxiliary files (HO)
+Package Info::rerunfilecheck.sty::282::0::New unique counter `rerunfilecheck'. (uniquecounter)
+Input File::beamerbaserequires.sty::0::0::Input File
+Input Package::beamerbaserequires.sty::0::0::beamerbaserequires 2010/05/01  (rcs-revision efa082c6111d)
+Input File::beamerbasecompatibility.sty::0::0::Input File
+Input Package::beamerbasecompatibility.sty::0::0::beamerbasecompatibility 2012/05/01  (rcs-revision 67c48b3b652d)
+Input File::beamerbasefont.sty::0::0::Input File
+Input Package::beamerbasefont.sty::0::0::beamerbasefont 2015/01/05  (rcs-revision b4b4bee242e2)
+Input File::amssymb.sty::0::0::Input File
+Input Package::amssymb.sty::0::0::amssymb 2013/01/14 v3.01 AMS font symbols
+Input File::amsfonts.sty::0::0::Input File
+Input Package::amsfonts.sty::0::0::amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+LaTeX Font Info::amsfonts.sty::106::0::   Overwriting math alphabet `\mathfrak' in version `bold' U/euf/m/n --> U/euf/b/n.
+Input File::sansmathaccent.sty::0::0::Input File
+Input Package::sansmathaccent.sty::0::0::sansmathaccent 2013/03/28
+Input File::filehook.sty::0::0::Input File
+Input Package::filehook.sty::0::0::filehook 2011/10/12 v0.5d Hooks for input files
+Input File::beamerbasetranslator.sty::0::0::Input File
+Input Package::beamerbasetranslator.sty::0::0::beamerbasetranslator 2010/06/11  (rcs-revision 85fd1cc7fc42)
+Input File::translator.sty::0::0::Input File
+Input Package::translator.sty::0::0::translator 2010/06/12 ver 1.10
+Input File::translator-language-mappings.tex::0::0::Input File
+Input File::beamerbasemisc.sty::0::0::Input File
+Input Package::beamerbasemisc.sty::0::0::beamerbasemisc 2013/09/03  (rcs-revision a55719c41d85)
+Input File::beamerbasetwoscreens.sty::0::0::Input File
+Input Package::beamerbasetwoscreens.sty::0::0::beamerbasetwoscreens 2010/05/01  (rcs-revision efa082c6111d)
+Input File::beamerbaseoverlay.sty::0::0::Input File
+Input Package::beamerbaseoverlay.sty::0::0::beamerbaseoverlay 2013/12/25  (rcs-revision f6bd5e3805da)
+Input File::beamerbasetitle.sty::0::0::Input File
+Input Package::beamerbasetitle.sty::0::0::beamerbasetitle 2010/09/21  (rcs-revision f0446ed0b6ae)
+Input File::beamerbasesection.sty::0::0::Input File
+Input Package::beamerbasesection.sty::0::0::beamerbasesection 2013/06/07  (rcs-revision 60b9fe0f342f)
+Input File::beamerbaseframe.sty::0::0::Input File
+Input Package::beamerbaseframe.sty::0::0::beamerbaseframe 2014/02/20  (rcs-revision 4b8ceeeff434)
+Input File::beamerbaseverbatim.sty::0::0::Input File
+Input Package::beamerbaseverbatim.sty::0::0::beamerbaseverbatim 2015/01/05  (rcs-revision 431510bb5890)
+Input File::beamerbaseframesize.sty::0::0::Input File
+Input Package::beamerbaseframesize.sty::0::0::beamerbaseframesize 2011/09/12  (rcs-revision 70f9d8411e54)
+Input File::beamerbaseframecomponents.sty::0::0::Input File
+Input Package::beamerbaseframecomponents.sty::0::0::beamerbaseframecomponents 2013/10/18  (rcs-revision 5cf6c5555a45)
+Input File::beamerbasecolor.sty::0::0::Input File
+Input Package::beamerbasecolor.sty::0::0::beamerbasecolor 2015/02/21  (rcs-revision d944b04ee2d5)
+Input File::beamerbasenotes.sty::0::0::Input File
+Input Package::beamerbasenotes.sty::0::0::beamerbasenotes 2012/12/19  (rcs-revision 1686da3db3c9)
+Input File::beamerbasetoc.sty::0::0::Input File
+Input Package::beamerbasetoc.sty::0::0::beamerbasetoc 2015/03/08  (rcs-revision 7270298bbaae)
+Input File::beamerbasetemplates.sty::0::0::Input File
+Input Package::beamerbasetemplates.sty::0::0::beamerbasetemplates 2010/05/01  (rcs-revision efa082c6111d)
+Input File::beamerbaseauxtemplates.sty::0::0::Input File
+Input Package::beamerbaseauxtemplates.sty::0::0::beamerbaseauxtemplates 2014/06/30  (rcs-revision 580088513a67)
+Input File::beamerbaseboxes.sty::0::0::Input File
+Input Package::beamerbaseboxes.sty::0::0::beamerbaseboxes 2012/05/13  (rcs-revision 56972908a390)
+Input File::beamerbaselocalstructure.sty::0::0::Input File
+Input Package::beamerbaselocalstructure.sty::0::0::beamerbaselocalstructure 2014/09/10  (rcs-revision 393f6dcff371)
+Input File::enumerate.sty::0::0::Input File
+Input Package::enumerate.sty::0::0::enumerate 2015/07/23 v3.00 enumerate extensions (DPC)
+Input File::beamerbasenavigation.sty::0::0::Input File
+Input Package::beamerbasenavigation.sty::0::0::beamerbasenavigation 2015/02/27  (rcs-revision 923f4bf87efa)
+Input File::beamerbasetheorems.sty::0::0::Input File
+Input Package::beamerbasetheorems.sty::0::0::beamerbasetheorems 2010/06/06  (rcs-revision 7e7cc5e53e9d)
+Input File::amsmath.sty::0::0::Input File
+Input Package::amsmath.sty::0::0::amsmath 2016/03/03 v2.15a AMS math features
+Input File::amstext.sty::0::0::Input File
+Input Package::amstext.sty::0::0::amstext 2000/06/29 v2.01 AMS text
+Input File::amsgen.sty::0::0::Input File
+Input File::amsbsy.sty::0::0::Input File
+Input Package::amsbsy.sty::0::0::amsbsy 1999/11/29 v1.2d Bold Symbols
+Input File::amsopn.sty::0::0::Input File
+Input Package::amsopn.sty::0::0::amsopn 1999/12/14 v2.01 operator names
+LaTeX Info::amsmath.sty::199::0::Redefining \frac.
+LaTeX Info::amsmath.sty::297::0::Redefining \overline.
+LaTeX Info::amsmath.sty::394::0::Redefining \ldots.
+LaTeX Info::amsmath.sty::397::0::Redefining \dots.
+LaTeX Info::amsmath.sty::518::0::Redefining \cdots.
+LaTeX Font Info::amsmath.sty::630::0::   Redeclaring font encoding OML.
+LaTeX Font Info::amsmath.sty::631::0::   Redeclaring font encoding OMS.
+LaTeX Info::amsmath.sty::2735::0::Redefining \[.
+LaTeX Info::amsmath.sty::2736::0::Redefining \].
+Input File::amsthm.sty::0::0::Input File
+Input Package::amsthm.sty::0::0::amsthm 2015/03/04 v2.20.2
+Input File::beamerbasethemes.sty::0::0::Input File
+Input Package::beamerbasethemes.sty::0::0::beamerbasethemes 2010/05/01  (rcs-revision efa082c6111d)
+Input File::beamerthemedefault.sty::0::0::Input File
+Input Package::beamerthemedefault.sty::0::0::beamerthemedefault 2010/06/17  (rcs-revision d02a7cf4d8ae)
+Input File::beamerfontthemedefault.sty::0::0::Input File
+Input Package::beamerfontthemedefault.sty::0::0::beamerfontthemedefault 2012/12/19  (rcs-revision 1686da3db3c9)
+Input File::beamercolorthemedefault.sty::0::0::Input File
+Input Package::beamercolorthemedefault.sty::0::0::beamercolorthemedefault 2012/12/19  (rcs-revision 1686da3db3c9)
+Input File::beamerinnerthemedefault.sty::0::0::Input File
+Input Package::beamerinnerthemedefault.sty::0::0::beamerinnerthemedefault 2014/06/30  (rcs-revision 580088513a67)
+Input File::beamerouterthemedefault.sty::0::0::Input File
+Input Package::beamerouterthemedefault.sty::0::0::beamerouterthemedefault 2012/12/19  (rcs-revision 1686da3db3c9)
+Input File::multimedia.sty::0::0::Input File
+Input Package::multimedia.sty::0::0::multimedia 2012/05/02 ver 0.02
+Input File::multirow.sty::0::0::Input File
+Input File::tikz.sty::0::0::Input File
+Input File::pgf.sty::0::0::Input File
+Input Package::pgf.sty::0::0::pgf 2015/08/07 v3.0.1a (rcs-revision 1.15)
+Input File::pgfmoduleshapes.code.tex::0::0::Input File
+Input File::pgfmoduleplot.code.tex::0::0::Input File
+Input File::pgfcomp-version-0-65.sty::0::0::Input File
+Input Package::pgfcomp-version-0-65.sty::0::0::pgfcomp-version-0-65 2007/07/03 v3.0.1a (rcs-revision 1.7)
+Input File::pgfcomp-version-1-18.sty::0::0::Input File
+Input Package::pgfcomp-version-1-18.sty::0::0::pgfcomp-version-1-18 2007/07/23 v3.0.1a (rcs-revision 1.1)
+Input File::pgffor.sty::0::0::Input File
+Input File::pgfkeys.sty::0::0::Input File
+Input File::pgfkeys.code.tex::0::0::Input File
+Input File::pgfmath.sty::0::0::Input File
+Input File::pgfmath.code.tex::0::0::Input File
+Input File::pgffor.code.tex::0::0::Input File
+Input Package::pgffor.code.tex::0::0::pgffor 2013/12/13 v3.0.1a (rcs-revision 1.25)
+Input File::pgfmath.code.tex::0::0::Input File
+Input File::tikz.code.tex::0::0::Input File
+Input Package::tikz.code.tex::0::0::tikz 2015/08/07 v3.0.1a (rcs-revision 1.151)
+Input File::pgflibraryplothandlers.code.tex::0::0::Input File
+Input File::pgfmodulematrix.code.tex::0::0::Input File
+Input File::tikzlibrarytopaths.code.tex::0::0::Input File
+Input File::beamerthemeCopenhagen.sty::0::0::Input File
+Input Package::beamerthemeCopenhagen.sty::0::0::beamerthemeCopenhagen 2010/06/17  (rcs-revision d02a7cf4d8ae)
+Input File::beamerouterthemesplit.sty::0::0::Input File
+Input Package::beamerouterthemesplit.sty::0::0::beamerouterthemesplit 2012/10/16  (rcs-revision 51a8c72084af)
+Input File::beamerinnerthemerounded.sty::0::0::Input File
+Input Package::beamerinnerthemerounded.sty::0::0::beamerinnerthemerounded 2010/06/17  (rcs-revision d02a7cf4d8ae)
+Input File::beamercolorthemewhale.sty::0::0::Input File
+Input Package::beamercolorthemewhale.sty::0::0::beamercolorthemewhale 2010/06/17  (rcs-revision d02a7cf4d8ae)
+Input File::beamercolorthemeorchid.sty::0::0::Input File
+Input Package::beamercolorthemeorchid.sty::0::0::beamercolorthemeorchid 2010/06/17  (rcs-revision d02a7cf4d8ae)
+Input File::beamercolorthemebeaver.sty::0::0::Input File
+Input Package::beamercolorthemebeaver.sty::0::0::beamercolorthemebeaver 2010/06/17  (rcs-revision d02a7cf4d8ae)
+Input File::2016-10-29-monoall-general.aux::0::0::Input File
+LaTeX Warning::2016-10-29-monoall-general.aux::0::0::Label `cmc<1>' multiply defined.
+LaTeX Warning::2016-10-29-monoall-general.aux::0::0::Label `cmc' multiply defined.
+LaTeX Warning::2016-10-29-monoall-general.aux::0::0::Label `all-betas<1>' multiply defined.
+LaTeX Warning::2016-10-29-monoall-general.aux::0::0::Label `all-betas' multiply defined.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   Checking defaults for OML/cmm/m/it.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   ... okay.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   Checking defaults for T1/cmr/m/n.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   ... okay.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   Checking defaults for OT1/cmr/m/n.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   ... okay.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   Checking defaults for OMS/cmsy/m/n.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   ... okay.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   Checking defaults for OMX/cmex/m/n.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   ... okay.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   Checking defaults for U/cmr/m/n.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   ... okay.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   Checking defaults for PD1/pdf/m/n.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   ... okay.
+Input File::supp-pdf.mkii::0::0::Input File
+Input File::epstopdf-base.sty::0::0::Input File
+Input Package::epstopdf-base.sty::0::0::epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+Input File::grfext.sty::0::0::Input File
+Input Package::grfext.sty::0::0::grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+Package Info::epstopdf-base.sty::452::0::Graphics extension search list: [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPEG,.JBIG2,.JB2,.eps] \AppendGraphicsExtensions. (grfext)
+Input File::epstopdf-sys.cfg::0::0::Input File
+Package Info::2016-10-29-monoall-general.tex::45::0::Link coloring OFF. (hyperref)
+Input File::nameref.sty::0::0::Input File
+Input Package::nameref.sty::0::0::nameref 2012/10/27 v2.43 Cross-referencing by name of section
+Input File::gettitlestring.sty::0::0::Input File
+Input Package::gettitlestring.sty::0::0::gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
+LaTeX Info::2016-10-29-monoall-general.tex::45::0::Redefining \ref.
+LaTeX Info::2016-10-29-monoall-general.tex::45::0::Redefining \pageref.
+LaTeX Info::2016-10-29-monoall-general.tex::45::0::Redefining \nameref.
+Input File::2016-10-29-monoall-general.out::0::0::Input File
+Input File::2016-10-29-monoall-general.out::0::0::Input File
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   Overwriting symbol font `operators' in version `normal' OT1/cmr/m/n --> OT1/cmss/m/n.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   Overwriting symbol font `operators' in version `bold' OT1/cmr/bx/n --> OT1/cmss/bx/n.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   Overwriting math alphabet `\mathrm' in version `normal' OT1/cmss/m/n --> OT1/cmr/m/n.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   Redeclaring math alphabet \mathbf.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   Overwriting math alphabet `\mathbf' in version `normal' OT1/cmr/bx/n --> OT1/cmss/bx/n.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   Overwriting math alphabet `\mathbf' in version `bold' OT1/cmr/bx/n --> OT1/cmss/bx/n.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   Redeclaring math alphabet \mathsf.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   Overwriting math alphabet `\mathsf' in version `normal' OT1/cmss/m/n --> OT1/cmss/m/n.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   Overwriting math alphabet `\mathsf' in version `bold' OT1/cmss/bx/n --> OT1/cmss/m/n.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   Redeclaring math alphabet \mathit.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   Overwriting math alphabet `\mathit' in version `normal' OT1/cmr/m/it --> OT1/cmss/m/it.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   Overwriting math alphabet `\mathit' in version `bold' OT1/cmr/bx/it --> OT1/cmss/m/it.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   Redeclaring math alphabet \mathtt.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   Overwriting math alphabet `\mathtt' in version `normal' OT1/cmtt/m/n --> OT1/cmtt/m/n.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   Overwriting math alphabet `\mathtt' in version `bold' OT1/cmtt/m/n --> OT1/cmtt/m/n.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   Overwriting symbol font `numbers' in version `bold' OT1/cmss/m/n --> OT1/cmss/bx/n.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   Overwriting symbol font `pureletters' in version `bold' OT1/cmss/m/it --> OT1/cmss/bx/it.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   Overwriting math alphabet `\mathrm' in version `bold' OT1/cmss/bx/n --> OT1/cmr/bx/n.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   Overwriting math alphabet `\mathbf' in version `bold' OT1/cmss/bx/n --> OT1/cmss/bx/n.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   Overwriting math alphabet `\mathsf' in version `bold' OT1/cmss/m/n --> OT1/cmss/bx/n.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   Overwriting math alphabet `\mathit' in version `bold' OT1/cmss/m/it --> OT1/cmss/bx/it.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   Overwriting math alphabet `\mathtt' in version `bold' OT1/cmtt/m/n --> OT1/cmtt/bx/n.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   Redeclaring symbol font `pureletters'.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   Overwriting symbol font `pureletters' in version `normal' OT1/cmss/m/it --> OT1/mathkerncmss/m/sl.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   Overwriting symbol font `pureletters' in version `bold' OT1/cmss/bx/it --> OT1/mathkerncmss/m/sl.
+LaTeX Font Info::2016-10-29-monoall-general.tex::45::0::   Overwriting symbol font `pureletters' in version `bold' OT1/mathkerncmss/m/sl --> OT1/mathkerncmss/bx/sl.
+LaTeX Info::2016-10-29-monoall-general.tex::45::0::Redefining \includegraphics.
+Input File::2016-10-29-monoall-general.nav::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+LaTeX Font Warning::2016-10-29-monoall-general.tex::51::0::Font shape `OT1/cmss/m/n' in size <4> not available size <5> substituted.
+Input File::2016-10-29-monoall-general.toc::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::2016-10-29-monoall-general.toc::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+hbox Warning::2016-10-29-monoall-general.tex::236::0::Overfull \hbox (15.48383pt too wide) in paragraph at lines 236--236
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+LaTeX Font Info::2016-10-29-monoall-general.tex::301::0::   Try loading font information for U+msa.
+Input File::umsa.fd::0::0::Input File
+LaTeX Font Info::2016-10-29-monoall-general.tex::301::0::   Try loading font information for U+msb.
+Input File::umsb.fd::0::0::Input File
+LaTeX Font Info::2016-10-29-monoall-general.tex::301::0::   Try loading font information for OT1+mathkerncmss.
+Input File::ot1mathkerncmss.fd::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+hbox Warning::2016-10-29-monoall-general.tex::315::0::Overfull \hbox (19.79999pt too wide) in paragraph at lines 315--315
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::signif-gene-effects-either-manual-annot.tex::0::0::Input File
+hbox Warning::2016-10-29-monoall-general.tex::1::0::Overfull \hbox (24.14473pt too wide) in paragraph at lines 1--463
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+hbox Warning::2016-10-29-monoall-general.tex::553::0::Overfull \hbox (4.55623pt too wide) detected at line 553
+Input File::pdftex.def::0::0::Input File
+Package Info::2016-10-29-monoall-general.tex::567::0::Empty hook `BeforeClearDocument'. (atveryend)
+Package Info::2016-10-29-monoall-general.tex::567::0::Empty hook `AfterLastShipout'. (atveryend)
+Input File::2016-10-29-monoall-general.aux::0::0::Input File
+Package Info::2016-10-29-monoall-general.tex::567::0::Executing hook `AtVeryEndDocument'. (atveryend)
+Package Info::2016-10-29-monoall-general.tex::567::0::Executing hook `AtEndAfterFileList'. (atveryend)
+Package Info::2016-10-29-monoall-general.tex::0::0::File `2016-10-29-monoall-general.out' has not changed. Checksum: B1B8F9646794F74AAFE2AB5B65706CA5;398. (rerunfilecheck)
+LaTeX Font Warning::2016-10-29-monoall-general.tex::0::0::Size substitutions with differences up to 1.0pt have occurred.
+LaTeX Warning::2016-10-29-monoall-general.tex::0::0::There were multiply-defined labels.
+Package Info::2016-10-29-monoall-general.tex::567::0::Empty hook `AtVeryVeryEnd'. (atveryend)

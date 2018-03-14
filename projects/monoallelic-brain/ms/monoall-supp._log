@@ -1,0 +1,200 @@
+Input File::/home/attila/projects/monoallelic-brain/ms/monoall-supp.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/latex/base/article.cls::0::0::Input File
+Input Package::/usr/share/texlive/texmf-dist/tex/latex/base/article.cls::0::0::article 2014/09/29 v1.4h Standard LaTeX document class
+Input File::/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty::0::0::Input File
+Input Package::/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty::0::0::amsmath 2016/03/03 v2.15a AMS math features
+Input File::/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty::0::0::Input File
+Input Package::/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty::0::0::amstext 2000/06/29 v2.01 AMS text
+Input File::/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty::0::0::Input File
+Input Package::/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty::0::0::amsbsy 1999/11/29 v1.2d Bold Symbols
+Input File::/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty::0::0::Input File
+Input Package::/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty::0::0::amsopn 1999/12/14 v2.01 operator names
+LaTeX Info::/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty::199::0::Redefining \frac.
+LaTeX Info::/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty::297::0::Redefining \overline.
+LaTeX Info::/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty::394::0::Redefining \ldots.
+LaTeX Info::/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty::397::0::Redefining \dots.
+LaTeX Info::/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty::518::0::Redefining \cdots.
+LaTeX Font Info::/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty::630::0::   Redeclaring font encoding OML.
+LaTeX Font Info::/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty::631::0::   Redeclaring font encoding OMS.
+LaTeX Info::/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty::2735::0::Redefining \[.
+LaTeX Info::/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty::2736::0::Redefining \].
+Input File::/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty::0::0::Input File
+Input Package::/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty::0::0::geometry 2010/09/12 v5.6 Page Geometry
+Input File::/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty::0::0::Input File
+Input Package::/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty::0::0::keyval 2014/10/28 v1.15 key=value parser (DPC)
+Input File::/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty::0::0::Input File
+Input Package::/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty::0::0::ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package Info::/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty::0::0::pdfTeX in PDF mode is detected. (ifpdf)
+Input File::/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifvtex.sty::0::0::Input File
+Input Package::/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifvtex.sty::0::0::ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
+Package Info::/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifvtex.sty::0::0::VTeX not detected. (ifvtex)
+Input File::/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty::0::0::Input File
+Input Package::/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty::0::0::ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+Input File::/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty::0::0::Input File
+Input Package::/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty::0::0::graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+Input File::/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty::0::0::Input File
+Input Package::/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty::0::0::graphics 2016/01/03 v1.0q Standard LaTeX Graphics (DPC,SPQR)
+Input File::/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty::0::0::Input File
+Input Package::/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty::0::0::trig 2016/01/03 v1.10 sin cos tan (DPC)
+Input File::/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg::0::0::Input File
+Package Info::/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty::95::0::Driver file: pdftex.def. (graphics)
+Input File::/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty::0::0::Input File
+Input Package::/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty::0::0::infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+Input File::/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty::0::0::Input File
+Input Package::/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty::0::0::ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+Input File::/usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common-lists.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/latex/ms/everyshi.sty::0::0::Input File
+Input Package::/usr/share/texlive/texmf-dist/tex/latex/ms/everyshi.sty::0::0::everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex::0::0::Input File
+Input Package::/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex::0::0::pgfrcs 2015/08/07 v3.0.1a (rcs-revision 1.31)
+Input Package::/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty::0::0::pgf 2015/08/07 v3.0.1a (rcs-revision 1.15)
+Input File::/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex::0::0::Input File
+Input Package::/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex::0::0::pgfsys 2014/07/09 v3.0.1a (rcs-revision 1.48)
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.def::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.def::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty::0::0::Input File
+Input Package::/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty::0::0::xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
+Input File::/usr/share/texlive/texmf-dist/tex/latex/latexconfig/color.cfg::0::0::Input File
+Package Info::/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty::225::0::Driver file: pdftex.def. (xcolor)
+Package Info::/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty::1337::0::Model `cmy' substituted by `cmy0'. (xcolor)
+Package Info::/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty::1341::0::Model `hsb' substituted by `rgb'. (xcolor)
+Package Info::/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty::1353::0::Model `RGB' extended. (xcolor)
+Package Info::/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty::1355::0::Model `HTML' substituted by `rgb'. (xcolor)
+Package Info::/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty::1356::0::Model `Hsb' substituted by `hsb'. (xcolor)
+Package Info::/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty::1357::0::Model `tHsb' substituted by `hsb'. (xcolor)
+Package Info::/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty::1358::0::Model `HSB' substituted by `hsb'. (xcolor)
+Package Info::/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty::1359::0::Model `Gray' substituted by `gray'. (xcolor)
+Package Info::/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty::1360::0::Model `wave' substituted by `hsb'. (xcolor)
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex::0::0::Input File
+Input Package::/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex::0::0::pgfcore 2010/04/11 v3.0.1a (rcs-revision 1.7)
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonometric.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerarithmetics.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformations.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathprocessing.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65.sty::0::0::Input File
+Input Package::/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65.sty::0::0::pgfcomp-version-0-65 2007/07/03 v3.0.1a (rcs-revision 1.7)
+Input File::/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18.sty::0::0::Input File
+Input Package::/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18.sty::0::0::pgfcomp-version-1-18 2007/07/23 v3.0.1a (rcs-revision 1.1)
+Input File::/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgffor.sty::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/latex/pgf/math/pgfmath.sty::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex::0::0::Input File
+Input Package::/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex::0::0::pgffor 2013/12/13 v3.0.1a (rcs-revision 1.25)
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex::0::0::Input File
+Input Package::/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex::0::0::tikz 2015/08/07 v3.0.1a (rcs-revision 1.151)
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopaths.code.tex::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex::0::0::Input File
+Input File::/home/attila/projects/monoallelic-brain/ms/monoall-supp.aux::0::0::Input File
+LaTeX Font Info::/home/attila/projects/monoallelic-brain/ms/monoall-supp.tex::23::0::   Checking defaults for OML/cmm/m/it.
+LaTeX Font Info::/home/attila/projects/monoallelic-brain/ms/monoall-supp.tex::23::0::   ... okay.
+LaTeX Font Info::/home/attila/projects/monoallelic-brain/ms/monoall-supp.tex::23::0::   Checking defaults for T1/cmr/m/n.
+LaTeX Font Info::/home/attila/projects/monoallelic-brain/ms/monoall-supp.tex::23::0::   ... okay.
+LaTeX Font Info::/home/attila/projects/monoallelic-brain/ms/monoall-supp.tex::23::0::   Checking defaults for OT1/cmr/m/n.
+LaTeX Font Info::/home/attila/projects/monoallelic-brain/ms/monoall-supp.tex::23::0::   ... okay.
+LaTeX Font Info::/home/attila/projects/monoallelic-brain/ms/monoall-supp.tex::23::0::   Checking defaults for OMS/cmsy/m/n.
+LaTeX Font Info::/home/attila/projects/monoallelic-brain/ms/monoall-supp.tex::23::0::   ... okay.
+LaTeX Font Info::/home/attila/projects/monoallelic-brain/ms/monoall-supp.tex::23::0::   Checking defaults for OMX/cmex/m/n.
+LaTeX Font Info::/home/attila/projects/monoallelic-brain/ms/monoall-supp.tex::23::0::   ... okay.
+LaTeX Font Info::/home/attila/projects/monoallelic-brain/ms/monoall-supp.tex::23::0::   Checking defaults for U/cmr/m/n.
+LaTeX Font Info::/home/attila/projects/monoallelic-brain/ms/monoall-supp.tex::23::0::   ... okay.
+Input File::/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii::0::0::Input File
+Input File::/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty::0::0::Input File
+Input Package::/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty::0::0::pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO)
+Input File::/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty::0::0::Input File
+Input Package::/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty::0::0::ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package Info::/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty::0::0::LuaTeX not detected. (ifluatex)
+Package Info::/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty::0::0::LuaTeX not detected. (pdftexcmds)
+Package Info::/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty::0::0::\pdf@primitive is available. (pdftexcmds)
+Package Info::/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty::0::0::\pdf@ifprimitive is available. (pdftexcmds)
+Package Info::/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty::0::0::\pdfdraftmode found. (pdftexcmds)
+Input File::/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty::0::0::Input File
+Input Package::/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty::0::0::epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+Input File::/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty::0::0::Input File
+Input Package::/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty::0::0::grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+Input File::/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty::0::0::Input File
+Input Package::/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty::0::0::kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+Input File::/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty::0::0::Input File
+Input Package::/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty::0::0::kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+Input File::/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty::0::0::Input File
+Input Package::/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty::0::0::kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+Input File::/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty::0::0::Input File
+Input Package::/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty::0::0::etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+Package Info::/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty::0::0::Could not find \expanded. That can mean that you are not using pdfTeX 1.50 or that some package has redefined \expanded. In the latter case, load this package earlier. (etexcmds)
+Package Info::/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty::452::0::Graphics extension search list: [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPEG,.JBIG2,.JB2,.eps] \AppendGraphicsExtensions. (grfext)
+Input File::/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::pdftex.def::0::0::Input File
+Input File::/home/attila/projects/monoallelic-brain/ms/monoall-supp.aux::0::0::Input File
