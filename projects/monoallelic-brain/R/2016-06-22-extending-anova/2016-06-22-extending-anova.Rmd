@@ -1,0 +1,370 @@
+---
+layout: default
+tags: [ regression, anova ]
+title: Extending ANOVA
+featimg: "anova-effects-fw-rv-wnlm-Q-1.png"
+---
+
+The analysis presented here follows up on the [previous ANOVA]({{ site.baseurl }}{% post_url /projects/monoallelic-brain/2016-04-22-glm-for-s-statistic %}) and extends it in two ways:
+
+1. terms, corresponding to predictors, are added in various sequences
+2. more genes (see the [preceding post]({{ site.baseurl }}{% post_url /projects/monoallelic-brain/2016-06-17-extending-regression-analysis %}))
+
+The present analysis has been extended several times over the time.  In particular, it depends on the model checking results presented in a subsequent post (see [Model Checking]({{ site.baseurl }}{% post_url /projects/monoallelic-brain/2016-09-23-model-checking %})).
+
+## Introduction
+
+ANOVA and effects were used before...TODO
+
+The least square estimates are given by $$\hat{\beta} = (X^T X)^{-1} X^T y$$.  Permuting the coefficients is equivalent to permuting the bases of the linear transformation $$(X^T X)^{-1} X^T$$ or, equivalently, permuting the *rows* of the corresponding matrix or, equivalently again, permuting the *columns* of the design matrix.  Therefore, when explanatory variables are reordered and the columns of the design matrix are permuted accordingly then the least square estimates still remain the same up to their relative order.
+
+Take two permutations of explanatory variables:
+
+1. **forward** has been used in all my and Ifat's previous analysis
+2. the **reverse** of the above
+
+
+## Preparation
+
+Relevant scripts
+```{r echo=FALSE}
+library(lattice)
+library(latticeExtra)
+opts_chunk$set(dpi = 144)
+opts_chunk$set(out.width = "700px")
+opts_chunk$set(dev = c("png", "pdf"))
+lattice.options(default.args = list(as.table = TRUE))
+lattice.options(default.theme = "standard.theme")
+source("~/projects/monoallelic-brain/src/import-data.R")
+source("~/projects/monoallelic-brain/src/fit-glms.R")
+source("~/projects/monoallelic-brain/src/graphics.R")
+source("2016-06-22-extending-anova.R")
+```
+
+Import data; note that the set of **selected genes have been updated** based on later analysis
+```{r cache=TRUE, warning=FALSE}
+E <- get.predictors() # default arguments
+# updated gene set
+gene.ids <- unlist(read.csv("../../data/genes.regression.new", as.is = TRUE))
+names(gene.ids) <- gene.ids
+Y <- get.readcounts(gene.ids = gene.ids, count.thrs = 0)
+#nobs <- as.data.frame(lapply(list(unfiltered=Y, filtered=Y.f), function(y) sapply(y, function(x) sum(! is.na(x[[1]])))))
+```
+
+Fit `wnlm.Q`, `wnlm.R` and `logi.S` using both the forward and the reverse order permutation.
+```{r cache=TRUE, warning=FALSE}
+# e.vars defined in fit-glms.R
+e.v <- list(forward = e.vars, reverse = rev(e.vars))
+# exclude unweighed aggregates UA.8 and UA from fitting
+to.fit.ids <- grep("^UA(.8)?$", names(Y), value = TRUE, invert = TRUE)
+to.fit.ids <- grep("^WA.8$", to.fit.ids, value = TRUE, invert = TRUE)
+M <- lapply(list(unlm.Q = "unlm.Q", wnlm.Q = "wnlm.Q", unlm.R = "unlm.R", wnlm.R = "wnlm.R", logi.S = "logi.S", logi2.S = "logi2.S"),
+            function(m) lapply(e.v,
+                               function(v) do.all.fits(Y[to.fit.ids], preds = v, sel.models = m)[[1]]))
+# a list of (sub)lists mirrioring the structure of M (sublists: forward or reverse)
+f.ids <- lapply(M, lapply, function(m) ! sapply(m, is.null))
+# the fit for TMEM261P1 has not converged under logi.S
+f.ids$logi.S$forward["TMEM261P1"] <- FALSE
+f.ids$logi.S$reverse["TMEM261P1"] <- FALSE
+```
+
+Consistent with the theory above, wherever the fit converged (with the exception of TMEM261P1), the order has no impact on the regression coefficients.  The next `R` expression compares coefficient estimates between forward and reverse under `logi.S` for every gene or aggregate and reports any difference:
+```{r}
+grep("TRUE", sapply(to.fit.ids, function(g) all.equal(coef(M$logi.S$forward[[g]]), coef(M$logi.S$reverse[[g]])[ names(coef(M$logi.S$forward[[g]])) ])), invert = TRUE, value = TRUE)
+```
+
+## Components of variation
+
+ANOVA allows *direct* comparison of predictors (explanatory variables) by partitioning all explained/systematic variation in the response ($$S$$ or $$R$$) among them.  Similarly, the directly comparable effect of each of the $$p$$ regression coefficients on the response (an $$n$$-vector) can be obtained from QR decomposition of the response into a set of $$n$$ orthogonal vectors, in which a subset of $$p$$ vectors corresponds to the coefficients. 
+
+In the above sentences "directly comparable" means that the effects are on a uniform scale for all predictors/coefficients for a given gene as that scale is closely related to the one on which the response varies.  But the total variation of the response $$S$$ itself shows variation across genes, which leaves two options in gene-gene comparisons: compare components of variation with or without correction for across gene variation of the total variance.  The first one will be referred below as **genes on uniform scale** and the second as **genes on relative scale**.
+
+### Comparing predictors with genes on uniform scale
+
+```{r cache=TRUE, warning=FALSE}
+A.long <- lapply(lapply(M, lapply, l.anova), reshape.2, type = "anova")
+```
+
+```{r lattice-functions, warning=FALSE, echo=FALSE}
+
+my.stripplot <- function(fm = Predictor ~ Deviance | Order, data = A.long$logi.S, ...) {
+    stripplot(fm,
+              groups = Gene,
+              data = data,
+              subset = Order %in% c("forward", "reverse"),
+              jitter.data = TRUE, fun = identity, type = "p",
+              pch = 1,
+              #abline = list(v = 0, col = "gray"),
+              grid = FALSE,
+              box.ratio = 4,
+              #auto.key = TRUE,
+              par.settings =
+                  list(box.rectangle = list(col = "black"), box.umbrella = list(col = "black"), box.dot = list(col = NULL, cex = 0.5),
+                       superpose.symbol = list(alpha = 0.5, cex = 0.5, col = rainbow(length(levels(data$Gene))))),
+              panel = function(x, y, box.ratio, ...) {
+                  panel.bwplot(x, y, do.out = FALSE, box.ratio = box.ratio, ...)
+                  panel.stripplot(x, y, ...)
+              }, ...)
+}
+
+my.dotplot <- function(fm = Predictor ~ Deviance | Gene, data = A.long$logi.S, ...) {
+    dotplot(fm,
+              groups = Order,
+              data = data,
+              subset = Order %in% c("forward", "reverse"),
+              abline = list(v = 0, lty = 2),
+              scales = list(cex = 0.5),
+              auto.key = list(text = levels(data$Order)[1:2], columns = 2),
+              layout = c(8, 4),
+              between = list(x = 0.2),
+              par.settings = list(superpose.symbol = list(pch = 21, alpha = 0.5), add.text = list(cex = 0.7)),
+              ...)
+}
+```
+
+Under `logi.S`:
+```{r anova-fw-rv-logi-S, echo=FALSE}
+(plots <- list(anova.logi.S = my.stripplot(fm = Predictor ~ Deviance | Order, data = A.long$logi.S, main = "ANOVA under logi.S", aspect = length(levels(A.long$logi.S$Predictor)) / 10)))
+```
+
+The same tendencies emerge under `wnlm.Q`:
+```{r anova-fw-rv-wnlm-Q, echo=FALSE}
+(plots$anova.wnlm.Q <- my.stripplot(fm = Predictor ~ Deviance | Order, data = A.long$wnlm.Q, main = "ANOVA under wnlm.Q", aspect = length(levels(A.long$wnlm.Q$Predictor)) / 10))
+```
+
+Similarly under `wnlm.R`:
+```{r anova-fw-rv-wnlm-R, echo=FALSE}
+(plots$anova.wnlm.R <- my.stripplot(fm = Predictor ~ Deviance | Order, data = A.long$wnlm.R, main = "ANOVA under wnlm.R", aspect = length(levels(A.long$wnlm.R$Predictor)) / 10))
+```
+
+```{r cache=TRUE, warning=FALSE}
+Ef.long <- lapply(M, function(m) { x <- l.l.effects(m); x <- x[ ! x$Coefficient %in% "(Intercept)", ] })
+```
+
+Under `logi.S`:
+```{r effects-fw-rv-logi-S, echo=FALSE}
+(plots$effects.logi.S <- my.stripplot(fm = Coefficient ~ Effect | Order, data = reverse.genes(Ef.long$logi.S), main = "Effects under logi.S", aspect = length(levels(Ef.long$logi.S$Coefficient)) / 10))
+```
+
+Again, similar tendencies are observed under `wnlm.Q`:
+```{r effects-fw-rv-wnlm-Q, echo=FALSE}
+(plots$effects.wnlm.Q <- my.stripplot(fm = Coefficient ~ Effect | Order, data = reverse.genes(Ef.long$wnlm.Q), main = "Effects under wnlm.Q", aspect = length(levels(Ef.long$wnlm.Q$Coefficient)) / 10))
+```
+
+Similarly under `wnlm.R`:
+```{r effects-fw-rv-wnlm-R, echo=FALSE}
+(plots$effects.wnlm.R <- my.stripplot(fm = Coefficient ~ Effect | Order, data = reverse.genes(Ef.long$wnlm.R), main = "Effects under wnlm.R", aspect = length(levels(Ef.long$wnlm.R$Coefficient)) / 10))
+```
+
+### Figure for manuscript
+
+```{r anova-effects-fw-rv-wnlm-Q, echo=FALSE, fig.asp = 2/3, out.width=700}
+print(update(plots$anova.wnlm.Q, main = "ANOVA", layout = c(2, 1), aspect = "fill", par.settings = list(superpose.symbol = list(cex = 0.5))), split = c(1, 1, 2, 1), more = TRUE)
+print(update(plots$effects.wnlm.Q, main = "QR decomposition", layout = c(2, 1), aspect = "fill"), split = c(2, 1, 2, 1), more = FALSE)
+```
+
+### Comparison with genes on relative scale
+
+```{r anova-fw-rv-logi-S-trellis, echo=FALSE, fig.asp=1}
+update(my.dotplot(fm = Predictor ~ Deviance | Gene, data = A.long$logi.S, main = "ANOVA under logi.S"), scales = list(x = "free"))
+```
+
+```{r effects-fw-rv-logi-S-trellis, echo=FALSE, fig.asp=1.4}
+update(my.dotplot(fm = Coefficient ~ Effect | Gene, data = Ef.long$logi.S, main = "Effects under logi.S"), scales = list(x = "free"))
+```
+
+```{r anova-fw-rv-wnlm-Q-trellis, echo=FALSE, fig.asp=1}
+update(my.dotplot(fm = Predictor ~ Deviance | Gene, data = A.long$wnlm.Q, main = "ANOVA under wnlm.Q"), scales = list(x = "free"))
+```
+
+```{r effects-fw-rv-wnlm-Q-trellis, echo=FALSE, fig.asp=1.4}
+update(my.dotplot(fm = Coefficient ~ Effect | Gene, data = Ef.long$wnlm.Q, main = "Effects under wnlm.Q"), scales = list(x = "free"))
+```
+
+```{r anova-fw-rv-wnlm-R-trellis, echo=FALSE, fig.asp=1}
+update(my.dotplot(fm = Predictor ~ Deviance | Gene, data = A.long$wnlm.R, main = "ANOVA under wnlm.R"), scales = list(x = "free"))
+```
+
+```{r effects-fw-rv-wnlm-R-trellis, echo=FALSE, fig.asp=1.4}
+update(my.dotplot(fm = Coefficient ~ Effect | Gene, data = Ef.long$wnlm.R, main = "Effects under wnlm.R"), scales = list(x = "free"))
+```
+
+### Another view, genes on uniform scale
+
+This display is meant to be comparable to a similarly structured trellis display of estimated regression coefficients.
+
+#### Under logi.S
+
+```{r effects-fw-rv-logi-S-trellis-coef-cond, fig.asp=1.7, echo=FALSE}
+# conditioning on the Coefficient instead of Gene
+update(my.dotplot(fm = Gene ~ Effect | Coefficient, data = reverse.genes(Ef.long$logi.S), main = "Effects under logi.S"), layout = c(6, 4))
+```
+
+#### Under logi2.S
+
+```{r effects-fw-rv-logi2-S-trellis-coef-cond, fig.asp=1.7, echo=FALSE}
+# conditioning on the Coefficient instead of Gene
+update(my.dotplot(fm = Gene ~ Effect | Coefficient, data = reverse.genes(Ef.long$logi2.S), main = "Effects under logi2.S"), layout = c(6, 4))
+```
+
+#### Under wnlm.Q
+
+```{r effects-fw-rv-wnlm-Q-trellis-coef-cond, fig.asp=1.7, echo=FALSE}
+# conditioning on the Coefficient instead of Gene
+update(my.dotplot(fm = Gene ~ Effect | Coefficient, data = reverse.genes(Ef.long$wnlm.Q), main = "Effects under wnlm.Q"), layout = c(6, 4))
+```
+
+#### Under unlm.Q
+
+```{r effects-fw-rv-unlm-Q-trellis-coef-cond, fig.asp=1.7, echo=FALSE}
+# conditioning on the Coefficient instead of Gene
+update(my.dotplot(fm = Gene ~ Effect | Coefficient, data = reverse.genes(Ef.long$unlm.Q), main = "Effects under unlm.Q"), layout = c(6, 4))
+```
+
+#### Under wnlm.R
+
+```{r effects-fw-rv-wnlm-R-trellis-coef-cond, fig.asp=1.7, echo=FALSE}
+# conditioning on the Coefficient instead of Gene
+update(my.dotplot(fm = Gene ~ Effect | Coefficient, data = reverse.genes(Ef.long$wnlm.R), main = "Effects under wnlm.R"), layout = c(6, 4))
+```
+
+#### Under unlm.R
+
+```{r effects-fw-rv-unlm-R-trellis-coef-cond, fig.asp=1.7, echo=FALSE}
+# conditioning on the Coefficient instead of Gene
+update(my.dotplot(fm = Gene ~ Effect | Coefficient, data = reverse.genes(Ef.long$unlm.R), main = "Effects under unlm.R"), layout = c(6, 4))
+```
+
+## Estimate and CI for regression coefficients
+
+This and the next section do not deal with analysis of variance specifically but rather with the estimated regression coefficient $$\beta_{jg}$$ for each column $$X_j$$ of the design matrix and for each gene $$g$$.  But because of computational convenience these are presented here.
+
+```{r cache=TRUE, warning=FALSE, message=FALSE, fig.asp=1}
+Betas <- lapply(M, function(m) { x <- get.estimate.CI(m$forward); x <- x[ ! x$Coefficient %in% "(Intercept)", ] })
+```
+
+```{r}
+Betas.long <- do.call(rbind, lapply(names(Betas), function(x) cbind(Betas[[x]], data.frame(Model = x))))
+write.csv(Betas.long, "../../results/beta-99-CI.csv")
+```
+
+```{r reg-coef-logi-S, dev=c("png", "pdf"), fig.asp=1.7}
+my.segplot(data = reverse.genes(Betas$logi.S), main = expression(paste("99 % CI for ", beta, " under logi.S")))
+```
+
+```{r reg-coef-logi2-S, dev=c("png", "pdf"), fig.asp=1.7, echo=FALSE}
+my.segplot(data = reverse.genes(Betas$logi2.S), main = expression(paste("99 % CI for ", beta, " under logi2.S")))
+```
+
+```{r reg-coef-wnlm-Q, dev=c("png", "pdf"), fig.asp=1.7, echo=FALSE}
+my.segplot(data = reverse.genes(Betas$wnlm.Q), main = expression(paste("99 % CI for ", beta, " under wnlm.Q")))
+```
+
+```{r reg-coef-unlm-Q, dev=c("png", "pdf"), fig.asp=1.7, echo=FALSE}
+my.segplot(data = reverse.genes(Betas$unlm.Q), main = expression(paste("99 % CI for ", beta, " under unlm.Q")))
+#my.segplot(data = reverse.genes(Betas$unlm.Q), subset = Gene != "WA", main = expression(paste("99 % CI for ", beta, " under unlm.Q")))
+```
+
+```{r reg-coef-wnlm-R, dev=c("png", "pdf"), fig.asp=1.7, echo=FALSE}
+my.segplot(data = reverse.genes(Betas$wnlm.R), main = expression(paste("99 % CI for ", beta, " under wnlm.R")))
+```
+
+```{r reg-coef-unlm-R, dev=c("png", "pdf"), fig.asp=1.7, echo=FALSE}
+my.segplot(data = reverse.genes(Betas$unlm.R), main = expression(paste("99 % CI for ", beta, " under unlm.R")))
+```
+
+Filtering out results for logi.S if the fit is bad for a given gene, using decisions based on model checking analysis
+
+```{r}
+logi.S.OK <- read.csv("../../results/model-checking.csv", row.names = "gene")["logi.S.fit.OK"]
+# filter betas for logi.S
+B.logi.S.f <- Betas$logi.S
+B.logi.S.f[B.logi.S.f$Gene %in% c(rownames(logi.S.OK)[! logi.S.OK$logi.S.fit.OK], "WA"), c("Estimate", "Lower.CL", "Upper.CL")] <- NA
+# filtered and unfiltered long format Betas
+Betas.l.f <- Betas.l <- do.call(cbind, Betas)
+# perform filtering by replacing data with NAs
+Betas.l.f[Betas.l.f$logi.S.Gene %in% c(rownames(logi.S.OK)[! logi.S.OK$logi.S.fit.OK], "WA"), grep("logi\\.S\\.[ELU]", names(Betas.l.f))] <- NA
+```
+
+```{r reg-coef-logi-S-filt, dev=c("png", "pdf"), fig.asp=1.7}
+my.segplot(data = B.logi.S.f, xlim = my.xlim)
+```
+
+### Figure for manuscript
+
+```{r reg-coef-unlm-Q-ms, dev=c("png", "pdf"), fig.asp=1.7, echo=FALSE}
+b.unlm.Q <- reverse.genes(Betas$unlm.Q)
+f <- b.unlm.Q$Gene
+levels(f) <- c("fixed II", levels(b.unlm.Q$Gene)[-1])
+b.unlm.Q$Gene <- f
+my.segplot(data = b.unlm.Q, main = expression(paste("Estimate and 99 % CI for ", beta[jg], ".  Fixed effects, unlm.Q")))
+```
+
+## Comparison of models
+
+The pairwise model comparisons in terms of $$\hat{\beta}$$ under either of two selected models are meant to assess sensitivity of the results to various aspects of modeling:
+
+* logistic vs normal linear model
+* scaling of the logit link function
+* data transformations for the normal linear model: $$Q$$ vs $$R$$ statistic
+* weighting for the normal linear model
+
+Each panel in the plot shows the theoretical zero line $$\beta_{jg}=0$$ under each of the two models (horizontal and vertical dashed lines).  The plotting symbols are color coded according to gene rank (rainbow, red to violet); the last "rank" #`r length(levels(Betas[[1]]$Gene))` (violet) corresponds to the weighted average `WA` of read count ratio over genes.  The plotting symbols also display the rank with numbers, see the key on the top.  Genes acceptably fitted by both models are distinguished with a diamond symbol and **bold font** from those that could be fitted only by wnlm.Q.
+
+```{r echo=FALSE}
+source("2016-06-22-extending-anova.R")
+```
+
+### Logistic vs normal linear model
+
+The plot shows overall agreement between logi.S and wnlm.Q.  Genes of disagreement tend to be those for which logi.S fits poorly to the data.
+
+Without filtering genes with poor fit by logi.S
+
+```{r logi-S-wnlm-Q-compare}
+mtype.compare.plot(mtypeA = "logi.S", mtypeB = "wnlm.Q", dt = Betas.l, do.key = TRUE)
+```
+
+With filtering
+
+```{r logi-S-filtered-wnlm-Q-compare}
+mtype.compare.plot(mtypeA = "logi.S", mtypeB = "wnlm.Q", dt = Betas.l.f, do.key = TRUE)
+```
+
+Only for 4 biological predictors
+
+```{r logi-S-filtered-wnlm-Q-compare-4pred}
+mtype.compare.plot(mtypeA = "logi.S", mtypeB = "wnlm.Q", dt = Betas.l.f, do.key = TRUE)[c(1,4,6,17)]
+```
+
+### Scaling of the logit link function
+
+There is very little impact on the $$2\times$$ difference in scaling of the logit link function because most of the observed cases are near the upper bound of the link function (which is 1), where the scaling has the smallest effect on the predictions.
+
+Without filtering genes with poor fit by logi.S
+
+```{r logi-S-logi2-S-compare, echo=FALSE}
+mtype.compare.plot(mtypeA = "logi.S", mtypeB = "logi2.S", dt = Betas.l) 
+```
+
+With filtering
+
+```{r logi-S-filtered-logi2-S-compare, echo=FALSE}
+mtype.compare.plot(mtypeA = "logi.S", mtypeB = "logi2.S", dt = Betas.l.f) 
+```
+
+### Data transformations for the normal linear model: $$Q$$ vs $$R$$
+
+Overall good agreement.
+
+```{r wnlm-R-wnlm-Q-compare, echo=FALSE}
+mtype.compare.plot(mtypeA = "wnlm.R", mtypeB = "wnlm.Q") 
+```
+
+### Weighting for the normal linear model
+
+Overall good agreement, suggesting relatively small impact of weighting.
+
+```{r unlm-Q-wnlm-Q-compare, echo=FALSE}
+mtype.compare.plot(mtypeA = "unlm.Q", mtypeB = "wnlm.Q") 
+```

@@ -1,12 +1,5 @@
 _site
 .sass-cache
 .jekyll-metadata
-assets
-monoall-ms
-_includes/projects/*
 *.swp
 Gemfile.lock
-*.png
-*.pdf
-*.md
-*.Rmd

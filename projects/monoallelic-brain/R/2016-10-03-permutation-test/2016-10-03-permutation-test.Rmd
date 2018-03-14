@@ -1,0 +1,297 @@
+---
+layout: default
+tags: [ permutation, p-value, hypothesis-test ]
+featimg: "p-values-1.png"
+---
+
+This analysis extends [permuted observations]({{ site.baseurl }}{% post_url /projects/monoallelic-brain/2016-09-20-permuted-observations %}) to testing hypotheses $$\beta_j=0, \; j=1,...,p$$ for any gene.  This is done by random permutation tests, which provide only approximate p-values in contrast with exact permutation tests (which are unpractical in the present case due to the large number $$n!$$ of all permutations of $$n\approx 500$$ cases).  These approximations more or less agree with the "theoretical" p-values, which are based on the hypothesis that the Studentized $$\hat{\beta}_j$$ follows a t-distribution on $$n - p$$ degrees of freedom (see ch8.3, p371 in A.C Davison: Statistical Models):
+
+$$
+\begin{equation}
+\frac{\hat{\beta}_j - \beta_j}{\sqrt{S^2 \left[ (X^\top X)^{-1} \right]_{jj}}} \sim t_{n - p},
+\end{equation}
+$$
+
+where $$S^2$$ is the unbiased estimate of the error variance (based on the residual sum of squares), and $$X$$ is the design matrix.
+
+The t-distribution comes from the second order assumptions on the error $$\epsilon_i$$ and on their normality; from these the normality of the residuals $$e_i$$ follows.  Thus normality of $$e_i$$ is a prerequisite for deriving p-values using the above theoretical approach.  In agreement with this comparison to the [model checking]({{ site.baseurl }}{% post_url /projects/monoallelic-brain/2016-09-23-model-checking %}) results, in particular the normal Q-Q plots of residuals, reveals that the two approaches to p-value calculation agree as long as the model fits the data well.  Otherwise the t-distribution based approach tends to produce much lower p-values and therefore exaggerate the significance that $$\beta_j\neq 0$$, as seen for several "poorly-fit" genes under the logistic model logi.S.
+
+Click [regr-coefs.csv][regr-coefs.csv] (long format) and [regr-coefs-w.csv][regr-coefs-w.csv] (wide format, annotated with stars) to download the saved csv files reporting both p-values and the estimate for all regression coefficients.  Click
+[signif-gene-effects-wnlm.Q.csv][signif-gene-effects-wnlm.Q.csv], [signif-gene-effects-logi.S.csv][signif-gene-effects-logi.S.csv], [signif-gene-effects-either.csv][signif-gene-effects-either.csv], or [signif-gene-effects-both.csv][signif-gene-effects-both.csv] for a gene-centric list of significant coefficient--gene associations mediating various biological effects, where each list corresponds to a rule of aggregation of p-values across the wnlm.Q and logi.S model types.  For the corresponding coefficient centric lists see
+[signif-effect-genes-wnlm.Q.csv][signif-effect-genes-wnlm.Q.csv], [signif-effect-genes-logi.S.csv][signif-effect-genes-logi.S.csv], [signif-effect-genes-either.csv][signif-effect-genes-either.csv], or [signif-effect-genes-both.csv][signif-effect-genes-both.csv].
+
+
+[regr-coefs.csv]: {{ site.baseurl }}/assets/projects/monoallelic-brain/regr-coefs.csv
+[regr-coefs-w.csv]: {{ site.baseurl }}/assets/projects/monoallelic-brain/regr-coefs-w.csv
+[signif-gene-effects-wnlm.Q.csv]: {{ site.baseurl }}/assets/projects/monoallelic-brain/signif-gene-effects-wnlm.Q.csv
+[signif-gene-effects-logi.S.csv]: {{ site.baseurl }}/assets/projects/monoallelic-brain/signif-gene-effects-logi.S.csv
+[signif-gene-effects-either.csv]: {{ site.baseurl }}/assets/projects/monoallelic-brain/signif-gene-effects-either.csv
+[signif-gene-effects-both.csv]: {{ site.baseurl }}/assets/projects/monoallelic-brain/signif-gene-effects-both.csv
+[signif-effect-genes-wnlm.Q.csv]: {{ site.baseurl }}/assets/projects/monoallelic-brain/signif-effect-genes-wnlm.Q.csv
+[signif-effect-genes-logi.S.csv]: {{ site.baseurl }}/assets/projects/monoallelic-brain/signif-effect-genes-logi.S.csv
+[signif-effect-genes-either.csv]: {{ site.baseurl }}/assets/projects/monoallelic-brain/signif-effect-genes-either.csv
+[signif-effect-genes-both.csv]: {{ site.baseurl }}/assets/projects/monoallelic-brain/signif-effect-genes-both.csv
+## Preparations
+
+```{r echo=FALSE, warnings=FALSE}
+library(ggplot2)
+library(lattice)
+library(latticeExtra)
+opts_chunk$set(dpi = 144)
+opts_chunk$set(out.width = "700px")
+opts_chunk$set(dev = c("png", "pdf"))
+lattice.options(default.args = list(as.table = TRUE))
+lattice.options(default.theme = "standard.theme")
+```
+
+Load functions
+
+```{r}
+source("~/projects/monoallelic-brain/src/import-data.R")
+source("~/projects/monoallelic-brain/src/fit-glms.R")
+source("~/projects/monoallelic-brain/src/graphics.R")
+```
+
+```{r}
+gene.ids <- unlist(read.csv("../../data/genes.regression.new", as.is = TRUE))
+names(gene.ids) <- gene.ids
+names(e.vars) <- e.vars
+```
+
+```{r cache=TRUE, warning=FALSE}
+E <- get.predictors() # default arguments
+Y <- get.readcounts(gene.ids = gene.ids, count.thrs = 0)
+```
+
+```{r cache=TRUE, warning=FALSE, message=FALSE}
+set.seed(1976)
+perms <- data.frame(cbind(seq_len(nrow(E)), replicate(n.perm <- 1e4, sample.int(nrow(E)))))
+names(perms) <- c("U", paste0("P", seq_len(n.perm)))
+sel.models <- c("wnlm.Q", "logi.S")
+sel.vars <- e.vars[c(1, 3, 5, 8)]
+system.time(Betas <- aggregate.CI.permut2(perms = perms, gene.ids = gene.ids, e.vars = e.vars,
+                                          sel.vars = sel.vars, sel.models = sel.models,
+                                          E = E, Y = Y[gene.ids], skip.CI = TRUE))
+```
+
+## Results
+
+The expressions above obtain the null distribution of regression coefficients for the selected predictor(s) `r sel.vars` under the selected model(s) `r sel.models` based on `r n.perm` permutations.  Each panel within a plot shows a red vertical zero line of the null hypothesis $$\beta_j = 0$$, the null distribution as probability density (solid blue line) based on the permutations, and the corresponding p-value (dotted blue line and number on the bottom).
+
+### Under wnlm.Q
+
+```{r beta-age-null-wnlm-Q}
+beta0densityplot("Age", mtype = "wnlm.Q")
+```
+
+```{r beta-gender-null-wnlm-Q, echo=FALSE}
+beta0densityplot("GenderMale", mtype = "wnlm.Q")
+```
+
+```{r beta-dx-scz-wnlm-Q, echo=FALSE}
+beta0densityplot("DxSCZ", mtype = "wnlm.Q")
+```
+
+```{r beta-dx-aff-wnlm-Q, echo=FALSE}
+beta0densityplot("DxAFF", mtype = "wnlm.Q")
+```
+
+```{r beta-ancestry-1-null-wnlm-Q, echo=FALSE}
+beta0densityplot("Ancestry.1", mtype = "wnlm.Q")
+```
+
+### Under logi.S
+
+```{r beta-age-null-logi-S, echo=FALSE}
+beta0densityplot("Age", mtype = "logi.S")
+```
+
+```{r beta-gender-null-logi-S, echo=FALSE}
+beta0densityplot("GenderMale", mtype = "logi.S")
+```
+
+```{r beta-dx-scz-logi-S, echo=FALSE}
+beta0densityplot("DxSCZ", mtype = "logi.S")
+```
+
+```{r beta-dx-aff-logi-S, echo=FALSE}
+beta0densityplot("DxAFF", mtype = "logi.S")
+```
+
+```{r beta-ancestry-1-null-logi-S, echo=FALSE}
+beta0densityplot("Ancestry.1", mtype = "logi.S")
+```
+
+## Comparison to p-values from t-distribution
+
+The calculations and the plot below compare the p-values from the permutations to those based on the theoretical t-distribution of the statistic.  Comparing these results to those from model checking reveals that the two approaches to p-value calculation agree (fall near the gray diagonal on the plots) as long as the model fits the data well.  Otherwise the t-distribution based approach tends to produce much lower p-values and therefore exaggerate the significance that $$\beta_j\neq 0$$.
+
+```{r}
+source("2016-10-03-permutation-test.R")
+```
+
+```{r cache=TRUE, warning=FALSE}
+M <- do.all.fits(Z = Y[gene.ids], G = E, preds = e.vars, sel.models = sel.models)
+cf <- unlist(sapply(e.vars, function(e.v) predictor2coefs(M[[c(1, 1)]], e.v)))
+both.p.val <-
+    do.call(rbind,
+            lapply(sel.models, function(mtype)
+                   do.call(rbind,
+                           lapply(cf, function(coef)
+                                  do.call(rbind,
+                                          lapply(gene.ids,
+                                                 function(g) get.both.p.vals(mtype = mtype, gene = g, coef = coef, M = M, B = Betas)))))))
+```
+
+Adjust p-values of 0 to `r 1/n.perm`, which is the reciprocal of the number of permutations.  Without this adjustment these p-values couldn't be plotted on a logarithmic scale.
+
+```{r}
+both.p.val[with(both.p.val, ! is.na(p.val.perm) & p.val.perm == 0), "p.val.perm"] <- 1 / n.perm
+```
+
+```{r p-val-tdist-vs-perm}
+pvalplot.genes.as.panels(both.p.val, ylim = c(-1, 15))
+```
+
+### Filtering for poor fit
+
+This filtering is based on earlier decisions on the goodness of fit of logi.S, which is stored in `results/model-checking.csv`.
+
+```{r}
+both.p.val <- cbind(both.p.val, logi.S.OK <- read.csv("../../results/model-checking.csv", row.names = "gene")["logi.S.fit.OK"])
+# set results to NA where logi.S fitted poorly
+both.p.val[with(both.p.val, Model == "logi.S" & logi.S.fit.OK == FALSE), c("Estimate", "p.val.t.dist", "p.val.perm")] <- NA
+```
+
+Repeat the previous plot with the filtered results:
+
+```{r p-val-tdist-vs-perm-filt}
+pvalplot.genes.as.panels(both.p.val, ylim = c(-1, 15))
+```
+
+Equal x and y scaling (isometric):
+
+```{r p-val-tdist-vs-perm-filt-iso, echo=FALSE}
+pvalplot.genes.as.panels(both.p.val, xlim = c(-0.5, 5), ylim = c(-0.5, 5))
+```
+
+### Figures for manuscript
+
+Figure for manuscript showing p-values calculated from both approaches (theory: t-distribution, and permutation test) and under both models (wnlm.Q and, when the fit was OK, also logi.S).
+The plotting symbols are color coded according to gene rank (rainbow, red to violet).  The plotting symbols also display the rank with numbers, see the key on the top.  Genes acceptably fitted by both models are distinguished with a diamond symbol and **bold font** from those that could be fitted only by wnlm.Q.  Gray rectangle shows the decision rule, which rejects the null hypothesis if the p-value is smaller than 0.05 given both the t-distribution and the permutation-based test.
+
+
+```{r p-values, echo=FALSE, fig.asp=0.8}
+mycol <- rainbow(n = length(levels(both.p.val$Gene)), start = 0, end = 5 / 6)
+mypch <- c(23, 22)
+mykey <- list(columns = 4, points = list(pch = ifelse(logi.S.OK$logi.S.fit.OK, mypch[1], mypch[2]), fill = mycol, alpha = 0.5),
+            text = list(paste0("(", seq_along(levels(both.p.val$Gene)), ") ", levels(both.p.val$Gene)),
+                        cex = 0.7, font = ifelse(logi.S.OK$logi.S.fit.OK, 2, 1)))
+p.val.plot <-
+    with(both.p.val,
+         xyplot(- log10(p.val.t.dist) ~ - log10(p.val.perm) | Coefficient * Model, data = both.p.val, groups = Gene,
+                subset = Coefficient %in% c("Age", "GenderMale", "Ancestry.1", "DxSCZ"),
+                par.settings = list(add.text = list(cex = 0.8),
+                                    superpose.symbol =
+                                        list(fill = rainbow(n = length(levels(Gene)), start = 0, end = 5 / 6))),
+                gene = as.character(as.integer(Gene)), estimate = Estimate, model = Model,
+                panel = function(x, y, groups, subscripts, gene, estimate, ...){
+                    sig.lev <- c(-log10(5e-2), 2, 3)
+                    panel.abline(v = sig.lev, h = sig.lev, col = "gray", lty = "solid")
+                    panel.rect(sig.lev[1], sig.lev[1], 1e2, 1e2, col = "gray", border = "transparent")
+                    #panel.abline(v = sig.lev[-1], h = sig.lev[-1], col = "white", lty = "dotted")
+                    panel.abline(v = sig.lev, h = sig.lev, col = "white", lty = "dashed")
+                    panel.abline(a = 0, b = 1, col = "black", lty = "dotted")
+                    col <- trellis.par.get("superpose.symbol")$fill
+                    panel.xyplot(x, y, pch = ifelse(logi.S.OK$logi.S.fit.OK, mypch[1], mypch[2]), fill = col, col = col, cex = 1.5, alpha = 0.5)
+                    panel.text(x, y, labels = gene[subscripts], cex = 0.7, font = ifelse(logi.S.OK$logi.S.fit.OK, 2, 1), ...)
+                },
+                key = mykey,
+                aspect = 1, scales = list(relation = "same"),
+                xlab = expression(paste(plain(-log)[10], "p  (permutations)")),
+                ylab = expression(paste(plain(-log)[10], "p  (t-distribution)"))))
+useOuterStrips(p.val.plot)
+```
+
+Leave logi.S out and show results only under wnlm.Q:
+
+```{r p-values-wnlm-Q, echo=FALSE, fig.asp=0.6}
+useOuterStrips(p.val.plot[, 1])
+```
+
+## Summarizing results
+
+Bringing results to long format and annotating significance with stars
+
+```{r}
+v.names <- c("Estimate", "p.val.t.dist", "p.val.perm")
+mtypes <- c("wnlm.Q", "logi.S")
+varying <- lapply(c(v.names), function(v) sapply(mtypes, function(m) paste0(v, ".", m)))
+both.p.val.w <-
+    reshape(both.p.val, direction = "wide", varying = varying, v.names = v.names,
+            timevar = "Model", times = mtypes, idvar = c("Gene", "Coefficient"))
+stars <- data.frame(sapply(varying.p <- unlist(varying[-1])[c(1, 3, 2, 4)],
+                           function(v) annotate.signif(both.p.val.w[[v]])))
+names(stars) <- paste0(varying.p, ".*")
+both.p.val.w <- cbind(both.p.val.w[2:1], stars, both.p.val.w[-1 * 2:1])
+```
+
+### Aggregation
+
+Aggregating significant findings over all four combinations of p-value calculation methods $$v \in \{\mathrm{t.dist}, \mathrm{perm}\}$$ and model types $$y \in \{\mathrm{wnlm.Q}, \mathrm{logi.S}\}$$ using the following rules
+
+1. under a given model type $$y$$ take parameter--gene pairs $$(j,g) \, \mid \, y$$ for which $$p_{jg}^{\mathrm{t.dist}, y} < 0.05 \; \mathrm{AND} \;p_{gj}^{\mathrm{perm}, y} < 0.05$$
+1. take $$(j,g)$$ if in the previous step
+   * either $$(j,g) \, \mid \, \mathrm{wnlm.Q}$$ or $$(j,g) \, \mid \, \mathrm{logi.S}$$ was taken
+   * both $$(j,g) \, \mid \, \mathrm{wnlm.Q}$$ and $$(j,g) \, \mid \, \mathrm{logi.S}$$ were taken
+
+This means that we have the rules *either* and *both*, which correspond to a less and more stringent condition, respectively.  These result in two corresponding sets of pairs, $$\{(j,g) \, \mid \, \mathrm{either}\} \supseteq \{(j,g) \, \mid \, \mathrm{both}\}$$.  (We also have the rules *wnlm.Q* and *logi.S*, which do not use aggregation over model types, and cannot be ordered in terms of stringency.  Also, $$\{(j,g) \, \mid \, \mathrm{wnlm.Q}\} \nsupseteq \{(j,g) \, \mid \, \mathrm{logi.S}\}$$ and $$\{(j,g) \, \mid \, \mathrm{wnlm.Q}\} \nsubseteq \{(j,g) \, \mid \, \mathrm{logi.S}\}$$ in general).
+
+The following code implements these rules.
+
+```{r}
+is.signif <-
+    list(wnlm.Q =
+             with(both.p.val.w, p.val.t.dist.wnlm.Q < 5e-2 & p.val.perm.wnlm.Q < 5e-2 &
+                  Coefficient %in% c("Age", "GenderMale", "Ancestry.1", "DxSCZ")),
+         logi.S =
+             with(both.p.val.w, logi.S.fit.OK & p.val.t.dist.logi.S < 5e-2 & p.val.perm.logi.S < 5e-2 &
+                  Coefficient %in% c("Age", "GenderMale", "Ancestry.1", "DxSCZ")))
+is.signif$either <- with(is.signif, wnlm.Q | logi.S)
+is.signif$both <- with(is.signif, wnlm.Q & logi.S)
+```
+
+The pairs $$\{(j,g) \, \mid \, x\}$$ (where $$x \in \{\mathrm{wnlm.Q}, \mathrm{logi.S}, \mathrm{either}, \mathrm{both}\}$$) can be presented in two sensible ways: a **gene-centric** and a **coefficient-centric** way.
+
+The gene-centric way lists, for each gene, all the significantly associated coefficients:
+
+```{r}
+signif.gene.effects <-
+    lapply(is.signif,
+           function(s)
+               sapply(split(x <- both.p.val.w[s, c("Gene", "Coefficient")][ with(both.p.val.w[is.signif$either, ], order(Gene, Coefficient)), ], x$Gene, drop = TRUE),
+                      function(g) toString(g$Coefficient)))
+signif.gene.effects
+```
+
+The coefficient-centric way lists, for each coefficient, all the significantly associated genes:
+
+```{r}
+signif.effect.genes <-
+    lapply(is.signif,
+           function(s)
+               sapply(split(x <- both.p.val.w[s, c("Gene", "Coefficient")][ with(both.p.val.w[is.signif$either, ], order(Coefficient, Gene)), ], x$Coefficient, drop = TRUE),
+                      function(g) toString(g$Gene)))
+signif.effect.genes
+```
+
+### Writing results to files
+
+```{r}
+write.csv(both.p.val, "../../results/regr-coefs.csv", row.names = FALSE)
+write.csv(both.p.val.w, "../../results/regr-coefs-w.csv", row.names = FALSE)
+invisible(lapply(names(signif.gene.effects),
+                 function(x) write.csv(data.frame(Gene = names(y <- signif.gene.effects[[x]]), Coefficient = y), file = paste0("../../results/signif-gene-effects-", x, ".csv"), row.names = FALSE)))
+invisible(lapply(names(signif.effect.genes),
+                 function(x) write.csv(data.frame(Gene = names(y <- signif.effect.genes[[x]]), Coefficient = y), file = paste0("../../results/signif-effect-genes-", x, ".csv"), row.names = FALSE)))
+```

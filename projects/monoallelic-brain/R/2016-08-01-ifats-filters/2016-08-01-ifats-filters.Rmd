@@ -1,0 +1,340 @@
+---
+layout: default
+title: Ifat's Filtering, Gene Ranking and Classification
+tags: [reproducible-research, genome, monoallelic-expression, manuscript]
+featimg: "known-genes-1.png"
+---
+
+It is crucial for publication to ensure that the genes selected for regression analysis were chosen on objective criteria.  This requires the reproduction of the set of genes that were called monoallelic in the [manuscript][ms] drafted by Ifat.  I'll refer to that in this document as *the previous manuscript*.  If perfect reproduction fails then minimum discordance is desired, and the regression analysis will potentially **need to be repeated** accordingly with the new set of genes called monoallelic.
+
+This post was extended with the test for reference/nonreference bias, whose results are summarized in [ref-nonref-test.csv][ref-nonref-test.csv] for top scoring genes.
+
+## Procedures from the previous manuscript
+
+### Filters
+
+The previous manuscript makes several statements on how the data were filtered before the gene were ranked and presented on [Fig 1][ifat fig 1]:
+
+section *Methods: Allelic expression analyses*, p3
+> there had to be $$\ge 7$$ reads, with a quality score $$\ge 20$$; a further gene-wide filter requires $$20$$ or more such reads for the gene to be assessable in a given individual
+
+section *Methods: Allelic expression analyses*, p4
+> Genes that were supported by fewer than 25 subjects were excluded.
+
+section *Results: Pipeline*, p4
+> there had to be $$\ge 7$$ reads; a further gene-wide filter requires 15 or more such reads for the gene to be assessable in a given individual
+
+section *Results: Landscape of monoallelic expression[...]*, p6
+> sufficient coverage defined as $$\gt 20$$ reads mapping to heterozygous SNPs per individual in at least ten individuals
+
+In addition, for the regression analysis a stronger filtering was used:
+
+section *Results: Relaxation of imprinting*, p8
+> We examined genes where we had greater than 180 analyzable individuals and where 30% or more of those individuals displayed monoallelic expression defined by Sg >0.9. An analyzable individual was defined as one with at least 50 reads at one or more SNPs imputed to be heterozygous (Lhet cutoff of 0.95 as above).
+
+#### My interpretation
+
+Two kind of filters were used: I call them **read count-based** and **individual-based**.  These have the following properties:
+
+1. the read count-based filter removes any such pair $$(i,g)$$ of individual $$i$$ and genes $$g$$ for which the total read count $$n_{ig}<t_\mathrm{rc}$$, where $$t_\mathrm{rc}$$ is what I call a **read count threshold**
+   * Note that there is *another* read count-based filter, which removes pairs $$(s,g)$$ of SNP $$s$$ and gene $$g$$ in the same fashion as the previous one but with threshold 7.  However, I cannot investigate this filter until the SNP-wise read counts become easily accessible.
+1. the individual-based filter removes any genes $$g$$ (across all individuals) if read count data involving $$g$$ are available on less than $$t_\mathrm{ind}$$ number of individuals
+
+Note that in fact there are two read count-based filters: not only the one for individual SNPs and a
+
+Given the above quotations from the previous manuscript the read count-based filter might have been applied with
+$$t_\mathrm{rc} = 20 \text{ or } 15 \text{ or } 21$$, whereas the individual-based filter with $$t_\mathrm{ind} = 25 \text{ or } 10$$ in order to arrive at [Fig 1][ifat fig 1].
+
+### Ranking and calling monoallelic expression
+
+The **ranking** of genes is based on the following score. The score of gene $$g$$ is the fractions of individuals $$i$$ for whom $$s_{ig} \gt 0.9$$.  In other words the score of $$g$$ is based on the empirical cumulative distribution function ECDF $$\hat{F}_g$$ or, equivalently, on the survival function $$1-\hat{F}_g$$:
+$$\text{the score of gene } g = 1 - \hat{F}_g(0.9).$$
+
+Judged from [Fig 1][ifat fig 1] the **classification** of genes appears to have been defined as follows: $$\text{the score of gene } g \ge 0.3 \Rightarrow g$$ is called monoallelic.  Otherwise $$g$$ is called not monoallelic.  (Does "not monoallelic" imply biallelicity or do we wish to consider one or more intermediate classes?)  However, nothing is explicitly stated in the previous manuscript on the classification of genes independently of individuals.  For example (section *Results: Landscape of monoallelic expression[...]*, p6) we read
+> 1b shows the 13 (of 32) genes that did not make it into the top Sg scoring group
+
+but we are not told the criterion based on which the top scoring group was defined.
+
+### Other quantities of interest
+
+Although *not* used for ranking or classification, other fractions were also calculated and presented in [Fig 1][ifat fig 1].  First, not only $$\hat{F}_g(s=0.9)$$ was obtained but also $$\hat{F}_g(s)$$ for $$s = 0.6,0.7,0.8$$.  Second, the fraction of individuals were calculated that passes the test conceived by Andy:
+$$ \text{given gene } g \text{ the fraction of indiv. passed} = \frac{\# \{i \,:\, s_{ig} \le 0.6 \text{ and } \mathrm{UCL}_{ig} \le 0.7 \}}{\# \{i\}}, $$
+where the upper 95 % confidence limit is given by
+$$\mathrm{UCL}_{ig} = s_{ig} + z_{0.975} \sqrt{\frac{s_{ig} (1 - s_{ig})}{n_{ig}}},$$
+such that $$z_{p}$$ is the $$p$$ quantile of the standard normal distribution and $$n_{ig}$$ is the observed total read count.
+
+## Results
+
+### Genome-wide data import and preparation
+
+```{r echo=FALSE}
+library(lattice)
+library(latticeExtra)
+opts_chunk$set(dpi = 144)
+opts_chunk$set(out.height = "700px")
+opts_chunk$set(dev = c("png", "pdf"))
+lattice.options(default.args = list(as.table = TRUE))
+lattice.options(default.theme = "standard.theme")
+```
+
+Load functions:
+```{r}
+source("../../src/import-data.R")
+source("../../src/utils.R")
+```
+
+```{r genomwide-data-import, cache=TRUE, warning=FALSE, echo=FALSE}
+gene.summary <-
+    read.csv("../../data/readcount/summary-all-genes.csv")
+rownames(gene.summary) <- gene.summary$Symbol
+gene.summary$file.size <-
+    read.csv("../../data/readcount/fsize-genes.csv", row.names = 2)[rownames(gene.summary), , drop = TRUE]
+gene.ids <- with(gene.summary, as.character(Symbol)[ file.size > 0 ])
+Y <- get.readcounts(gene.ids, g.subsets = list(), sel.var = c("H", "N"), rm.conflict = TRUE)
+S <- data.frame(lapply(gene.ids, function(g) Y[[g]]$H / Y[[g]]$N), check.names = FALSE)
+names(S) <- gene.ids
+N <- data.frame(lapply(Y, getElement, "N"), check.names = FALSE)
+rm(Y)
+```
+
+Read count data have been imported (not shown).  We see that the minimum number of reads for any gene and individual is 7.
+```{r cache=TRUE}
+min(unlist(N), na.rm = TRUE)
+```
+
+The following code
+
+1. applies "a filter giving priority to even a single SNP showing biallelic expression" (see Ifat's ms and her "1_conflict" annotation)
+1. applies the read count-based filter given a *sequence* of read count thresholds $$t_\mathrm{rc}$$
+1. applies the individual-based filter given $$t_\mathrm{ind}$$
+1. calculates the fractions of interest, which include the score $$1-\hat{F}_g(0.9)$$
+1. ranks genes according to their score
+
+```{r cache=TRUE}
+min.obs <- 25 # set t_ind
+# implementation detail!: filter out genes with fewer observations than 'min.obs'
+g.passed <- names(S)[sapply(S, function(y) sum(! is.na(y)) >= min.obs)]
+# a sequence of thresholds t_rc for minimum read count to filter individual data points S_{ig} or N_{ig}
+min.reads <- c(7, 15, 20)
+min.r.names <- paste0("min.reads.", min.reads)
+names(min.r.names) <- min.r.names
+names(min.reads) <- min.r.names
+# filter S_{ig} (then N_{ig}) first based on 'min.reads' and then again on 'min.obs'
+Sf <- lapply(min.reads, function(m) filter.min.read(m, X = S[g.passed], N = N[g.passed], min.obs = min.obs))
+Nf <- lapply(min.reads, function(m) filter.min.read(m, X = N[g.passed], N = N[g.passed], min.obs = min.obs))
+# ECDFs for all filter levels and all genes g; individual ECDF components F_g are named according to gene g
+ECDF <- lapply(Sf, sorted.ecdfs)
+frac <- lapply(min.r.names,
+               function(m)
+                   do.fractions(ECDF[[m]], Sf[[m]], Nf[[m]],
+                                frac = 10:6 / 10, ucl.fun = CI.p, max.ucl = 0.7, max.s = 0.6))
+```
+Note that the individual-based filter is also applied *before* the read count-based one.  However, this step is an implementation detail and has no conceptual significance.
+
+#### Result on the individual-based filter
+
+Besides $$t_\mathrm{ind}=25$$ the threshold $$t_\mathrm{ind}=10$$ was also tested (not shown) but the former resulted in clearly more consistency with Ifat's ranking (see below).
+
+### Gene rankings
+
+The plots show four gene rankings and the corresponding fractions of interest.  The first three correspond to the sequence of three $$t_\mathrm{rc}$$ settings of the read count-based filter so these rankings will be named $$R_{7}, R_{15}, R_{20}$$.  The fourth plot follows the ranking seen on Ifat's [Fig 1][ifat fig 1], and this ranking will be referred to as $$R_\mathrm{Ifat}$$.  Since that figure shows only the 51 genes, the same is done here for also the first three plots.  Note that the last 13 genes of the fourth plot are in fact low ranking "known" imprinted genes so they are *not* in the top 51 according to $$R_\mathrm{ifat}$$.  The first three plots do, however, present the 51 top ranking genes for the corresponding ranking.
+
+```{r echo=FALSE, cache=TRUE}
+# format required for my function pad.fraction.imprint 
+gene.summary$imprinting.status <- factor(4 - as.integer(gene.summary$imprinted))
+levels(gene.summary$imprinting.status) <- c("known imprinted", "nearby candidate", "distant candidate")
+genes.ifat <- read.csv("../../data/ifat/ifat-fig1-genelist.csv", row.names = "gene")
+genes.ifat$imprinting.status <- as.factor(genes.ifat$imprinting.status)
+levels(genes.ifat$imprinting.status) <- c("known imprinted", "nearby candidate", "distant candidate")
+```
+
+```{r compare-to-ifats-fig, echo=FALSE, out.height=1400, fig.width=7, fig.asp=2}
+xlab <- "fraction of indiv."
+par.set <- list(superpose.polygon = list(col = palette.ifat(is.bw = FALSE, detailed = FALSE)))
+trellis.par.set(superpose.polygon = list(lty = 0))
+b.charts <-
+    lapply(min.r.names,
+           function(n)
+               barchart(padded.frac(fr = frac[[n]][nrow(genes.ifat):1]), par.settings = par.set, main = n, xlab = xlab))
+plot.pos <- list(c(1, 1, 2, 2), c(2, 1, 2, 2), c(1, 2, 2, 2))
+names(plot.pos) <- min.r.names
+for(n in min.r.names) print(b.charts[[n]], split = plot.pos[[n]], more = TRUE)
+
+plot(barchart(padded.frac(fr = frac$min.reads.7[rev(row.names(genes.ifat))]),
+              par.settings = par.set, main = "min.reads.7 + Ifat's ranking", xlab = xlab), split = c(2, 2, 2, 2), more = FALSE)
+```
+
+### Figure for manuscript
+
+The basis for the figure is the one in the upper-right panel in the previous plot, which is supplemented with the outcome of the "reference/non-reference allele bias" test.  The outcome was done via a subjective analysis by Andy and I, in which we sorted each of the top 51 genes into three categories: biased, unbiased, and indeterminate.  These are stored in `ref-nonref-test.csv` and correspond to `X`, ` ` (whitespace) and `0` in `ref.allele.bias`, respectively:
+
+```{r}
+ref.allele.bias <- read.csv("../../results/ref-nonref-test.csv")$ref.allele.bias[1:50]
+names(ref.allele.bias) <- read.csv("../../results/ref-nonref-test.csv")$gene[1:50]
+levels(ref.allele.bias) <- c("X", "0", " ")
+```
+
+```{r top-ranking-genes, echo=FALSE, fig.width=3.5, fig.asp=2.25}
+# ECDF
+fr <- frac$min.reads.15[50:1]
+par.set <- list(superpose.polygon = list(col = pal.ifat <- palette.ifat(is.bw = TRUE, detailed = TRUE, col2 = "tan")))
+fig.ms <- list(ecdf = barchart(padded.frac(fr = fr), par.settings = par.set, xlab = xlab))
+# tests
+y <- data.frame(t(fr['andys.test', ]))
+y$ref.nonref <- as.numeric(sub(" \\([[:digit:]]+\\/[[:digit:]]+\\)", "",
+                               as.character(gene.summary[ names(fr), "Biased.SNPs..binomial....." ])))
+y$gene <- factor(rownames(y), levels = rownames(y))
+y <- reshape(y, direction = "long", varying = c("ref.nonref", "andys.test"),
+             v.names = "fraction", timevar = "test", times = c("ref/nonref", "biallelic"))
+fig.ms$tests <- dotplot(gene ~ fraction | test, data = y, stack = TRUE, layout = c(2, 1), col = "black")
+# graphic adjustments
+fig.ms <- lapply(fig.ms,
+                 function(x) update(x, main = "", scales = list(cex = 0.7, x = list(alternating = 1))))
+fig.ms$ecdf <- update(fig.ms$ecdf, strip = strip.custom(factor.levels = "1 - ECDF"),
+                      scales = list(y = list(alternating = 1)))
+my.text <- c("1 - F(0.9) = score", "F(0.9) - F(0.8)", "F(0.8) - F(0.7)", "F(0.7) - F(0.6)", "F(0.6) - F(0.5)", "nearly unbiased")
+# color y axis label according to imprinting status
+imp.stat.key <- c("blue", "darkgreen", "red")
+names(imp.stat.key) <- levels(gene.summary[names(fr), "imprinting.status"])
+fig.ms$ecdf <- update(fig.ms$ecdf, scales = list(y = list(col = imp.stat.key[gene.summary[names(fr), "imprinting.status"]])))
+fig.ms$ecdf <- update(fig.ms$ecdf, scales = list(y = list(labels = paste(names(fr), rev(ref.allele.bias)))),
+                      auto.key = list(text = my.text, cex = 0.8,
+                                      points = FALSE, rectangles = TRUE, columns = 1))
+#fig.ms$tests <- update(fig.ms$tests, scales = list(y = list(alternating = 2)))
+print(fig.ms$ecdf)
+```
+
+#### Gene rankings with Ifat's ranking as reference
+
+The previous figures show that several genes in the top 51 according to $$R_{7}, R_{15}$$ or $$R_{20}$$ are missing from Ifat's figure.  But clearly, when the read count-based filter is used at $$t_\mathrm{rc}=15$$ there is a close match with Ifat's ranking.  
+
+```{r echo=FALSE}
+genes.ifat.ranks <- as.data.frame(sapply(min.r.names, function(m) match(rownames(genes.ifat), names(ECDF[[m]]))))
+names(genes.ifat.ranks) <- paste0("R.", min.reads)
+genes.ifat.ranks <- cbind(genes.ifat, data.frame(R.ifat = seq_len(nrow(genes.ifat.ranks))), genes.ifat.ranks)
+# the last 13 genes are low ranking "known" imprinted genes whose rank the manuscript does not present
+genes.ifat.ranks$R.ifat[seq(from = nrow(genes.ifat.ranks), by = -1, length.out = 13)] <- NA
+genes.ifat.ranks
+```
+
+In fact, the two rankings agree for the top 24 genes (except that ranks 6 and 7 are swapped):
+```{r}
+all.equal(genes.ifat.ranks[ , "R.15"][c(1:5, 7:6, 8:24)], 1:24)
+```
+
+From this result we may conclude that Ifat's filter settings were $$t_\mathrm{rc}=15$$ and $$t_\mathrm{ind}=25$$ and the discrepancies we see might partly or entirely be due to rounding errors introduced at the export of $$S$$ values to csv files and/or different implementation of the calculation of gene scores.
+
+### Monoallelically called genes
+
+Given the result that $$R_{15}$$ resembles the most to $$R_\mathrm{ifat}$$, we will use $$R_{15}$$ to call monoallelic genes.  We will compare called gene sets under different threshold for the score $$1 - \hat{F}_g(0.9)$$ and further compare these to the one presented in the previous [manuscript][ms].
+
+Notice that the lowest scoring gene in the "nearby candidate" category is *PWRN1* (green on [Fig 1][ifat fig 1]).  Its score is `r 1 - ECDF$min.reads.15$PWRN1(0.9)` and it ranks at `r match("PWRN1", names(ECDF$min.reads.15))` according to $$R_{15}$$ and at `genes.ifat.ranks["PWRN1", "R.ifat"]`.  We may define the classification threshold such that we only call genes monoallelic if their score $$\ge0.4$$:
+```{r}
+(called.mono.0.4 <- names(frac$min.reads.15)[unlist(frac$min.reads.15[1, ]) >= 0.4])
+```
+
+If we further lower the classification threshold to $$0.3$$ then according to $$R_{15}$$ several more genes must also be called monoallelic.
+```{r}
+called.mono.0.3 <- names(frac$min.reads.15)[unlist(frac$min.reads.15[1, ]) >= 0.3]
+length(setdiff(called.mono.0.3, called.mono.0.4))
+```
+
+The upper right panel of the figure above indicates that most---if not all---of the genes between score 0.3 and 0.5 fall in the "distant candidate" category.  More on this in the next section.
+
+### Implications for regression analysis
+
+My latest regression analysis was carried out on the following genes extending the set of 8 genes initially used in the previous manuscript:
+```{r}
+genes.regression.ifat <-
+    c("PEG3", "INPP5F", "SNRPN", "PWAR6", "ZDBF2", "MEG3", "ZNF331", "GRB10", # 8 genes analyzed by Ifat
+      "PEG10", "SNHG14", "NAP1L5", "KCNQ1OT1", "MEST", # 5 more genes analyzed by AGK 3/2/16
+      "IGF2", "NLRP2", "UBE3A", # 3 more genes present in data files
+      "TMEM261P1", "AL132709.5", "RP11-909M7.3", "SNORD116-20", "RP13-487P22.1", "hsa-mir-335", "PWRN1") # 'green' novel 1 MB imprinted genes; note that PWAR6 is already included above
+```
+
+These were selected based on two rules:
+
+1. most monoallelically called genes with imprinting status either "known imprinted" or "nearby candidate"
+   * exceptions include *MAGEL2* and *ZIM2*---it is not clear why those were not selected initally or later so now they will become selected ones
+1. the highest scoring but not monoallelically called "known" imprinted genes; these were *IGF2*, *NLRP2* and *UBE3A*
+
+Given these rules and the called gene sets (at score threshold 0.5 or 0.3) what genes, if any, should I extend my latest (already extended) regression analysis?
+
+I start with the first rule.  Excluding "distant candidate"s from the set of monoallelically called genes confirms the earlier suspicion that all genes scoring between 0.3 and 0.4 must be then excluded so for regression analysis it is immaterial which score is used as classfication threshold.
+```{r}
+genes.not.cand.4 <- called.mono.0.4[gene.summary[called.mono.0.4, "imprinting.status"] != "distant candidate"]
+genes.not.cand.3 <- called.mono.0.3[gene.summary[called.mono.0.3, "imprinting.status"] != "distant candidate"]
+all.equal(genes.not.cand.3, genes.not.cand.4)
+```
+
+To see which genes might be selected according to the second rule:
+```{r known-genes}
+frac$min.reads.15.known <- frac$min.reads.15[gene.summary[names(frac$min.reads.15), "imprinting.status"] == "known imprinted"]
+barchart(padded.frac(fr = frac$min.reads.15.known[length(frac$min.reads.15.known):1]),
+              par.settings = par.set, main = "Known imprinted genes", xlab = xlab)
+```
+
+So, it still seems reasonable to select *IGF2*, *NLRP2* and *UBE3A* based on the second rule.
+
+Then **the set of genes to carry out regression analysis**:
+```{r}
+(genes.regression.new <- c(genes.not.cand.4, c("IGF2", "NLRP2", "UBE3A")))
+write.csv(data.frame(genes.regression.new), file = "../../data/genes.regression.new", row.names = FALSE)
+```
+
+No genes need to be removed from the previous set but several new genes need to be added:
+```{r}
+setdiff(genes.regression.ifat, genes.regression.new) # what genes to remove?
+setdiff(genes.regression.new, genes.regression.ifat) # what genes to add?
+```
+
+## Cumulative loss of data
+
+The `VennDiagram` package implements scaled [Euler diagrams](https://en.wikipedia.org/wiki/Euler_diagram).
+
+```{r}
+library(VennDiagram)
+```
+
+The partitions induced by filtering and calling genes monoallelic (imprinted) are illustrated by the following Euler or Venn diagrams.  Note that, for an Euler diagram but not for a Venn diagram, the shapes (circles or ellipses) are proportional to the size of the set they represent and that topological relationship among shapes is such that there is no overlap if the intersection of the corresponding sets is the empty set $$\{\}$$.
+
+```{r}
+g.sets <- list(in.dataset = 1:22254, passed.initial.filter = names(S), passed.final.filter = names(Sf$min.reads.15), called.imprinted = genes.regression.new)
+sapply(g.sets, length)
+```
+
+```{r venn-total-initialf-finalf}
+l <- c(n.sets <- lapply(g.sets[-4], length), n.sets[-1], rep(n.sets[3], 2))
+names(l) <- NULL
+l <- c(l, list(category = gsub("\\.", " ", names(g.sets[-4])), cat.cex = 1.2, cat.pos = 0, cat.dist = 1e-2))
+grid.draw(do.call(draw.triple.venn, l))
+```
+
+```{r venn-total-finalf-called, echo=FALSE}
+l <- c(n.sets <- lapply(g.sets[-2], length), n.sets[-1], rep(n.sets[3], 2))
+names(l) <- NULL
+l <- c(l, list(category = gsub("\\.", " ", names(g.sets[-2])), cat.cex = 1.2, cat.pos = 0, cat.dist = 1e-2))
+grid.draw(do.call(draw.triple.venn, l))
+```
+
+```{r venn-total-initialf-finalf-called, echo=FALSE}
+l <- c(n.sets <- lapply(g.sets, length), n.sets[2:4], n.sets[3:4], n.sets[4], n.sets[3:4], rep(n.sets[4], 3))
+names(l) <- NULL
+my.col <- list(c("yellow", "green", "blue", "red"))
+l <- c(l, list(category = gsub("\\.", " ", names(g.sets)), cat.cex = 1.2, cat.pos = 0, cat.dist = 1e-2), fill = my.col)
+grid.draw(do.call(draw.quad.venn, l))
+```
+
+## Conclusion
+
+* Ifat's ranking is the most consistent with the present $$R_{15}$$ ranking obtained with filter settings were $$t_\mathrm{rc}=15$$ and $$t_\mathrm{ind}=25$$
+* the consistency is not perfect, which might be due to implementation details
+* therefore the two ranking leads to discrepant sets of monoallelically called genes
+* the level of discrepancy depends on what rule is chosen for classification
+* several considerations play role in what genes are seleceted for regression analysis; these have been discussed above
+* the **regression** analysis **needs to be further extended** with *MAGEL2*, *ZIM2*, *FAM50B*, *NDN*, *SNURF*, *KCNK9* and *DIRAS3*
+
+
+[ifat fig 1]: https://docs.google.com/presentation/d/1YvpA1AJ-zzir1Iw0F25tO9x8gkSAzqaO4fjB7K3zBhE/edit#slide=id.p4
+[ms]: https://docs.google.com/document/d/1cWd4UH98SJR5lihDihC0ZO-C_A1-8MQ5COcixxCLzHE/edit
+[ref-nonref-test.csv]: {{ site.baseurl }}/assets/projects/monoallelic-brain/ref-nonref-test.csv

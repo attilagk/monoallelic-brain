@@ -1,0 +1,304 @@
+---
+layout: default
+tags: [genome]
+featimg: "score-genomic-location-1.png"
+---
+
+Imprinted genes form **clusters** of one or more genes.  Previous work by Ifat established the **imprinting status** of each gene as either known to be imprinted, *not* known to be imprinted but near an "known" gene, or else neither.  I refer to these three categories as "known", "nearby candidate" and "candidate", respectively.
+
+The main question queries the mechanism of the age effect on imprinting (loss, gain or lack of effect).  In particular: does age regulate genes within some cluster in a concerted or an independent manner?
+
+The current work studies this by performing two main steps
+
+1. delineation of clusters
+1. visualize clusters and age effect in terms of regression coefficients for age
+
+Note that a table comparing imprinted genes identified by Baran et al to those by this study is available at [baran-vs-ourwork.csv][baran-vs-ourwork.csv].
+
+## Data import and preparation
+
+```{r echo=FALSE}
+library(lattice)
+library(latticeExtra)
+opts_chunk$set(dpi = 144)
+opts_chunk$set(out.width = "700px")
+opts_chunk$set(dev = c("png", "pdf"))
+lattice.options(default.args = list(as.table = TRUE))
+lattice.options(default.theme = "standard.theme")
+```
+
+Load data importer functions:
+```{r}
+source("../../src/import-data.R")
+source("../../src/utils.R")
+source("~/projects/monoallelic-brain/src/fit-glms.R")
+source("2016-08-08-imprinted-gene-clusters.R")
+```
+
+### Genome-wide data
+
+```{r cache=TRUE}
+gene.summary <-
+    read.csv("../../data/readcount/summary-all-genes.csv")
+rownames(gene.summary) <- gene.summary$Symbol
+gene.summary$file.size <-
+    read.csv("../../data/readcount/fsize-genes.csv", row.names = 2)[rownames(gene.summary), , drop = TRUE]
+gene.ids <- with(gene.summary, as.character(Symbol)[ file.size > 0 ])
+genes2fit <- unlist(read.csv("../../data/genes.regression.new", as.is = TRUE))
+names(genes2fit) <- genes2fit
+```
+
+```{r genomwide-data-import, cache=TRUE, warning=FALSE}
+Y <- get.readcounts(gene.ids, g.subsets = list(), sel.var = c("H", "N"), rm.conflict = TRUE)
+S <- data.frame(lapply(gene.ids, function(g) Y[[g]]$H / Y[[g]]$N), check.names = FALSE)
+names(S) <- gene.ids
+N <- data.frame(lapply(Y, getElement, "N"), check.names = FALSE)
+rm(Y)
+```
+
+#### Filtering
+
+1. read count-based filter with threshold $$t_\mathrm{rc}=15$$
+1. individual-based filter with threshold $$t_\mathrm{ind}=25$$
+
+The code was copied from an earlier post and is hidden here.
+```{r cache=TRUE, echo=FALSE}
+min.obs <- 25 # reset t_ind
+# implementation detail!: filter out genes with fewer observations than 'min.obs'
+g.passed <- names(S)[sapply(S, function(y) sum(! is.na(y)) >= min.obs)]
+min.reads <- 15 # set t_rc
+S <- filter.min.read(min.reads, X = S[g.passed], N = N[g.passed], min.obs = min.obs)
+N <- filter.min.read(min.reads, X = N[g.passed], N = N[g.passed], min.obs = min.obs)
+# ECDFs for all filter levels and all genes g; individual ECDF components F_g are named according to gene g
+# the expression also sorts genes g according to F_g(0.9) where F_g is the ECDF for gene g 
+ED <- list(fun = sorted.ecdfs(S))
+# evaluate ECDF at
+ED$ss <- seq(0.5, 1, length.out = 101)
+ED$val <- data.frame(lapply(ED$fun, function(f) f(ED$ss)), check.names = FALSE)
+# fractions of interest
+frac <- do.fractions(ED$fun, S, N, frac = 10:6 / 10,
+                     ucl.fun = CI.p, max.ucl = 0.7, max.s = 0.6)
+# sort data according to gene ranking
+S <- S[names(ED$fun)]
+N <- N[names(ED$fun)]
+```
+
+### Fitting models to selected genes
+
+Import read count data but do **not** filter, to be consistent with the most recent regression analysis:
+```{r cache=FALSE, warning=FALSE}
+genes2fit <- unlist(read.csv("../../data/genes.regression.new", as.is = TRUE))
+names(genes2fit) <- genes2fit
+E <- get.predictors() # default arguments
+Y <- get.readcounts(gene.ids = genes2fit, count.thrs = 0)
+```
+
+Fitting all models to all retained gene-wise and aggregated read count data sets
+```{r cache=FALSE, warning=FALSE}
+# exclude unweighed aggregates UA.8 and UA from fitting
+ids2fit <- grep("^UA(.8)?$", names(Y), value = TRUE, invert = TRUE)
+M <- do.all.fits(Y[ids2fit], preds = e.vars)
+f.ids <- as.data.frame(lapply(M, function(m) ! sapply(m, is.null)))
+f.ids["TMEM261P1", c("logi.S", "logi2.S")] <- FALSE
+f.ids[c("WA.8", "WA"), ] <- FALSE # gene aggregates are not needed here
+```
+
+## Analysis
+
+### Delineation of imprinted gene clusters
+
+Let $$K$$ denote the set of genes $$g$$ such that $$g\in K$$ means the gene is either "known" (to be imprinted) or near some "known", i.e. "nearby candidate". Let $$C$$ be the set of "candidate" genes (further away from "known"s). Let $$g_{i-1}$$ and $$g_i$$ be neighboring genes on the same chromosome at the $$i-1$$-th and $$i$$-th site.  Delineation of clusters was done using the following simple rule: if $$g_{i-1}\in C$$ and $$g_{i}\in K$$ then a cluster starts at the $$i$$-th gene.  The cluster ends at the first $$j\gt i$$ such that $$g_{j}\in K$$ but $$g_{i}\in C$$.  The rule is implemented in the `make.impr.segs` function in `2016-08-08-imprinted-gene-clusters.R`.
+
+```{r cache=TRUE}
+gene.summary$imprinting.status <- factor(gene.summary$imprinted, ordered = TRUE)
+levels(gene.summary$imprinting.status) <- rev(c("known imprinted", "nearby candidate", "distant candidate"))
+gene.summary$Symbol <- factor(gene.summary$Symbol, levels = gene.summary$Symbol, ordered = TRUE)
+gene.summary$chr <- factor(paste("chr", gene.summary$chr), levels = paste("chr", seq_along(levels(factor(gene.summary$chr)))), ordered = TRUE)
+# imprinting segments in component 'seg': clusters and segments inbetween
+gs.seg <- make.impr.segs(gene.summary, remove.str = "distant candidate")
+gs.seg$cluster <-
+    factor(x <- with(gs.seg,
+                     ifelse(seg > 0, paste0("clus ", seg, " (", chr, ")"), paste0("inter clus ", abs(seg)))),
+           levels = unique(x), ordered = TRUE)
+rm(x)
+# remove filtered genes
+gs <- gs.seg[names(frac), ]
+gs$score <- unlist(frac["1", ])
+```
+
+Write results to file:
+
+```{r}
+write.csv(gs, file = "../../results/gene-clusters.csv")
+```
+
+Eeach cluster has several genes including the "nearby candidate" category; note the median as well.
+
+```{r cluster-sizes, echo=TRUE}
+cluster.freq <- table(gs.seg$cluster)[seq(2, length(levels(gs.seg$cluster)), by = 2)]
+median(cluster.freq)
+barchart(cluster.freq, xlab = "# genes in cluster (including nearby candidates)")
+```
+
+*Before* filtering these clusters contain the following number of "known" and "nearby candidate" genes:
+```{r}
+table(gene.summary$imprinting.status)
+```
+
+*After* filtering:
+```{r}
+table(gs$imprinting.status)
+```
+
+### Genomic location
+
+The plot below shows the genomic location of all `r nrow(gs)` genes in the filtered data set and indicates their imprinting status with different colors.  Also shown is the gene score according to which genes have been ranked and called as monoallelically expressing or not.
+
+```{r score-genomic-location, dev=c("png", "pdf"), fig.asp=1}
+gs$imprinting.status.1 <- as.character(gs$imprinting.status)
+gs$imprinting.status.1[51:length(gs$imprinting.status.1)] <- "below top 50"
+gs$imprinting.status.1 <- factor(gs$imprinting.status.1, levels = c("below top 50", levels(gs$imprinting.status)))
+mycol <- c("gray", "red", "darkgreen", "blue")
+xyplot(score ~ start | chr, data = gs, groups = imprinting.status.1,
+       auto.key = list(text = rev(levels(gs$imprinting.status.1)), columns = 1, col = rev(mycol), points = FALSE),
+       layout = c(4, 6),
+       par.settings = list(superpose.symbol =
+                           list(pch = c(21, 21, 21, 21), alpha = c(1, 1, 1, 1),
+                                fill = c("white", "pink", "green", "lightblue"),
+                                cex = c(0.2, 0.5, 0.5, 0.5),
+                                col = mycol)),
+       xlab = "genomic location", ylab = "gene score")
+```
+
+Extract $$\hat{\beta}_\mathrm{age}$$ and confidence intervals for $$\beta_\mathrm{age}$$ 
+
+```{r warning=FALSE, message=FALSE, cache=TRUE}
+sel.genes <- unlist(read.csv("../../data/genes.regression.new", as.is = TRUE))
+beta.99 <- lapply(M, function(l.m) do.beta(l.m[sel.genes], conf.lev = 0.99))
+beta.95 <- lapply(M, function(l.m) do.beta(l.m[sel.genes], conf.lev = 0.95))
+```
+
+```{r}
+beta.99.long <- do.call(rbind, lapply(names(beta.99), function(x) cbind(beta.99[[x]], data.frame(Model = x))))
+#write.csv(beta.99.long, "../../results/beta-99-CI.csv")
+beta.95.long <- do.call(rbind, lapply(names(beta.99), function(x) cbind(beta.99[[x]], data.frame(Model = x))))
+#write.csv(beta.95.long, "../../results/beta-95-CI.csv")
+```
+
+### Filtering for poor fit
+
+Filter based on earlier decisions on the goodness of fit of logi.S, which is stored in `results/model-checking.csv`.
+
+```{r}
+logi.S.OK <- read.csv("../../results/model-checking.csv", row.names = "gene")["logi.S.fit.OK"]
+# set results to NA where logi.S fitted poorly
+beta.99$logi.S[beta.99$logi.S$Gene %in% rownames(logi.S.OK)[! logi.S.OK$logi.S.fit.OK],
+               c("Estimate", "Lower.CL", "Upper.CL")] <- NA
+beta.95$logi.S[beta.95$logi.S$Gene %in% rownames(logi.S.OK)[! logi.S.OK$logi.S.fit.OK],
+               c("Estimate", "Lower.CL", "Upper.CL")] <- NA
+```
+
+
+### $$\beta_g$$ arranged by clusters
+
+#### wnlm.Q, 99 % confidence (for the manuscript)
+
+```{r segplot-wnlm-Q-99conf}
+my.segplot2(beta.99$wnlm.Q, layout = c(4, 1), xlim = list(2e-2*c(-1,1), 0.7*c(-1,1), 0.9*c(-1,1), 9*c(-1,1)))
+```
+
+#### wnlm.Q, 95 % confidence
+
+```{r segplot-wnlm-Q-95conf, echo=FALSE}
+my.segplot2(beta.95$wnlm.Q, layout = c(4, 1), xlim = list(2e-2*c(-1,1), 0.7*c(-1,1), 0.9*c(-1,1), 9*c(-1,1)))
+```
+
+#### logi.S, 99 % confidence
+
+```{r segplot-logi-S-99conf, echo=FALSE}
+my.segplot2(beta.99$logi.S, layout = c(4, 1), xlim = list(4e-2*c(-1,1), 0.9*c(-1,1), 1.1*c(-1,1), 13*c(-1,1)))
+```
+
+#### logi.S, 95 % confidence
+
+```{r segplot-logi-S-95conf, echo=FALSE}
+my.segplot2(beta.95$logi.S, layout = c(4, 1), xlim = list(4e-2*c(-1,1), 0.9*c(-1,1), 1.1*c(-1,1), 13*c(-1,1)))
+```
+
+```{r segplot-wnlm-Q-99conf-allcoef, fig.asp=1.7}
+my.segplot2(beta.99$wnlm.Q, layout = c(7, 3), sel.coefs = unlist(lapply(e.vars, function(v) predictor2coefs(M$wnlm.Q[[1]], v))))
+```
+
+### Comparison to Baran et al 2015
+
+[Baran et al 2015][baran] identified 42 imprinted genes in various human tissues based on GTeX and other data.  Their Table S3 lists these genes along with the tissue in which they were found to be imprinted:
+
+```{r}
+baran <- read.csv("../../data/baran-2015-genome-res/table_s3.csv")
+levels(baran$name)
+```
+
+Establish consistency of gene names between Baran et al and our study and extract genes Baran et al found to be imprinted in the brain:
+
+```{r}
+levels(baran) <- sub("INPP5F_V2", "INPP5F", levels(baran$name))
+levels(baran) <- sub("MEG8", "RP11-909M7.3", levels(baran$name))
+baran$name <- sub("INPP5F_V2", "INPP5F", baran$name)
+baran$name <- sub("MEG8", "RP11-909M7.3", baran$name)
+baran.brain <- baran[ baran$tissue == "BRAIN", "name"]
+```
+
+Summarize genes called imprinted either by Baran et al or this study:
+
+```{r echo=FALSE}
+baran.vs.ourwork <- data.frame(gene = union(baran.brain, sel.genes),
+                               Baran.et.al = factor(NA, levels = imp.levs <- c("imprinted", "not imprinted or assessed")),
+                               this.work = factor(NA, levels = imp.levs <- c("imprinted", "not imprinted", "not assessed")))
+row.names(baran.vs.ourwork) <- baran.vs.ourwork$gene
+baran.vs.ourwork[ baran.brain, "Baran.et.al" ] <- "imprinted"
+baran.vs.ourwork[ setdiff(sel.genes, baran.brain), "Baran.et.al" ] <- "not imprinted or assessed"
+baran.vs.ourwork[ setdiff(baran.brain, gene.summary$Symbol), "this.work" ] <- "not assessed"
+baran.vs.ourwork[ sel.genes, "this.work" ] <- "imprinted"
+baran.vs.ourwork[ is.na(baran.vs.ourwork$this.work), "this.work" ] <- "not imprinted"
+baran.vs.ourwork$prior.status <- gene.summary[as.character(baran.vs.ourwork$gene), "imprinted"]
+with(baran.vs.ourwork, table(Baran.et.al, this.work))
+```
+
+Next, list each gene and write result to file.  It is noteworthy that the novel imprinted genes suggested by our study are `r with(baran.vs.ourwork, gene[ this.work == "imprinted" & prior.status == "1 M impr clstr"])` and among these only `r with(baran.vs.ourwork, gene[ this.work == "imprinted" & prior.status == "1 M impr clstr" & Baran.et.al == "imprinted" ])` is/are suggested by Baran et al.
+
+```{r}
+baran.vs.ourwork[ , -1]
+write.csv(baran.vs.ourwork, file = "../../results/baran-vs-ourwork.csv", row.names = FALSE)
+```
+
+### Revision for Nature Communications
+
+This part is motivated by the following comments from reviewer \#2
+
+> How robust the results are the arbitrarily chosen “S_{ig} > 0.9” threshold? If 0.7 were chosen how would the top 50 genes change? Couldn’t genes simply be ranked by the sum of the S_{ig} scores across individuals? Similar question about the “top 50” genes, why 50, how would the top 20, top 100 behave in terms of imprinting enrichment? Wouldn’t it be simpler to make the point by drawing a ROC curve (truth=known imprinted genes, S_{ig}>.9 fraction as predictor)?
+
+```{r}
+gs.0.9 <- cbind(gs, data.frame(ecdf.thrs = factor("0.9")))
+gs.0.7 <- cbind(gs, data.frame(ecdf.thrs = factor("0.7")))
+gs$score.0.7 <- gs.0.7$score <- apply(frac[1:3, ], 2, sum)
+gs.long <- rbind(gs.0.7, gs.0.9)
+rm(gs.0.9, gs.0.7)
+mykey <- list(text = c(rev(levels(gs$imprinting.status.1)[-1:-2]), "any other gene"), columns = 1, col = rev(mycol[-1]), points = FALSE, lines = FALSE)
+mypar <- list(superpose.line = list(col = c(mycol[-1])), superpose.symbol = list(col = c("red", mycol[-1])))
+```
+
+```{r 2-scores-parallel, fig.asp = 0.5}
+parallelplot(gs[c("score.0.7", "score")], groups = gs$imprinting.status,
+       par.settings = mypar, auto.key = mykey, ylab = "threshold", xlab = "score",
+       scales = list(x = list(at = seq(from = 0, to = 1, by = 0.2), labels = as.character(seq(from = 0, to = 1, by = 0.2))),
+                     y = list(at = 1:2, labels = c("0.7", "0.9"))))
+```
+
+```{r 2-scores-strip, fig.asp = 0.5}
+stripplot(ecdf.thrs ~ score, data = gs.long, groups = imprinting.status.1, jitter = TRUE,
+       par.settings = mypar, ylab = "threshold",
+       auto.key = mykey, pch = c("I", "I", "o", "o"))
+```
+
+[baran]: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4484390/
+[baran-vs-ourwork.csv]: {{ site.baseurl }}/assets/projects/monoallelic-brain/baran-vs-ourwork.csv
