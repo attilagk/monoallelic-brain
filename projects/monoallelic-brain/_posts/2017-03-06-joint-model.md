@@ -773,6 +773,7 @@ av.6$Ancestry.5 <- anova(M6, update(M6, . ~ . + scale(Ancestry.5)))
 
 
 ```r
+write.csv(summarize.anova(av.5), "../../results/anova-mixed-M5.csv")
 print.av(summarize.anova(av.5))
 ```
 
@@ -798,6 +799,7 @@ print.av(summarize.anova(av.5))
 ```
 
 ```r
+write.csv(summarize.anova(av.6), "../../results/anova-mixed-M6.csv")
 print.av(summarize.anova(av.6))
 ```
 
@@ -820,6 +822,407 @@ print.av(summarize.anova(av.6))
 ## Ancestry.3            1.6       8.6      0.4     1    5.4e-01
 ## Ancestry.4            1.0       8.0      1.0     1    3.1e-01
 ## Ancestry.5            1.9       9.0      0.1     1    8.1e-01
+```
+
+#### Revision for Nature Communications
+
+
+```r
+M5.odd <- lmer(formula(M5), data = dat, subset = Gene %in% gene.ids[seq(from = 1, to = length(gene.ids), by = 2)])
+M5.even <- lmer(formula(M5), data = dat, subset = Gene %in% gene.ids[seq(from = 2, to = length(gene.ids), by = 2)])
+```
+
+
+```r
+av.5.odd <- list()
+av.5.odd$Age.Gene <-
+    anova(update(M5.odd, . ~ . - (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene) + (scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene)),
+          M5.odd)
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5.odd$Ancestry.1.Gene <-
+    anova(update(M5.odd, . ~ . - (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene) + (scale(Age) + scale(RIN) + scale(Ancestry.3) | Gene)),
+          M5.odd)
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5.odd$Ancestry.2.Gene <-
+    anova(M5.odd,
+          update(M5.odd, . ~ . - (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene) + (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.2) + scale(Ancestry.3) | Gene)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5.odd$Ancestry.3.Gene <-
+    anova(update(M5.odd, . ~ . - (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene) + (scale(Age) + scale(RIN) + scale(Ancestry.1) | Gene)),
+          M5.odd)
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5.odd$Ancestry.4.Gene <-
+    anova(M5.odd,
+          update(M5.odd, . ~ . - (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene) + (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.4) + scale(Ancestry.3) | Gene)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5.odd$Ancestry.5.Gene <-
+    anova(M5.odd,
+          update(M5.odd, . ~ . - (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene) + (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.5) + scale(Ancestry.3) | Gene)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5.odd$Gender.Gene <-
+    anova(update(M5.odd, . ~ . - (1 | Gender:Gene)), M5.odd)
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5.odd$Gender <- anova(M5.odd, update(M5.odd, . ~ . + (1 | Gender)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+# note that the next one is an addition to M5.odd
+av.5.odd$Dx.Gene <-
+    anova(M5.odd, update(M5.odd, . ~ . + (1 | Dx:Gene)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5.odd$Dx <- anova(M5.odd, update(M5.odd, . ~ . + (1 | Dx)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5.odd$Gene <-
+    anova(update(M5.odd, . ~ . - (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene) + (-1 + scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene)),
+          M5.odd)
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5.odd$Age <- anova(M5.odd, update(M5.odd, . ~ . + scale(Age)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5.odd$Ancestry.1 <- anova(M5.odd, update(M5.odd, . ~ . + scale(Ancestry.1)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5.odd$Ancestry.2 <- anova(M5.odd, update(M5.odd, . ~ . + scale(Ancestry.2)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5.odd$Ancestry.3 <- anova(M5.odd, update(M5.odd, . ~ . + scale(Ancestry.3)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5.odd$Ancestry.4 <- anova(M5.odd, update(M5.odd, . ~ . + scale(Ancestry.4)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5.odd$Ancestry.5 <- anova(M5.odd, update(M5.odd, . ~ . + scale(Ancestry.5)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+
+```r
+av.5.even <- list()
+av.5.even$Age.Gene <-
+    anova(update(M5.even, . ~ . - (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene) + (scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene)),
+          M5.even)
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5.even$Ancestry.1.Gene <-
+    anova(update(M5.even, . ~ . - (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene) + (scale(Age) + scale(RIN) + scale(Ancestry.3) | Gene)),
+          M5.even)
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5.even$Ancestry.2.Gene <-
+    anova(M5.even,
+          update(M5.even, . ~ . - (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene) + (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.2) + scale(Ancestry.3) | Gene)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5.even$Ancestry.3.Gene <-
+    anova(update(M5.even, . ~ . - (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene) + (scale(Age) + scale(RIN) + scale(Ancestry.1) | Gene)),
+          M5.even)
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5.even$Ancestry.4.Gene <-
+    anova(M5.even,
+          update(M5.even, . ~ . - (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene) + (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.4) + scale(Ancestry.3) | Gene)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5.even$Ancestry.5.Gene <-
+    anova(M5.even,
+          update(M5.even, . ~ . - (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene) + (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.5) + scale(Ancestry.3) | Gene)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5.even$Gender.Gene <-
+    anova(update(M5.even, . ~ . - (1 | Gender:Gene)), M5.even)
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5.even$Gender <- anova(M5.even, update(M5.even, . ~ . + (1 | Gender)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+# note that the next one is an addition to M5.even
+av.5.even$Dx.Gene <-
+    anova(M5.even, update(M5.even, . ~ . + (1 | Dx:Gene)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5.even$Dx <- anova(M5.even, update(M5.even, . ~ . + (1 | Dx)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5.even$Gene <-
+    anova(update(M5.even, . ~ . - (scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene) + (-1 + scale(Age) + scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene)),
+          M5.even)
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5.even$Age <- anova(M5.even, update(M5.even, . ~ . + scale(Age)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5.even$Ancestry.1 <- anova(M5.even, update(M5.even, . ~ . + scale(Ancestry.1)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5.even$Ancestry.2 <- anova(M5.even, update(M5.even, . ~ . + scale(Ancestry.2)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5.even$Ancestry.3 <- anova(M5.even, update(M5.even, . ~ . + scale(Ancestry.3)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5.even$Ancestry.4 <- anova(M5.even, update(M5.even, . ~ . + scale(Ancestry.4)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+```r
+av.5.even$Ancestry.5 <- anova(M5.even, update(M5.even, . ~ . + scale(Ancestry.5)))
+```
+
+```
+## refitting model(s) with ML (instead of REML)
+```
+
+The less significant p-values for the `even` gene subset compared to the `odd` gene subset are partly explained by fewer observations (more missing values) in the `even` subset, and partly by the fact that the `even` subset is less variable in terms of e.g. age dependence.
+
+
+```
+## [1] "number of non-NA observations"
+```
+
+```
+##  odd even 
+## 4347 3866
+```
+
+```
+## [1] "number of total observations in subsets"
+```
+
+```
+##  odd even 
+## 8685 8685
+```
+
+```
+## [1] "fraction of non-NA observations"
+```
+
+```
+##       odd      even 
+## 0.5005181 0.4451353
+```
+
+
+```r
+write.csv(summarize.anova(av.5.odd), "../../results/anova-mixed-M5.odd.csv")
+print.av(summarize.anova(av.5.odd))
+```
+
+```
+##                 Delta.AIC Delta.BIC    Chisq    df      p.Chi
+## Age.Gene            -11.8      20.1     21.8     5    5.8e-04
+## Ancestry.1.Gene     -40.1      -8.2     50.1     5    1.3e-09
+## Ancestry.2.Gene       5.6      43.8      6.4     6    3.8e-01
+## Ancestry.3.Gene     -13.3      18.5     23.3     5    2.9e-04
+## Ancestry.4.Gene      11.6      49.9      0.4     6        1.0
+## Ancestry.5.Gene       9.0      47.3      3.0     6    8.1e-01
+## Gender.Gene          -2.2       4.2      4.2     1    4.0e-02
+## Gender                2.0       8.4      0.0     1        1.0
+## Dx.Gene               1.9       8.2      0.1     1    7.1e-01
+## Dx                    2.0       8.4      0.0     1        1.0
+## Gene                -61.2     -29.3     71.2     5    5.7e-14
+## Age                  -0.0       6.4      2.0     1    1.6e-01
+## Ancestry.1           -0.4       6.0      2.4     1    1.2e-01
+## Ancestry.2            1.4       7.8      0.6     1    4.4e-01
+## Ancestry.3            1.7       8.1      0.3     1    5.9e-01
+## Ancestry.4           -1.0       5.4      3.0     1    8.2e-02
+## Ancestry.5            1.3       7.6      0.7     1    3.9e-01
+```
+
+```r
+write.csv(summarize.anova(av.5.even), "../../results/anova-mixed-M5.even.csv")
+print.av(summarize.anova(av.5.even))
+```
+
+```
+##                 Delta.AIC Delta.BIC    Chisq    df      p.Chi
+## Age.Gene              5.1      36.4      4.9     5    4.3e-01
+## Ancestry.1.Gene     -18.5      12.8     28.5     5    2.9e-05
+## Ancestry.2.Gene       8.6      46.2      3.4     6    7.6e-01
+## Ancestry.3.Gene       6.0      37.3      4.0     5    5.5e-01
+## Ancestry.4.Gene       5.5      43.1      6.5     6    3.7e-01
+## Ancestry.5.Gene       8.1      45.7      3.9     6    6.9e-01
+## Gender.Gene           0.1       6.4      1.9     1    1.7e-01
+## Gender                0.7       6.9      1.3     1    2.5e-01
+## Dx.Gene              -0.0       6.2      2.0     1    1.6e-01
+## Dx                    2.0       8.3      0.0     1        1.0
+## Gene                -59.2     -27.9     69.2     5    1.5e-13
+## Age                   2.0       8.2      0.0     1    8.6e-01
+## Ancestry.1            1.8       8.1      0.2     1    6.6e-01
+## Ancestry.2            1.9       8.1      0.1     1    7.1e-01
+## Ancestry.3            1.6       7.9      0.4     1    5.4e-01
+## Ancestry.4            2.0       8.3      0.0     1    9.5e-01
+## Ancestry.5            1.7       8.0      0.3     1    6.0e-01
 ```
 
 #### Summary

@@ -189,6 +189,14 @@ beta.99 <- lapply(M, function(l.m) do.beta(l.m[sel.genes], conf.lev = 0.99))
 beta.95 <- lapply(M, function(l.m) do.beta(l.m[sel.genes], conf.lev = 0.95))
 ```
 
+
+```r
+beta.99.long <- do.call(rbind, lapply(names(beta.99), function(x) cbind(beta.99[[x]], data.frame(Model = x))))
+#write.csv(beta.99.long, "../../results/beta-99-CI.csv")
+beta.95.long <- do.call(rbind, lapply(names(beta.99), function(x) cbind(beta.99[[x]], data.frame(Model = x))))
+#write.csv(beta.95.long, "../../results/beta-95-CI.csv")
+```
+
 ### Filtering for poor fit
 
 Filter based on earlier decisions on the goodness of fit of logi.S, which is stored in `results/model-checking.csv`.
@@ -341,6 +349,42 @@ baran.vs.ourwork[ , -1]
 ```r
 write.csv(baran.vs.ourwork, file = "../../results/baran-vs-ourwork.csv", row.names = FALSE)
 ```
+
+### Revision for Nature Communications
+
+This part is motivated by the following comments from reviewer \#2
+
+> How robust the results are the arbitrarily chosen “S_{ig} > 0.9” threshold? If 0.7 were chosen how would the top 50 genes change? Couldn’t genes simply be ranked by the sum of the S_{ig} scores across individuals? Similar question about the “top 50” genes, why 50, how would the top 20, top 100 behave in terms of imprinting enrichment? Wouldn’t it be simpler to make the point by drawing a ROC curve (truth=known imprinted genes, S_{ig}>.9 fraction as predictor)?
+
+
+```r
+gs.0.9 <- cbind(gs, data.frame(ecdf.thrs = factor("0.9")))
+gs.0.7 <- cbind(gs, data.frame(ecdf.thrs = factor("0.7")))
+gs$score.0.7 <- gs.0.7$score <- apply(frac[1:3, ], 2, sum)
+gs.long <- rbind(gs.0.7, gs.0.9)
+rm(gs.0.9, gs.0.7)
+mykey <- list(text = c(rev(levels(gs$imprinting.status.1)[-1:-2]), "any other gene"), columns = 1, col = rev(mycol[-1]), points = FALSE, lines = FALSE)
+mypar <- list(superpose.line = list(col = c(mycol[-1])), superpose.symbol = list(col = c("red", mycol[-1])))
+```
+
+
+```r
+parallelplot(gs[c("score.0.7", "score")], groups = gs$imprinting.status,
+       par.settings = mypar, auto.key = mykey, ylab = "threshold", xlab = "score",
+       scales = list(x = list(at = seq(from = 0, to = 1, by = 0.2), labels = as.character(seq(from = 0, to = 1, by = 0.2))),
+                     y = list(at = 1:2, labels = c("0.7", "0.9"))))
+```
+
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-08-08-imprinted-gene-clusters/figure/2-scores-parallel-1.png" title="plot of chunk 2-scores-parallel" alt="plot of chunk 2-scores-parallel" width="700px" />
+
+
+```r
+stripplot(ecdf.thrs ~ score, data = gs.long, groups = imprinting.status.1, jitter = TRUE,
+       par.settings = mypar, ylab = "threshold",
+       auto.key = mykey, pch = c("I", "I", "o", "o"))
+```
+
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-08-08-imprinted-gene-clusters/figure/2-scores-strip-1.png" title="plot of chunk 2-scores-strip" alt="plot of chunk 2-scores-strip" width="700px" />
 
 [baran]: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4484390/
 [baran-vs-ourwork.csv]: {{ site.baseurl }}/assets/projects/monoallelic-brain/baran-vs-ourwork.csv

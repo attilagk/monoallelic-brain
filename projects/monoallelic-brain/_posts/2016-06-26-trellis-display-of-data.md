@@ -158,6 +158,10 @@ update(P$s.age$lattice, layout = c(5, 6))
 
 Both "scatter plot matrices" show the same set of pairwise associations (top: `lattice`, bottom: `ggplot2` and `GGally` packages).
 
-<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-06-26-trellis-display-of-data/figure/evar-scatterplot-matrix-1.png" title="plot of chunk evar-scatterplot-matrix" alt="plot of chunk evar-scatterplot-matrix" width="700px" /><img src="figure/evar-scatterplot-matrix-2.png" title="plot of chunk evar-scatterplot-matrix" alt="plot of chunk evar-scatterplot-matrix" width="700px" />
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-06-26-trellis-display-of-data/figure/evar-scatterplot-matrix-1.png" title="plot of chunk evar-scatterplot-matrix" alt="plot of chunk evar-scatterplot-matrix" width="700px" />
+
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-06-26-trellis-display-of-data/figure/evar-scatterplot-matrix-gg-1.png" title="plot of chunk evar-scatterplot-matrix-gg" alt="plot of chunk evar-scatterplot-matrix-gg" width="700px" />
+
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-06-26-trellis-display-of-data/figure/evar-scatterplot-matrix-simple-1.png" title="plot of chunk evar-scatterplot-matrix-simple" alt="plot of chunk evar-scatterplot-matrix-simple" width="700px" /><img src="figure/evar-scatterplot-matrix-simple-2.png" title="plot of chunk evar-scatterplot-matrix-simple" alt="plot of chunk evar-scatterplot-matrix-simple" width="700px" />
 <!-- MathJax scripts -->
 <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

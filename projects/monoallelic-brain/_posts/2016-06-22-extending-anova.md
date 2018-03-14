@@ -171,6 +171,12 @@ Betas <- lapply(M, function(m) { x <- get.estimate.CI(m$forward); x <- x[ ! x$Co
 
 
 ```r
+Betas.long <- do.call(rbind, lapply(names(Betas), function(x) cbind(Betas[[x]], data.frame(Model = x))))
+write.csv(Betas.long, "../../results/beta-99-CI.csv")
+```
+
+
+```r
 my.segplot(data = reverse.genes(Betas$logi.S), main = expression(paste("99 % CI for ", beta, " under logi.S")))
 ```
 

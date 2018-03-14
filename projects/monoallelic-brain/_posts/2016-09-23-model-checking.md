@@ -91,6 +91,7 @@ Calculate diagnostics:
 ```r
 diagnostics <- lapply(names(M), function(m) get.diagnostics(M[[m]][gene.ids], mtype = m))
 diagnostics <- do.call(rbind, diagnostics)
+#diagnostics$gene <- factor(diagnostics$gene, levels = rev(levels(diagnostics$gene)), ordered = TRUE)
 ```
 
 ### Normality of residuals
@@ -165,6 +166,20 @@ myqqnorm.demo("KCNK9")
 ```
 
 <img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-09-23-model-checking/figure/qqnorm-KCNK9-1.png" title="plot of chunk qqnorm-KCNK9" alt="plot of chunk qqnorm-KCNK9" width="700px" />
+
+
+```r
+myqqnorm2(genes = c("MEST", "INPP5F"), models = c("wnlm.Q", "unlm.Q"))
+```
+
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-09-23-model-checking/figure/res-std-dev-wnlmQ-unlmQ-FAM50B-MEST-1.png" title="plot of chunk res-std-dev-wnlmQ-unlmQ-FAM50B-MEST" alt="plot of chunk res-std-dev-wnlmQ-unlmQ-FAM50B-MEST" width="700px" />
+
+
+```r
+myqqnorm2(genes = gene.ids, models = c("wnlm.Q", "unlm.Q"))
+```
+
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-09-23-model-checking/figure/res-std-dev-wnlmQ-unlmQ-1.png" title="plot of chunk res-std-dev-wnlmQ-unlmQ" alt="plot of chunk res-std-dev-wnlmQ-unlmQ" width="700px" />
 
 ### Homogeneity of error (homoscedasticity)
 

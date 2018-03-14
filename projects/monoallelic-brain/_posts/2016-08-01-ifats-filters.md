@@ -346,11 +346,7 @@ library(VennDiagram)
 ```
 
 ```
-## Loading required package: grid
-```
-
-```
-## Loading required package: futile.logger
+## Error in library(VennDiagram): there is no package called 'VennDiagram'
 ```
 
 The partitions induced by filtering and calling genes monoallelic (imprinted) are illustrated by the following Euler or Venn diagrams.  Note that, for an Euler diagram but not for a Venn diagram, the shapes (circles or ellipses) are proportional to the size of the set they represent and that topological relationship among shapes is such that there is no overlap if the intersection of the corresponding sets is the empty set $$\{\}$$.
@@ -376,11 +372,19 @@ l <- c(l, list(category = gsub("\\.", " ", names(g.sets[-4])), cat.cex = 1.2, ca
 grid.draw(do.call(draw.triple.venn, l))
 ```
 
-<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-08-01-ifats-filters/figure/venn-total-initialf-finalf-1.png" title="plot of chunk venn-total-initialf-finalf" alt="plot of chunk venn-total-initialf-finalf" height="700px" />
+```
+## Error in grid.draw(do.call(draw.triple.venn, l)): could not find function "grid.draw"
+```
 
-<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-08-01-ifats-filters/figure/venn-total-finalf-called-1.png" title="plot of chunk venn-total-finalf-called" alt="plot of chunk venn-total-finalf-called" height="700px" />
 
-<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-08-01-ifats-filters/figure/venn-total-initialf-finalf-called-1.png" title="plot of chunk venn-total-initialf-finalf-called" alt="plot of chunk venn-total-initialf-finalf-called" height="700px" />
+```
+## Error in grid.draw(do.call(draw.triple.venn, l)): could not find function "grid.draw"
+```
+
+
+```
+## Error in grid.draw(do.call(draw.quad.venn, l)): could not find function "grid.draw"
+```
 
 ## Conclusion
 

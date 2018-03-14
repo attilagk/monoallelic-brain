@@ -148,6 +148,19 @@ There are 5283 genes on this figure but before filtering there were 15584 genes.
 
 <img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-07-19-genome-wide-S/figure/complex-plot-c-1.png" title="plot of chunk complex-plot-c" alt="plot of chunk complex-plot-c" height="1000" /><img src="figure/complex-plot-c-2.png" title="plot of chunk complex-plot-c" alt="plot of chunk complex-plot-c" height="1000" />
 
+## Revision for Nature Communications
+
+
+```r
+source("../../src/fit-glms.R")
+set.seed(19760415) # my birthdate
+sel.g.rnd <- sample(names(S), 42)
+Y.long <- reshape.Y2long(sel.g.rnd)
+```
+
+<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2016-07-19-genome-wide-S/figure/S-Dx-strip-1.png" title="plot of chunk S-Dx-strip" alt="plot of chunk S-Dx-strip" height="700px" />
+
+
 [ifat]: http://katahdin.mssm.edu/ifat/web/cm/home
 [Fig 1]: https://docs.google.com/presentation/d/1YvpA1AJ-zzir1Iw0F25tO9x8gkSAzqaO4fjB7K3zBhE/edit#slide=id.p4
 <!-- MathJax scripts -->
