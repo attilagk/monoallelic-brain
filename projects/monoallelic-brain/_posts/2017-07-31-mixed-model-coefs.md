@@ -42,7 +42,7 @@ formula(M5)
 ## Q ~ scale(RIN) + (1 | RNA_batch) + (1 | Institution) + (1 | Institution:Individual) + 
 ##     (1 | Gene:Institution) + (1 | Gender:Gene) + (scale(Age) + 
 ##     scale(RIN) + scale(Ancestry.1) + scale(Ancestry.3) | Gene)
-## <environment: 0x55fe570452f8>
+## <environment: 0x562d327adf38>
 ```
 
 Recall that the '1's are intercept terms, the rest are slope terms; each kind has its own sets of random coefficients.

@@ -24,6 +24,13 @@ The analysis below excludes programming bug and appears to suggest that the disc
 
 ```r
 library(variancePartition)
+```
+
+```
+## Error in library(variancePartition): there is no package called 'variancePartition'
+```
+
+```r
 library(doParallel)
 library(lattice)
 library(latticeExtra)
@@ -144,19 +151,83 @@ Extract $$\hat{\beta}_{pg}$$ for each gene $$g$$ under each model:
 
 ```r
 coef.names <- names(coef(M$unlm.Q[[1]]))
+```
+
+```
+## Warning: namespace 'variancePartition' is not available and has been replaced
+## by .GlobalEnv when processing object '.cache/unnamed-chunk-6_72e4844ff5cebd82235b24954c573556'
+
+## Warning: namespace 'variancePartition' is not available and has been replaced
+## by .GlobalEnv when processing object '.cache/unnamed-chunk-6_72e4844ff5cebd82235b24954c573556'
+
+## Warning: namespace 'variancePartition' is not available and has been replaced
+## by .GlobalEnv when processing object '.cache/unnamed-chunk-6_72e4844ff5cebd82235b24954c573556'
+```
+
+```r
 cf <- data.frame(lapply(M[- length(M)],
                         function(l.m)
                             stack(lapply(l.m,
                                          function(m)
                                              coef(m)[ coef.names ]))$values))
+```
+
+```
+## Loading required package: variancePartition
+```
+
+```
+## Warning in library(package, lib.loc = lib.loc, character.only = TRUE,
+## logical.return = TRUE, : there is no package called 'variancePartition'
+```
+
+```
+## Error in .requirePackage(package): unable to find required package 'variancePartition'
+```
+
+```r
 cf$mixed.1 <-
     stack(lapply(M$mixed.1,
                  function(m)
                      unlist(coef(m)[[1]][1, , drop = TRUE])[ coef.names ]))$values
+```
+
+```
+## Loading required package: variancePartition
+```
+
+```
+## Warning in library(package, lib.loc = lib.loc, character.only = TRUE,
+## logical.return = TRUE, : there is no package called 'variancePartition'
+```
+
+```
+## Error in .requirePackage(package): unable to find required package 'variancePartition'
+```
+
+```r
 #cf$coefficient <- rep(coef.names, length(gene.ids))
 cf$coefficient <- factor(rep(coef.names, length(gene.ids)), ordered = TRUE, levels = coef.names)
+```
+
+```
+## Error in cf$coefficient <- factor(rep(coef.names, length(gene.ids)), ordered = TRUE, : object 'cf' not found
+```
+
+```r
 cf$gene <- factor(rep(gene.ids, each = length(coef.names)), ordered = TRUE, levels = gene.ids)
+```
+
+```
+## Error in cf$gene <- factor(rep(gene.ids, each = length(coef.names)), ordered = TRUE, : object 'cf' not found
+```
+
+```r
 cf <- cbind(cf[c("coefficient", "gene")], cf[- grep("coefficient|gene", names(cf))])
+```
+
+```
+## Error in cbind(cf[c("coefficient", "gene")], cf[-grep("coefficient|gene", : object 'cf' not found
 ```
 
 Calculate 99% confidence intervals for each $$\beta_{pg}$$ (also extracts $$\hat{\beta}_{pg}$$):
@@ -171,6 +242,10 @@ Finally, load objects for plotting:
 
 ```r
 source("2017-02-14-beta-from-mixed-model.R")
+```
+
+```
+## Error in levels(cf$coefficient): object 'cf' not found
 ```
 
 ## Results
@@ -220,7 +295,9 @@ my.ylab <- expression(paste("|", t[pg], "|, normalized coefficient ", hat(beta)[
 tval.vp.plot(tval.vp.data <- tval.vp(m.type = "fixed.1", llm = M), main = my.main, xlab = my.xlab, ylab = my.ylab)
 ```
 
-<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2017-02-14-beta-from-mixed-model/figure/tval-varpart-fixed-1.png" title="plot of chunk tval-varpart-fixed" alt="plot of chunk tval-varpart-fixed" width="700px" /><img src="figure/tval-varpart-fixed-2.png" title="plot of chunk tval-varpart-fixed" alt="plot of chunk tval-varpart-fixed" width="700px" />
+```
+## Error in xyplot.formula(abs(t.value) ~ var.part | gene, data = df, panel = function(..., : object 'my.key' not found
+```
 
 #### For presentation
 
@@ -230,14 +307,18 @@ tval.vp.plot(tval.vp.data <- tval.vp(m.type = "fixed.1", llm = M), main = my.mai
 update(tval.vp.plot(tval.vp.data <- tval.vp(m.type = "fixed.1", llm = M), xlab = my.xlab, ylab = my.ylab)[c(5:8, 21:24)], layout = c(4, 2))
 ```
 
-<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2017-02-14-beta-from-mixed-model/figure/tval-varpart-fixed-present-1.png" title="plot of chunk tval-varpart-fixed-present" alt="plot of chunk tval-varpart-fixed-present" width="700px" />
+```
+## Error in xyplot.formula(abs(t.value) ~ var.part | gene, data = df, panel = function(..., : object 'my.key' not found
+```
 
 
 ```r
 update(tval.vp.plot(tval.vp.data <- tval.vp(m.type = "fixed.1", llm = M), xlab = my.xlab, ylab = my.ylab)[c(3, 6, 14, 15, 24, 30)], layout = c(3, 2), key = my.key$coefficient.2)
 ```
 
-<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2017-02-14-beta-from-mixed-model/figure/tval-varpart-fixed-present-b-1.png" title="plot of chunk tval-varpart-fixed-present-b" alt="plot of chunk tval-varpart-fixed-present-b" width="700px" />
+```
+## Error in xyplot.formula(abs(t.value) ~ var.part | gene, data = df, panel = function(..., : object 'my.key' not found
+```
 
 ### Introducing random effects
 
@@ -249,7 +330,9 @@ my.main <- "Quantities of effect size: mixed model (mixed.1)"
 tval.vp.plot(tval.vp.mixed.1 <- tval.vp(m.type = "mixed.1", llm = M), main = my.main, xlab = my.xlab, ylab = my.ylab)
 ```
 
-<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2017-02-14-beta-from-mixed-model/figure/tval-varpart-mixed-1.png" title="plot of chunk tval-varpart-mixed" alt="plot of chunk tval-varpart-mixed" width="700px" /><img src="figure/tval-varpart-mixed-2.png" title="plot of chunk tval-varpart-mixed" alt="plot of chunk tval-varpart-mixed" width="700px" />
+```
+## Error in xyplot.formula(abs(t.value) ~ var.part | gene, data = df, panel = function(..., : object 'my.key' not found
+```
 
 #### Impact on variance partitioning
 
@@ -263,7 +346,9 @@ my.ylab <- "fractional variance: mixed effects (mixed.1)"
 my.plot(x = "fixed.1", y = "mixed.1", group.by = "predictor", lbl.type = "gene", dt = vpl, main = my.main, xlab = my.xlab, ylab = my.ylab)
 ```
 
-<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2017-02-14-beta-from-mixed-model/figure/fixed-mixed-varpart-1.png" title="plot of chunk fixed-mixed-varpart" alt="plot of chunk fixed-mixed-varpart" width="700px" />
+```
+## Error in xyplot.formula(fm, data = dt, panel = my.panel, scales = switch(group.by, : object 'my.key' not found
+```
 
 Another view on the same results: grouping by genes
 
@@ -272,19 +357,46 @@ Another view on the same results: grouping by genes
 update(my.plot(x = "fixed.1", y = "mixed.1", group.by = "gene", lbl.type = "predictor", dt = vpl, subset = vpl$predictor != "Residuals", main = my.main, xlab = my.xlab, ylab = my.ylab), scales = list(relation = "free"), layout = c(4, 4))
 ```
 
-<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2017-02-14-beta-from-mixed-model/figure/fixed-mixed-varpart-genes-1.png" title="plot of chunk fixed-mixed-varpart-genes" alt="plot of chunk fixed-mixed-varpart-genes" width="700px" /><img src="figure/fixed-mixed-varpart-genes-2.png" title="plot of chunk fixed-mixed-varpart-genes" alt="plot of chunk fixed-mixed-varpart-genes" width="700px" />
+```
+## Error in xyplot.formula(fm, data = dt, panel = my.panel, scales = switch(group.by, : object 'my.key' not found
+```
 
 #### Impact on regression coefficients
 
 The impact of introducing random effects on $$T_{pg}$$ statistics (normalized $$\hat{\beta}_{pg}$$) is rather small:
 
-<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2017-02-14-beta-from-mixed-model/figure/mixed-1-fixed-tval-1.png" title="plot of chunk mixed-1-fixed-tval" alt="plot of chunk mixed-1-fixed-tval" width="700px" />
+
+```
+## Error in sub("t.value", "t.value.fixed.1", names(tval.vp.data)): object 'tval.vp.data' not found
+```
+
+```
+## Error in tval.vp.data$var.part <- NULL: object 'tval.vp.data' not found
+```
+
+```
+## Error in tval.vp.data$model <- NULL: object 'tval.vp.data' not found
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'tval.vp.mixed.1' not found
+```
+
+```
+## Error in xyplot.formula(fm, data = dt, panel = my.panel, scales = switch(group.by, : object 'my.key' not found
+```
 
 The result is similar for unnormalized $$\hat{\beta}_{pg}$$:
 
-<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2017-02-14-beta-from-mixed-model/figure/mixed-1-fixed-1.png" title="plot of chunk mixed-1-fixed" alt="plot of chunk mixed-1-fixed" width="700px" />
 
-<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2017-02-14-beta-from-mixed-model/figure/mixed-1-fixed-coef-1.png" title="plot of chunk mixed-1-fixed-coef" alt="plot of chunk mixed-1-fixed-coef" width="700px" />
+```
+## Error in xyplot.formula(fm, data = dt, panel = my.panel, scales = switch(group.by, : object 'my.key' not found
+```
+
+
+```
+## Error in xyplot.formula(fm, data = dt, panel = my.panel, scales = switch(group.by, : object 'my.key' not found
+```
 
 These differences really reflect the introduction of random effects and are not due to software bug because the two different implementations of the fitting of the same fixed effects model (unlm.Q) gives identical results:
 
@@ -294,14 +406,20 @@ with(cf, all.equal(unlm.Q, fixed.1))
 ```
 
 ```
-## [1] TRUE
+## Error in with(cf, all.equal(unlm.Q, fixed.1)): object 'cf' not found
 ```
 
 ### Introducing weighting
 
 Because fitting weighted models using `variancePartition` failed (see Calculations above), the impact of weighting is only studied in terms of regression coefficients:
 
-<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2017-02-14-beta-from-mixed-model/figure/fixed-unweighted-weighted-1.png" title="plot of chunk fixed-unweighted-weighted" alt="plot of chunk fixed-unweighted-weighted" width="700px" />
-<img src="{{ site.baseurl }}/projects/monoallelic-brain/R/2017-02-14-beta-from-mixed-model/figure/fixed-unweighted-weighted-coef-1.png" title="plot of chunk fixed-unweighted-weighted-coef" alt="plot of chunk fixed-unweighted-weighted-coef" width="700px" />
+
+```
+## Error in xyplot.formula(fm, data = dt, panel = my.panel, scales = switch(group.by, : object 'my.key' not found
+```
+
+```
+## Error in xyplot.formula(fm, data = dt, panel = my.panel, scales = switch(group.by, : object 'my.key' not found
+```
 <!-- MathJax scripts -->
 <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

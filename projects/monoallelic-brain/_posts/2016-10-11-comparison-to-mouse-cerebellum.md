@@ -43,7 +43,21 @@ perez <- read.csv("../../data/elife-07860/elife-07860-supp1-v2.csv", as.is = TRU
 ```r
 library(AnnotationDbi)
 library("org.Hs.eg.db")
+```
+
+```
+## Error in library("org.Hs.eg.db"): there is no package called 'org.Hs.eg.db'
+```
+
+```r
 library("org.Mm.eg.db")
+```
+
+```
+## Error in library("org.Mm.eg.db"): there is no package called 'org.Mm.eg.db'
+```
+
+```r
 library("hom.Hs.inp.db")
 ```
 
@@ -54,12 +68,19 @@ Convert for the 30 selected human genes the gene names (stored in `h.g.names`) i
 
 ```r
 human.eg.ids <- unlist(as.list(org.Hs.egSYMBOL2EG[mappedkeys(org.Hs.egSYMBOL2EG)])[h.g.names])
+```
+
+```
+## Error in as.list(org.Hs.egSYMBOL2EG[mappedkeys(org.Hs.egSYMBOL2EG)]): object 'org.Hs.egSYMBOL2EG' not found
+```
+
+```r
 # the conversion failed for these genes:
 names(h.g.names[! h.g.names %in% names(human.eg.ids)])
 ```
 
 ```
-## [1] "AL132709.5"    "RP11-909M7.3"  "RP13-487P22.1" "hsa-mir-335"
+## Error in h.g.names %in% names(human.eg.ids): object 'human.eg.ids' not found
 ```
 
 Import all mouse gene ids and symbols, do the conversion hack and check which human genes could not be converted:
@@ -68,8 +89,22 @@ Import all mouse gene ids and symbols, do the conversion hack and check which hu
 ```r
 # get all mouse genes
 mouse.all <- as.list(org.Mm.egSYMBOL2EG[mappedkeys(org.Mm.egSYMBOL2EG)])
+```
+
+```
+## Error in as.list(org.Mm.egSYMBOL2EG[mappedkeys(org.Mm.egSYMBOL2EG)]): object 'org.Mm.egSYMBOL2EG' not found
+```
+
+```r
 # "humanify" mouse gene names by all-capitalization, i.e. using the rule Mest (mouse) -> MEST (human)
 names(mouse.all) <- toupper(names(mouse.all))
+```
+
+```
+## Error in toupper(names(mouse.all)): object 'mouse.all' not found
+```
+
+```r
 # convert mouse gene names (i.e. symbols) to upper case and check for non-matching human gene symbols
 names(h.g.names[! h.g.names %in% toupper(as.character(perez$gene_name))])
 ```
