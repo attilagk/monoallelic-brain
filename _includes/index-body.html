@@ -3,6 +3,7 @@
         <h1 class="project-name">{{ site.title }}</h1>
         <h2 class="project-tagline">{{ site.description }}</h2>
         <a href="https://github.com/attilagk/monoallelic-brain-notebook" class="btn">View on GitHub</a>
+        <h2>Hover over an <i class="fa fa-info-circle fa-1x"></i> to reveal abstract.  Click to open article.</h2>
     </section>
     {% case page.sortkey %}
     {% when 'categories' %}
@@ -14,28 +15,12 @@
     {% assign otherhtml = 'index-tags.html' %}
     {% endcase %}
     <section class="container-with-menu">
-        <!-- menu of labels: categories or tags -->
-        <ul>
-            <li><a href="#" class="active">all {{ page.sortkey }}</a></li>
-            {% for item in site.[{{page.sortkey}}] %}
-            {% assign label = item[0] %}
-            {% unless label == 'projects' %}
-            <li><a href="#" class="{{ class }}">{{ label }}</a></li>
-            {% endunless %}
-            {% endfor %}
-        </ul>
         <!-- panels: each corresponds to a label; panels are overlaid on each other -->
         <div class="panels">
             <!-- active panel is the one with all articles -->
             {% assign postsincategory = site.posts %}
             {% assign class = 'active-panel' %}
-            {% case page.sortkey %}
-            {% when 'categories' %}
-            {% assign label = 'all categories' %}
-            {% when 'tags' %}
-            {% assign label = 'all tags' %}
-            {% endcase %}
-            <!-- include first html corresponding to actie panel-->
+            <!-- include first html corresponding to active panel-->
             {% include index-article.html %}
             <!-- for each label -->
             {% for item in site.[{{page.sortkey}}] %}
