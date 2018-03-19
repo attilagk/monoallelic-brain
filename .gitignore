@@ -2,5 +2,5 @@ _site
 .sass-cache
 .jekyll-metadata
 *.swp
-*.pdf
+**/figure/*.pdf
 Gemfile.lock
