@@ -17,8 +17,8 @@ github_username:  attilagk
 
 # Build settings
 markdown: kramdown
-theme: jekyll-theme-dinky
-#theme: minima
+theme: jekyll-theme-cayman
+#theme: jekyll-theme-dinky
 
 gems: [jekyll-paginate, jekyll/scholar]
 

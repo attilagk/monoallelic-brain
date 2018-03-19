@@ -1,20 +1,17 @@
 <body>
-    <!-- sortkey is either 'categories' or 'tags' -->
-    <h1>Articles by {{ page.sortkey }}</h1>
+    <section class="page-header">
+    <h1 class="project-name">{{ site.title }}</h1>
+    <h2 class="project-tagline">{{ site.description }}</h2>
+    </section>
     {% case page.sortkey %}
     {% when 'categories' %}
     <!-- otherlabel will be used to switch between tags and categories -->
-    {% assign otherlabel = 'tags' %}
     <!-- otherhtml will be included upon that switch -->
     {% assign otherhtml = 'index-tags.html' %}
     {% when 'tags' %}
     {% assign otherlabel = 'categories' %}
-    {% assign otherhtml = 'index.html' %}
+    {% assign otherhtml = 'index-tags.html' %}
     {% endcase %}
-    <a href="{{ otherhtml }}">
-        <!-- button for switching -->
-        <button style="margin-bottom: 2em;">arrange by {{ otherlabel }}</button>
-    </a>
     <section class="container-with-menu">
         <!-- menu of labels: categories or tags -->
         <ul>

@@ -4,6 +4,7 @@ ruby RUBY_VERSION
 gem "jekyll", "3.4.3"
 gem "minima", "~> 2.0"
 gem "jekyll-theme-leap-day"
+gem "jekyll-theme-architect"
 gem "github-pages"
 gem "jekyll-scholar"
 gem "font-awesome-sass"

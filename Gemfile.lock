@@ -227,6 +227,7 @@ DEPENDENCIES
   jekyll-feed (~> 0.6)
   jekyll-paginate
   jekyll-scholar
+  jekyll-theme-architect
   jekyll-theme-leap-day
   minima (~> 2.0)
   octokit
