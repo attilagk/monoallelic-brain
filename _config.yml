@@ -6,10 +6,10 @@
 # 'jekyll serve'. If you change this file, please restart the server process.
 
 # Site settings
-title: Open Lab Notebook
+title: Lab Notebook
 email: attila.gulyas.kovacs@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
-    Author of notebook: Attila Gulyás-Kovács, Chess Lab, Mount Sinai School of Medicine.  This work has been accepted for publication in Nature Communications under the title "Unperturbed Expression Bias of Imprinted Genes in Schizophrenia".
+    Author of notebook: Attila Gulyás-Kovács, Chess Lab, Mount Sinai School of Medicine.  Related publication: Nat Commun. 2018 Jul 25;9(1):2914
 baseurl: "/monoallelic-brain-notebook" # the subpath of your site, e.g. /blog
 url: "http://127.0.0.1:4000" # the base hostname & protocol for your site
 twitter_username: 
