@@ -1,5 +1,6 @@
 *.Rmd linguist-detectable=true
 _site/* linguist-generated
+*.tex linguist-documentation
 *.html linguist-documentation
 *.css linguist-documentation
 *.scss linguist-documentation
